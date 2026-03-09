@@ -32,6 +32,24 @@ function renderShell() {
   document.getElementById('home-btn').onclick = closeModule;
 }
 
+// Tambahin di shell.js, setelah renderShell()
+function startClock() {
+  const clockEl = document.getElementById('clock');
+  if (!clockEl) return;
+  
+  function update() {
+    const now = new Date();
+    clockEl.textContent = now.toLocaleTimeString('id-ID', {
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
+  }
+  update();
+  setInterval(update, 1000);
+}
+
+// Call inside init(), after renderShell()
+startClock();
+
 function renderModuleGrid(modules) {
   const grid = document.getElementById('module-grid');
   grid.innerHTML = modules.map(m => `
