@@ -318,6 +318,33 @@ async function initDreamCore() {
         
         // Setup event listeners
         setupEventListeners();
+        // Ghost mode activation (5 taps on header)
+let ghostTapCount = 0;
+const header = document.getElementById('app-header');
+if (header) {
+    header.addEventListener('click', () => {
+        ghostTapCount++;
+        if (ghostTapCount === 5) {
+            ghostTapCount = 0;
+            const pwd = prompt('👻 Developer access:');
+            // Ganti dengan metode autentikasi yang lebih aman (misal hash)
+            if (pwd === 'dreamos2026') {
+                // Tambahkan module ghost ke config jika belum ada
+                if (!DREAM.config.modules.ghost) {
+                    DREAM.config.modules.ghost = { 
+                        path: '/modules/ghost/module.js', 
+                        title: 'Ghost' 
+                    };
+                }
+                DREAM.load('ghost');
+                DREAM.utils.showToast('Ghost mode activated', 'info');
+            } else {
+                alert('Access denied');
+            }
+        }
+        setTimeout(() => ghostTapCount = 0, 3000);
+    });
+}
         
         // Initialize features
         initBatteryMonitor();
