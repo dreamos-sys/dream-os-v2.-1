@@ -372,7 +372,7 @@ if (header) {
                         path: '../modules/ghost/module.js'
                         title: 'Ghost' 
                     };
-                }
+            }
                 DREAM.load('ghost');
                 DREAM.utils.showToast('Ghost mode activated', 'info');
             } else {
