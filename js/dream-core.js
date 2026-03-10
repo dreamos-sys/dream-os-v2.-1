@@ -369,7 +369,7 @@ if (header) {
                 // Tambahkan module ghost ke config jika belum ada
                 if (!DREAM.config.modules.ghost) {
                     DREAM.config.modules.ghost = { 
-                        path: '/modules/ghost/module.js', 
+                        path: '../modules/ghost/module.js'
                         title: 'Ghost' 
                     };
                 }
