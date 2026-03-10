@@ -50,6 +50,43 @@ window.DREAM = {
 };
 
 // ============================================================================
+// LOGGING SYSTEM (untuk Ghost Module)
+// ============================================================================
+
+// Override console untuk menyimpan log ke localStorage
+const originalError = console.error;
+const originalWarn = console.warn;
+const originalLog = console.log;
+
+function saveLog(level, args) {
+    try {
+        const logs = JSON.parse(localStorage.getItem('dreamos-logs') || '[]');
+        logs.push({
+            timestamp: new Date().toLocaleTimeString(),
+            level,
+            message: args.map(a => String(a)).join(' ')
+        });
+        if (logs.length > 100) logs.shift();
+        localStorage.setItem('dreamos-logs', JSON.stringify(logs));
+    } catch (e) {}
+}
+
+console.error = (...args) => {
+    saveLog('ERROR', args);
+    originalError.apply(console, args);
+};
+
+console.warn = (...args) => {
+    saveLog('WARN', args);
+    originalWarn.apply(console, args);
+};
+
+console.log = (...args) => {
+    saveLog('INFO', args);
+    originalLog.apply(console, args);
+};
+
+// ============================================================================
 // UTILITY FUNCTIONS
 // ============================================================================
 
