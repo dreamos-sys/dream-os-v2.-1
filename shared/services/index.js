@@ -4,7 +4,7 @@ export const services = {
   auth: {
     login: (code) => {
       // Ganti '1234' dengan Access Code rahasia lo, My Bro!
-      if (code === '1234') {
+      if (code === 'b15m1ll4h_012443410') {
         localStorage.setItem('dream_os_session', 'active');
         return true;
       }
