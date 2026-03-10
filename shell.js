@@ -196,3 +196,197 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
+
+// Tambahkan di shell.js atau file terpisah
+
+// === SMOOTH PAGE TRANSITIONS ===
+function smoothTransition(element, duration = 500) {
+    element.style.transition = `opacity ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+    element.style.opacity = '0';
+    
+    setTimeout(() => {
+        element.style.opacity = '1';
+    }, duration);
+}
+
+// === LAZY LOADING FOR MODULES ===
+async function loadModuleWithProgress(moduleInfo, progressBar) {
+    const toast = services.toast;
+    
+    // Show progress
+    if (progressBar) {
+        progressBar.style.display = 'block';
+        progressBar.style.width = '0%';
+    }
+    
+    toast(`Loading ${moduleInfo.name}...`, 'info');
+    
+    // Simulate progress (remove in production)
+    if (progressBar) {
+        const interval = setInterval(() => {
+            const currentWidth = parseInt(progressBar.style.width);
+            if (currentWidth < 90) {
+                progressBar.style.width = `${currentWidth + 10}%`;
+            }
+        }, 100);
+        
+        setTimeout(() => {
+            clearInterval(interval);
+            progressBar.style.width = '100%';
+        }, 900);
+    }
+    
+    try {
+        const module = await import(moduleInfo.path);
+        
+        // Complete progress
+        if (progressBar) {
+            progressBar.style.width = '100%';
+            setTimeout(() => {
+                progressBar.style.display = 'none';
+            }, 300);
+        }
+                toast(`${moduleInfo.name} loaded successfully!`, 'success');
+        return module;
+    } catch (err) {
+        toast(`Failed to load ${moduleInfo.name}`, 'error');
+        throw err;
+    }
+}
+
+// === HAPTIC FEEDBACK (Mobile) ===
+function hapticFeedback(pattern = 'light') {
+    if ('vibrate' in navigator) {
+        const patterns = {
+            light: 10,
+            medium: 20,
+            heavy: [30, 50, 30],
+            success: [50, 100, 50],
+            error: [100, 50, 100]
+        };
+        navigator.vibrate(patterns[pattern] || patterns.light);
+    }
+}
+
+// Add to nav items
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+        hapticFeedback('light');
+    });
+});
+
+// === PERFORMANCE MONITORING ===
+class PerformanceMonitor {
+    constructor() {
+        this.fps = 60;
+        this.frames = 0;
+        this.prevTime = performance.now();
+    }
+    
+    update() {
+        this.frames++;
+        const time = performance.now();
+        
+        if (time >= this.prevTime + 1000) {
+            this.fps = Math.round((this.frames * 1000) / (time - this.prevTime));
+            this.prevTime = time;
+            this.frames = 0;
+            
+            // Update UI
+            const fpsEl = document.getElementById('fps-counter');
+            if (fpsEl) {
+                fpsEl.textContent = this.fps;                fpsEl.style.color = this.fps >= 55 ? '#10b981' : '#f59e0b';
+            }
+        }
+        
+        requestAnimationFrame(() => this.update());
+    }
+    
+    start() {
+        this.update();
+    }
+}
+
+// Start performance monitoring
+if (document.getElementById('performance-monitor')) {
+    const monitor = new PerformanceMonitor();
+    monitor.start();
+}
+
+// === ERROR BOUNDARY ENHANCEMENT ===
+window.addEventListener('error', (event) => {
+    console.error('[GLOBAL ERROR]', event.error);
+    
+    // Show user-friendly error
+    if (services.toast) {
+        services.toast('Something went wrong. Please try again.', 'error');
+    }
+    
+    // Log to analytics (placeholder)
+    if (window.ANALYTICS) {
+        ANALYTICS.track('error', {
+            message: event.error?.message,
+            stack: event.error?.stack,
+            timestamp: new Date().toISOString()
+        });
+    }
+});
+
+// === NETWORK STATUS MONITOR ===
+function updateNetworkStatus() {
+    const statusEl = document.getElementById('network-status');
+    const typeEl = document.getElementById('network-type');
+    
+    if (!statusEl || !typeEl) return;
+    
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    
+    if (connection) {
+        const type = connection.effectiveType || '4G';
+        const speed = connection.downlink || 10;
+                typeEl.textContent = `${type.toUpperCase()} (${speed} Mbps)`;
+        
+        // Visual indicator
+        if (speed < 1) {
+            statusEl.className = 'flex items-center gap-1 text-red-400/70';
+        } else if (speed < 5) {
+            statusEl.className = 'flex items-center gap-1 text-yellow-400/70';
+        } else {
+            statusEl.className = 'flex items-center gap-1 text-emerald-400/70';
+        }
+    }
+}
+
+// Update on load and change
+updateNetworkStatus();
+if (navigator.connection) {
+    navigator.connection.addEventListener('change', updateNetworkStatus);
+}
+
+// === BATTERY STATUS MONITOR ===
+async function updateBatteryStatus() {
+    if ('getBattery' in navigator) {
+        const battery = await navigator.getBattery();
+        const batteryEl = document.getElementById('battery-level');
+        const batteryIcon = document.querySelector('#battery-indicator i');
+        
+        if (batteryEl && batteryIcon) {
+            const level = Math.round(battery.level * 100);
+            batteryEl.textContent = `${level}%`;
+            
+            // Update icon based on level
+            if (level <= 20) {
+                batteryIcon.className = 'fas fa-battery-quarter text-red-400 text-[10px]';
+            } else if (level <= 50) {
+                batteryIcon.className = 'fas fa-battery-half text-yellow-400 text-[10px]';
+            } else {
+                batteryIcon.className = 'fas fa-battery-full text-emerald-400 text-[10px]';
+            }
+            
+            // Update on change
+            battery.addEventListener('levelchange', () => updateBatteryStatus());
+        }
+    }
+}
+
+updateBatteryStatus();
