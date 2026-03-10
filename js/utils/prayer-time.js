@@ -99,5 +99,3 @@ class PrayerTimeUtility {
 }
 DREAM.utils = DREAM.utils || {};
 DREAM.utils.prayerTime = new PrayerTimeUtility();
-
-export { PrayerTimeUtility };
