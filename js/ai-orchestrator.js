@@ -10,7 +10,7 @@ class AIOrchestrator {
     this.isListening = false;
     this.conversationHistory = [];
     this.maxHistory = 10;
-    this.apiEndpoint = DREAM.config.cloudflare.workerUrl + '/ai';
+    this.apiEndpoint = (DREAM.config?.cloudflare?.workerUrl || '') + '/ai';
     
     this.init();
   }
