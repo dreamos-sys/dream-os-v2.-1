@@ -10,6 +10,7 @@
         version: '2026.1.0',
         env: 'production',
         
+        // ✅ BENAR DISINI MY BRO! (DI DALAM modulePaths)
         // Module Path Mapping (Fix QR Scanner Issue)
         modulePaths: {
             'home': './modules/home/module.js',
@@ -20,7 +21,8 @@
             'scanner': './modules/qr/module.js',
             'settings': './modules/settings/module.js',
             'ghost': './modules/ghost/module.js',
-            'developer': './modules/ghost/module.js'
+            'developer': './modules/ghost/module.js',
+            'ai-panel': './modules/ai-panel/module.js'  // ✅ ADD HERE!
         },
         
         state: {
@@ -38,8 +40,8 @@
         
         config: {
             supabase: {
-                url: 'https://your-project.supabase.co',
-                key: 'your-anon-key'
+                url: 'https://pvznaeppaagylwddirla.supabase.co',
+                key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2em5hZXBwYWFneWx3ZGRpcmxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NTEwNDMsImV4cCI6MjA4NzUyNzA0M30.t9SJi3VfsBDkKmeZ3egZ4rbvljl4xe0WwNkPtfA9-vo'
             },
             cloudflare: {
                 workerUrl: 'https://your-worker.workers.dev'
@@ -47,11 +49,14 @@
             api: {
                 prayerTime: 'https://api.aladhan.com/v1/timingsByCity',
                 quran: 'https://api.alquran.cloud/v1'
-            }        },
+            }
+        },
         
         modules: new Map(),
         cache: new Map(),
         utils: {},
+        
+        // ... LANJUT KE BAWAH (init, load, dst)
         
         // ============================================================
         // INITIALIZATION
