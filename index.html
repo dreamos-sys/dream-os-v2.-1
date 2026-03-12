@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dream OS v2.1 - Sovereign Edition</title>
+    
+    <!-- Preconnect untuk performa -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="core/engine.css">
+    
+    <!-- Manifest untuk PWA -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#10b981">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body class="bg-dynamic-prayer">
+    <!-- Tempat shell akan dirender -->
+    <div id="app-shell"></div>
+
+    <!-- =========================================================================
+         SYSTEM CORE & SECURITY (dijalankan segera, bukan module)
+         ========================================================================= -->
+    <script>
+        // SYSTEM UTILS & SECURITY
+        window.DREAM_SYS = {
+            haptic: (p = 50) => { if ('vibrate' in navigator) navigator.vibrate(p); },
+            log: (t, m, d = '') => {
+                const s = {info:'color:#06b6d4', success:'color:#10b981', warn:'color:#f59e0b', error:'color:#ef4444', ghost:'color:#8b5cf6'};
+                console.log(`%c[DREAM ${t.toUpperCase()}] %c${m}`, s[t]||'', 'color:inherit;', d);
+            }
+        };
+
+        window.DREAM_SECURITY = {
+            getFingerprint: () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    const gl = canvas.getContext('webgl');
+                    const renderer = gl ? gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info').UNMASKED_RENDERER_WEBGL) : "";
+                    return btoa(`${screen.width}x${screen.height}|${renderer}|${navigator.hardwareConcurrency}`);
+                } catch (e) {
+                    return "unknown";
+                }
+            },
+            isAuthorized: () => true // Untuk development
+        };
+
+        // DREAM Global Object – Lengkap dengan Supabase & Safe Zone
+        window.DREAM = {
+            version: '2.1.0-Sovereign',
+            env: 'production',
+            config: {
+                supabase: { 
+                    url: 'https://pvznaeppaagylwddirla.supabase.co', 
+                    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2em5hZXBwYWFneWx3ZGRpcmxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NTEwNDMsImV4cCI6MjA4NzUyNzA0M30.t9SJi3VfsBDkKmeZ3egZ4rbvljl4xe0WwNkPtfA9-vo'
+                },
+                safeZone: { radius: 5, center: { lat: -6.4025, lng: 106.7942 } } // Koordinat Depok
+            },
+            state: { currentModule: 'home', user: null, isPanic: false },
+            modules: new Map(),
+            cache: new Map(),
+            load: (name) => console.warn(`[DREAM] Loading ${name}... core pending.`) // Akan di-override oleh dream-core.js
+        };
+    </script>
+
+    <!-- =========================================================================
+         GHOST BYPASS ACTIVATION (Polling 5 tap header)
+         ========================================================================= -->
+    <script>
+        (function() {
+            let taps = 0;
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.shell-header')) return;
+                taps++;
+                window.DREAM_SYS.haptic(30);
+                if (taps === 5) {
+                    taps = 0;
+                    const pwd = prompt('👻 Ghost Architect Access:');
+                    if (pwd === 'dreamos2026') {
+                        let att = 0;
+                        const check = () => {
+                            if (window.DREAM?.load && !window.DREAM.load.toString().includes('placeholder')) {
+                                window.DREAM.load(window.DREAM.state?.user ? 'ghost' : 'login');
+                            } else if (att < 50) { att++; setTimeout(check, 200); }
+                        };
+                        check();
+                    } else {
+                        alert('Access denied');
+                    }
+                }
+                setTimeout(() => taps = 0, 3000);
+            });
+        })();
+    </script>
+
+    <!-- =========================================================================
+         UTILITY SCRIPTS (dijalankan secara berurutan)
+         ========================================================================= -->
+    <!-- Utility dasar -->
+    <script src="js/utils/prayer-time.js" defer></script>
+    <script src="js/utils/battery-monitor.js" defer></script>
+    <script src="js/utils/network-monitor.js" defer></script>
+    <script src="js/utils/camera-scanner.js" defer></script>
+    <script src="js/utils/device-fingerprint.js" defer></script>
+    <script src="js/utils/geofencing.js" defer></script>
+    <script src="js/utils/system-monitor.js" defer></script>
+    <script src="js/utils/smart-printer.js" defer></script>
+    <script src="js/utils/nfc-scanner.js" defer></script>
+    <script src="js/utils/i18n.js" defer></script>
+
+    <!-- Enterprise Security Utilities -->
+    <script src="js/utils/system-watchdog.js" defer></script>
+    <script src="js/utils/secure-vault.js" defer></script>
+    <script src="js/utils/stealth-engine.js" defer></script>
+    <script src="js/utils/backup-manager.js" defer></script>
+
+    <!-- =========================================================================
+         MAIN MODULES (type="module" untuk ES6 imports)
+         ========================================================================= -->
+    <script type="module" src="js/dream-core.js"></script>
+    <script type="module" src="js/ai-orchestrator.js"></script>
+    <script type="module" src="shell.js"></script>
+
+    <!-- =========================================================================
+         SERVICE WORKER (PWA)
+         ========================================================================= -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(() => window.DREAM_SYS.log('success', 'Service Worker Active'))
+                    .catch(err => window.DREAM_SYS.log('error', 'SW Failed', err));
+            });
+        }
+    </script>
+</body>
+</html>
