@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dream OS v2.1 - Sovereign Edition</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="core/engine.css">
+</head>
+<body class="bg-slate-950 text-white">
+    <div id="app-shell"></div>
+
+    <script>
+        window.DREAM_SYS = {
+            haptic: (p = 50) => { if ('vibrate' in navigator) navigator.vibrate(p); },
+            log: (t, m) => console.log(`%c[DREAM ${t.toUpperCase()}] %c${m}`, 'color:#10b981', 'color:inherit;')
+        };
+
+        window.DREAM = {
+            version: '2.1.0-Sovereign',
+            config: {
+                supabase: { url: 'https://pvznaeppaagylwddirla.supabase.co', key: 'SECRET_KEY' },
+                safeZone: { radius: 5, center: { lat: -6.4025, lng: 106.7942 } }
+            },
+            load: (module) => { 
+                window.DREAM_SYS.haptic(20);
+                console.log("Loading module:", module); 
+            }
+        };
+
+        // Ghost Bypass - Tap Header 5x
+        (function() {
+            let taps = 0, tapTimer;
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.shell-header')) return;
+                taps++;
+                window.DREAM_SYS.haptic(30);
+                clearTimeout(tapTimer);
+                if (taps === 5) {
+                    const pwd = prompt('👻 Ghost Architect Access:');
+                    if (pwd === 'dreamos2026') window.DREAM.load('ghost');
+                    taps = 0;
+                }
+                tapTimer = setTimeout(() => taps = 0, 2000);
+            });
+        })();
+    </script>
+    <script type="module" src="shell.js"></script>
+</body>
+</html>
