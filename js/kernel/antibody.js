@@ -1,6 +1,5 @@
 /**
- * js/kernel/antibody.js
- * Immunity System - Ghost Architect Only
+ * ANTIBODY SYSTEM - Ghost Architect Immunity
  * Sovereign Edition v2.1
  */
 class DreamImmunity {
@@ -12,18 +11,14 @@ class DreamImmunity {
         window.DREAM_SYS?.log('success', 'Immunity Kernel Initialized.');
     }
 
-    // 1. Ghost Bypass: Independen & Tidak Tergantung Header DOM
+    // Ghost Bypass: 5-tap di area atas layar
     initBypass() {
         let taps = 0, tapTimer;
-        // Deteksi tap di area manapun (Global Capture)
         document.addEventListener('click', (e) => {
-            // Kita gunakan area atas layar (Ghost Zone) sebagai trigger utama
-            if (e.clientY > 100) return; 
-            
+            if (e.clientY > 100) return; // hanya area atas
             taps++;
             window.DREAM_SYS?.haptic(40);
             clearTimeout(tapTimer);
-            
             if (taps === 5) {
                 const pwd = prompt('👻 Ghost Recovery Access:');
                 if (pwd === 'dreamos2026') this.launchAnalysis();
@@ -33,35 +28,20 @@ class DreamImmunity {
         });
     }
 
-    // 2. Watchdog: Mendeteksi Crash/Virus Secara Mandiri
     initWatchdog() {
-        // Asimilasi error sistem secara global
         window.onerror = (msg, url, line) => {
             this.absorbThreat({ msg, url, line, type: 'RUNTIME_ERR' });
-            return true; // Shadow Band: Cegah user melihat crash
+            return true;
         };
-
-        // Heuristic: Cek injeksi script eksternal
-        setInterval(() => {
-            if (document.querySelector('script[src*="malware"]')) {
-                this.absorbThreat({ type: 'INJECTION_ATTEMPT', detail: 'Malicious Script Found' });
-            }
-        }, 5000);
     }
 
-    // 3. Virus Assimilation (Makan Virus Jadi Antibodi)
     absorbThreat(error) {
         this.threatVault.push({ time: new Date().toISOString(), detail: error });
         this.isShadowMode = true;
-        
-        // Shadow Banding: Mengalihkan aktivitas ke sandbox
         window.DREAM_SYS?.log('warn', 'Virus absorbed. Shadow Mode Active.');
-        
-        // Haptic alert: Getaran pendek-panjang-pendek
         window.DREAM_SYS?.haptic([50, 100, 50]);
     }
 
-    // 4. Matrix Analysis Dashboard (Independent Overlay)
     launchAnalysis() {
         const overlay = document.createElement('div');
         overlay.id = 'ghost-analysis-overlay';
@@ -70,7 +50,6 @@ class DreamImmunity {
             background: #020617; color: #10b981; font-family: 'JetBrains Mono', monospace;
             padding: 20px; overflow-y: auto; box-sizing: border-box;
         `;
-        
         overlay.innerHTML = `
             <div style="border-bottom: 1px solid #10b98144; padding-bottom: 10px; margin-bottom: 20px;">
                 <h2 style="margin:0;">GHOST_ANALYSIS_DASHBOARD</h2>
@@ -89,5 +68,4 @@ class DreamImmunity {
     }
 }
 
-// Inisialisasi otomatis sebagai "Sistem Imun" pertama
 const GhostAntibody = new DreamImmunity();
