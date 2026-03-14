@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dream OS v13.6 - Sovereign LUX</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="system-healthy">
+
+    <div id="ghost-header-trigger"></div>
+
+    <div id="system-loader">
+        <div class="loader-content">
+            <div class="bismillah">Bismillah bi idznillah</div>
+            <h1 class="logo-text">DREAM OS</h1>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <main id="root-viewport"></main>
+
+    <nav class="bottom-nav" id="main-nav" style="display: none;">
+        <div class="nav-item active" onclick="DREAM.load('home')">
+            <i class="fa-solid fa-house"></i><span>Home</span>
+        </div>
+        <div class="nav-item" onclick="DREAM.load('k3')">
+            <i class="fa-solid fa-triangle-exclamation"></i><span>K3</span>
+        </div>
+        <div class="nav-center">
+            <div class="shalawat-btn" onclick="DREAM.haptic(100)">صلوات</div>
+        </div>
+        <div class="nav-item" onclick="DREAM.load('asset')">
+            <i class="fa-solid fa-boxes-stacked"></i><span>Aset</span>
+        </div>
+        <div class="nav-item" onclick="DREAM.load('settings')">
+            <i class="fa-solid fa-gear"></i><span>Sistem</span>
+        </div>
+    </nav>
+
+    <script src="shell.js" type="module"></script>
+</body>
+</html>
