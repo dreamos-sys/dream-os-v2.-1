@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Dream OS v2.1 - Sovereign Enterprise</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Manifest & Icons -->
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/svg+xml" href="./assets/icons/logo_haa.svg">
+    <link rel="apple-touch-icon" href="./assets/icons/icon-192x192.png">
+    
+    <!-- Core CSS (minimal) -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+        :root {
+            --color-primary: #10b981;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        /* Toast container */
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        .toast {
+            background: #1e293b;
+            border-left: 4px solid var(--color-primary);
+            color: white;
+            padding: 12px 20px;
+            margin-top: 10px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+            max-width: 300px;
+        }
+        .toast-error { border-left-color: #ef4444; }
+        .toast-warning { border-left-color: #f59e0b; }
+        .toast-info { border-left-color: #3b82f6; }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+    
+    <!-- Prevent Jekyll from ignoring folders -->
+</head>
+<body>
+    <div id="app-shell"></div>
+    <div id="toast-container"></div>
+
+    <!-- ============================================================
+         KERNEL & IMMUNITY (LOAD FIRST - NO DEFER)
+         ============================================================ -->
+    <script src="js/kernel/antibody.js"></script>
+    <script src="js/kernel/sovereign-kernel.js"></script>
+    <script src="js/kernel/brain-hub.js"></script>
+
+    <!-- ============================================================
+         SYSTEM CONFIG & DREAM GLOBAL
+         ============================================================ -->
+    <script>
+        window.DREAM_SYS = {
+            haptic: (p = 50) => { if ('vibrate' in navigator) navigator.vibrate(p); },
+            log: (t, m) => console.log(`%c[DREAM ${t.toUpperCase()}] %c${m}`, 'color:#10b981', 'color:inherit;'),
+            toast: (msg, type = 'success') => {
+                const icons = { success:'✅', error:'❌', warning:'⚠️', info:'ℹ️' };
+                const el = document.createElement('div');
+                el.className = `toast toast-${type}`;
+                el.innerHTML = `<span>${icons[type]}</span><span>${String(msg).replace(/</g,'&lt;')}</span>`;
+                const container = document.getElementById('toast-container');
+                if (container) {
+                    container.appendChild(el);
+                    setTimeout(() => { el.style.opacity='0'; setTimeout(() => el.remove(), 350); }, 3500);
+                } else {
+                    alert(msg);
+                }
+            }
+        };
+
+        window.DREAM_SECURITY = {
+            getFingerprint: () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    const gl = canvas.getContext('webgl');
+                    const renderer = gl ? gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info').UNMASKED_RENDERER_WEBGL) : "";
+                    return btoa(`${screen.width}x${screen.height}|${renderer}|${navigator.hardwareConcurrency}`);
+                } catch (e) {
+                    return 'unknown';
+                }
+            }
+        };
+
+        window.DREAM = {
+            version: '2.1.0-Sovereign',
+            state: { module: 'home', user: null, isShadow: false },
+            config: {
+                supabase: { 
+                    url: 'https://pvznaeppaagylwddirla.supabase.co', 
+                    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2em5hZXBwYWFneWx3ZGRpcmxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NTEwNDMsImV4cCI6MjA4NzUyNzA0M30.t9SJi3VfsBDkKmeZ3egZ4rbvljl4xe0WwNkPtfA9-vo'
+                },
+                safeZone: { center: { lat: -6.4025, lng: 106.7942 } } // Depok Core
+            },
+            modules: new Map(), // akan diisi oleh shell.js
+            load: (module) => {
+                window.DREAM_SYS.haptic(30);
+                window.DREAM_SYS.log('info', `Switching to: ${module}`);
+                if (window.DREAM.modules.has(module)) {
+                    const loader = window.DREAM.modules.get(module);
+                    loader().then(mod => {
+                        if (mod.default) mod = mod.default;
+                        const container = document.getElementById('app-shell');
+                        if (typeof mod === 'function') {
+                            // mod adalah fungsi yang mengembalikan cleanup
+                            const cleanup = mod({ container, services: window.DREAM_SYS, supabase: window.supabase, user: window.DREAM.state.user });
+                            window.DREAM.currentCleanup = cleanup;
+                        } else if (mod.render && mod.afterRender) {
+                            // format lama
+                            container.innerHTML = mod.render();
+                            mod.afterRender();
+                        }
+                        window.DREAM.state.module = module;
+                    }).catch(err => {
+                        console.error('Gagal load modul:', err);
+                        window.DREAM_SYS.toast('Gagal memuat modul', 'error');
+                    });
+                } else {
+                    window.DREAM_SYS.toast(`Modul "${module}" tidak ditemukan`, 'warning');
+                }
+            }
+        };
+    </script>
+
+    <!-- ============================================================
+         EXTERNAL LIBRARIES
+         ============================================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+    <!-- ============================================================
+         SERVICE WORKER REGISTRATION
+         ============================================================ -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./service-worker.js')
+                .then(reg => console.log('✅ SW registered:', reg.scope))
+                .catch(err => console.error('❌ SW registration failed:', err));
+        }
+    </script>
+
+    <!-- ============================================================
+         SHELL UI (DEFER - JALANKAN SETELAH DOM SIAP)
+         ============================================================ -->
+    <script src="shell.js" defer></script>
+</body>
+</html>
