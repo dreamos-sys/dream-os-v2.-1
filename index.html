@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream OS v2.1 - Sovereign Enterprise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="core/style.css">
+    
+    <!-- Theme Manager -->
+    <script type="module" src="js/utils/theme-manager.js"></script>
+    
+    <!-- NEW: Focus 1-4 Files -->
+    <script type="module" src="js/utils/ghost-trigger.js"></script>
+    <script type="module" src="js/utils/database.js"></script>
+    <script type="module" src="js/utils/auth.js"></script>
+    <script type="module" src="js/utils/icons.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div style="text-align:center;">
+            <img src="/assets/icons/logo-golden-d.png" alt="Dream OS" style="width:100px;height:100px;margin-bottom:1rem;">
+            <p style="color:var(--color-primary);">Bismillah bi idznillah</p>
+            <h1 style="color:var(--text-primary);">DREAM OS</h1>
+            <p style="color:var(--text-muted);font-size:0.75rem;">v2.1 Sovereign Enterprise</p>
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- App Shell -->
+    <div id="app-shell"></div>
+
+    <!-- Main App Script -->
+    <script src="shell.js" defer></script>
+</body>
+</html>
