@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* ════════════════════════════════════════════
-           DREAM OS v2.1 - COMPLETE CSS
-           ════════════════════════════════════════════ */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         :root {
@@ -48,19 +45,20 @@
             color: var(--text-primary);
             transition: all 0.5s;
         }
-        /* Loading Screen */
-        #loading-screen {
-            position: fixed;
+
+        /* Loading Screen - FIXED */
+        #loading-screen {            position: fixed;
             inset: 0;
             background: var(--bg-primary);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            transition: opacity 0.5s;
         }
 
-        #loading-screen.hidden { opacity: 0; pointer-events: none; }
+        #loading-screen.hide {
+            display: none;
+        }
 
         .loader {
             width: 60px;
@@ -74,6 +72,7 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
         /* Glass Header */
         .glass-header {
@@ -96,8 +95,8 @@
             transition: all 0.3s;
         }
 
-        .glass-card:hover {            transform: translateY(-3px);
-            border-color: var(--color-primary);
+        .glass-card:hover {
+            transform: translateY(-3px);            border-color: var(--color-primary);
             box-shadow: 0 12px 40px rgba(16,185,129,0.2);
         }
 
@@ -145,8 +144,8 @@
             background: var(--glass-bg-heavy);
             backdrop-filter: var(--glass-blur);
             border-top: var(--glass-border);
-            padding: 8px 12px calc(8px + env(safe-area-inset-bottom));            z-index: 100;
-        }
+            padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+            z-index: 100;        }
 
         .nav-container {
             display: flex;
@@ -194,8 +193,8 @@
         }
 
         .module-card:hover {
-            transform: translateY(-5px);            border-color: var(--color-primary);
-            box-shadow: 0 12px 40px rgba(16,185,129,0.2);
+            transform: translateY(-5px);
+            border-color: var(--color-primary);            box-shadow: 0 12px 40px rgba(16,185,129,0.2);
         }
 
         .module-icon {
@@ -212,7 +211,6 @@
 
         .module-icon i { color: white; font-size: 1.5rem; }
         .module-label { font-size: 12px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
-        .module-desc { font-size: 9px; color: var(--text-muted); }
 
         /* Stats Grid */
         .stats-grid {
@@ -243,21 +241,21 @@
             border-radius: var(--radius-md);
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;            box-shadow: 0 4px 15px var(--color-primary-glow);
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px var(--color-primary-glow);
         }
-
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px var(--color-primary-glow);
         }
 
         /* Category Section */
-        .category-section { margin-bottom: 24px; }
+        .category-section { margin-bottom: 24px; animation: fadeInUp 0.5s ease; }
         .category-title { color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; font-weight: 600; }
 
         /* Module Container */
-        .module-container { display: none; padding: 16px; padding-bottom: 100px; }
-        .module-container.active { display: block; animation: fadeInUp 0.5s ease; }
+        .module-container { display: none; padding: 16px; padding-bottom: 140px; animation: fadeInUp 0.5s ease; }
+        .module-container.active { display: block; }
 
         /* Scrollbar */
         ::-webkit-scrollbar { width: 4px; }
@@ -292,9 +290,9 @@
             font-family: var(--font-mono);
             font-size: 10px;
             color: var(--color-primary);
-            opacity: 0.7;            margin-bottom: 6px;
+            opacity: 0.7;
+            margin-bottom: 6px;
         }
-
         /* Neural Status */
         .neural-status {
             background: linear-gradient(135deg, rgba(16,185,129,0.1), transparent);
@@ -340,16 +338,14 @@
             <div class="loader"></div>
             <p style="margin-top:1rem;color:var(--color-primary);font-size:0.875rem;">Bismillah bi idznillah</p>
             <h1 style="margin-top:0.5rem;color:var(--text-primary);font-size:2rem;letter-spacing:2px;">DREAM OS</h1>
-            <div style="width:200px;height:2px;background:rgba(16,185,129,0.3);margin:1rem auto;border-radius:2px;overflow:hidden;">
-                <div id="loading-bar" style="width:0%;height:100%;background:var(--color-primary);transition:width 0.3s;"></div>            </div>
+            <p style="margin-top:0.5rem;color:var(--text-muted);font-size:0.75rem;">v2.1 Sovereign Enterprise</p>
         </div>
     </div>
-
     <!-- Toast Container -->
     <div id="toast-container"></div>
 
     <!-- App Shell -->
-    <div id="app-shell" style="display:none;"></div>
+    <div id="app-shell"></div>
 
     <!-- JavaScript -->
     <script>
@@ -390,11 +386,11 @@
                 },
                 'cyberpunk': {
                     name: '🤖 Cyberpunk',
-                    colors: {                        '--bg-primary': '#0a0a0f', '--bg-secondary': '#12121a', '--text-primary': '#ffffff',
+                    colors: {
+                        '--bg-primary': '#0a0a0f', '--bg-secondary': '#12121a', '--text-primary': '#ffffff',
                         '--text-muted': '#b0b0b0', '--color-primary': '#00ff88', '--color-secondary': '#00ffff'
                     }
-                },
-                'islamic-modern': {
+                },                'islamic-modern': {
                     name: '🕌 Islamic Modern',
                     colors: {
                         '--bg-primary': '#1a1f2e', '--bg-secondary': '#242b3d', '--text-primary': '#ffffff',
@@ -439,11 +435,11 @@
 
         // Current Module State
         let currentModule = 'home';
+
         // Render Functions
         function renderHome() {
             const categories = {
-                'ai': { label: '🧠 Neural Intelligence', modules: ['ai-panel'] },
-                'ops': { label: '⚙️ Operations', modules: ['booking'] },
+                'ai': { label: '🧠 Neural Intelligence', modules: ['ai-panel'] },                'ops': { label: '⚙️ Operations', modules: ['booking'] },
                 'security': { label: '🛡️ Security & Safety', modules: ['sekuriti', 'k3'] },
                 'system': { label: '🔧 System', modules: ['settings', 'profile', 'qr'] }
             };
@@ -461,7 +457,7 @@
                             <p class="shalawat">اَللهم صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ</p>
                         </div>
                         <div style="font-size:9px;text-align:center;color:var(--text-subtle);margin-top:6px;">
-                            ${navigator.platform} | ${navigator.onLine ? 'Online' : 'Offline'}
+                            ${navigator.platform || 'Device'} | ${navigator.onLine ? 'Online' : 'Offline'}
                         </div>
                     </header>
 
@@ -488,11 +484,11 @@
                                 <div class="stat-label">Total Modules</div>
                                 <div class="stat-value" style="color:var(--color-primary);">19</div>
                             </div>
-                            <div class="stat-card">                                <div class="stat-label">Active Users</div>
+                            <div class="stat-card">
+                                <div class="stat-label">Active Users</div>
                                 <div class="stat-value" style="color:var(--color-secondary);">24</div>
                             </div>
-                            <div class="stat-card">
-                                <div class="stat-label">Pending</div>
+                            <div class="stat-card">                                <div class="stat-label">Pending</div>
                                 <div class="stat-value" style="color:#f59e0b;">3</div>
                             </div>
                         </div>
@@ -537,11 +533,11 @@
         function renderBooking() {
             return `
                 <div class="module-container active" id="module-booking">
-                    <div style="margin-bottom:24px;">                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+                    <div style="margin-bottom:24px;">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
                             <div style="width:48px;height:48px;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));border-radius:14px;display:flex;align-items:center;justify-content:center;">
                                 <i class="fas fa-calendar-check" style="color:white;font-size:1.5rem;"></i>
-                            </div>
-                            <div>
+                            </div>                            <div>
                                 <h1 style="color:var(--text-primary);font-size:1.5rem;">Booking</h1>
                                 <p style="color:var(--text-muted);font-size:0.875rem;">Resource Scheduling</p>
                             </div>
@@ -557,13 +553,6 @@
                             <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
                                 <div><h3 style="color:var(--text-primary);">Board Room A</h3><p style="color:var(--text-muted);font-size:0.75rem;">Floor 3</p></div>
                                 <div style="background:rgba(16,185,129,0.15);color:var(--color-primary);padding:4px 10px;border-radius:8px;font-size:10px;">20 ppl</div>
-                            </div>
-                            <button class="btn-primary" style="width:100%;font-size:13px;"><i class="fas fa-plus" style="margin-right:6px;"></i> Book Now</button>
-                        </div>
-                        <div class="glass-card" onclick="toast('Booking feature coming soon!', 'info')">
-                            <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
-                                <div><h3 style="color:var(--text-primary);">Meeting Room B</h3><p style="color:var(--text-muted);font-size:0.75rem;">Floor 2</p></div>
-                                <div style="background:rgba(16,185,129,0.15);color:var(--color-primary);padding:4px 10px;border-radius:8px;font-size:10px;">10 ppl</div>
                             </div>
                             <button class="btn-primary" style="width:100%;font-size:13px;"><i class="fas fa-plus" style="margin-right:6px;"></i> Book Now</button>
                         </div>
@@ -586,7 +575,8 @@
                                 <h1 style="color:var(--text-primary);font-size:1.5rem;">Settings</h1>
                                 <p style="color:var(--text-muted);font-size:0.875rem;">System Configuration</p>
                             </div>
-                        </div>                    </div>
+                        </div>
+                    </div>
                     <div class="glass-card" style="margin-bottom:16px;">
                         <h2 style="color:var(--text-primary);font-size:1.1rem;margin-bottom:16px;">🎨 Theme</h2>
                         <div class="theme-grid">
@@ -596,8 +586,7 @@
                                     <div style="color:var(--text-primary);font-size:12px;text-align:center;">${t.name}</div>
                                 </div>
                             `).join('')}
-                        </div>
-                    </div>
+                        </div>                    </div>
                     <div class="glass-card" style="margin-bottom:16px;">
                         <h2 style="color:var(--text-primary);font-size:1.1rem;margin-bottom:16px;">ℹ️ System Info</h2>
                         <div style="padding:12px 0;border-bottom:1px solid var(--color-border);">
@@ -635,6 +624,7 @@
 
             document.querySelectorAll('.module-container').forEach(m => m.remove());
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
             let content = '';
             switch(moduleName) {
                 case 'home': content = renderHome(); break;
@@ -646,7 +636,6 @@
 
             app.innerHTML = content;
             currentModule = moduleName;
-
             const navItem = document.querySelector(`[data-nav="${moduleName}"]`);
             if (navItem) navItem.classList.add('active');
 
@@ -685,6 +674,7 @@
                 taps++;
                 if ('vibrate' in navigator) navigator.vibrate(30);
                 if (timeout) clearTimeout(timeout);
+
                 if (taps === 5) {
                     taps = 0;
                     const code = prompt('🔑 GHOST ACCESS CODE:');
@@ -692,10 +682,9 @@
                         if ('vibrate' in navigator) navigator.vibrate([100, 50, 100]);
                         toast('👻 Ghost Mode Activated!', 'success');
                         setTimeout(() => {
-                            alert('Ghost Mode: Developer Access\n\nThis is a demo. Full Ghost Mode coming soon!');
+                            alert('Ghost Mode: Developer Access\n\nFull Ghost Mode coming soon!');
                         }, 500);
-                    } else {
-                        toast('❌ Access Denied', 'error');
+                    } else {                        toast('❌ Access Denied', 'error');
                     }
                     return;
                 }
@@ -712,8 +701,8 @@
             }
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
+        // Initialize - FIXED LOADING SCREEN
+        function init() {
             console.log('🚀 [DREAM OS] v2.1 Initializing...');
 
             // Init Theme
@@ -722,18 +711,32 @@
             // Render Home
             loadModule('home');
 
-            // Loading Animation
+            // Hide Loading Screen - FIXED!
             setTimeout(() => {
-                document.getElementById('loading-bar').style.width = '100%';
-                setTimeout(() => {
-                    document.getElementById('loading-screen').classList.add('hidden');
-                    document.getElementById('app-shell').style.display = 'block';
-                }, 500);
-            }, 1000);
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen) {
+                    loadingScreen.classList.add('hide');
+                    console.log('✅ [LOADING] Screen hidden');
+                }
+            }, 1500);
+
+            // Setup Ghost Trigger
+            setTimeout(setupGhostTrigger, 100);
+
+            // Start Clock
+            updateClock();
+            setInterval(updateClock, 1000);
 
             console.log('✅ [DREAM OS] Ready!');
             console.log('🎨 5 Themes Available');
-            console.log('👻 5-TAP Header for Ghost Mode');        });
+            console.log('👻 5-TAP Header for Ghost Mode');
+        }
+
+        // Run Init
+        if (document.readyState === 'loading') {            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
     </script>
 </body>
 </html>
