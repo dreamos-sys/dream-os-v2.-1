@@ -1,0 +1,1038 @@
+/* ============================================
+   🕌 DREAM OS 2026 ENTERPRISE EDITION
+   Responsive Layout System
+   Version: 2026.1.0
+   ============================================ */
+
+/* ============================================
+   📐 BREAKPOINT SYSTEM 2026
+   ============================================ */
+
+:root {
+    /* Screen Sizes */
+    --bp-xs: 320px;    /* Small phones */
+    --bp-sm: 375px;    /* Medium phones */
+    --bp-md: 480px;    /* Large phones */
+    --bp-lg: 768px;    /* Tablets */
+    --bp-xl: 1024px;   /* Small laptops */
+    --bp-2xl: 1440px;  /* Desktops */
+    
+    /* Container Max Widths */
+    --container-sm: 100%;
+    --container-md: 480px;
+    --container-lg: 768px;
+    --container-xl: 1024px;
+    --container-2xl: 1440px;
+    
+    /* Spacing Scale */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    
+    /* Border Radius Scale */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 24px;
+    --radius-full: 9999px;
+}
+
+/* ============================================
+   🌍 BASE RESPONSIVE RESET
+   ============================================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+img, video, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ============================================
+   📱 SAFE AREA INSETS - NOTCH SUPPORT [[40]]
+   ============================================ */
+
+:root {
+    --safe-top: env(safe-area-inset-top, 20px);
+    --safe-bottom: env(safe-area-inset-bottom, 20px);
+    --safe-left: env(safe-area-inset-left, 16px);
+    --safe-right: env(safe-area-inset-right, 16px);
+}
+
+.safe-top {
+    padding-top: var(--safe-top);
+}
+
+.safe-bottom {
+    padding-bottom: var(--safe-bottom);
+}
+
+.safe-left {
+    padding-left: var(--safe-left);
+}
+
+.safe-right {    padding-right: var(--safe-right);
+}
+
+.safe-all {
+    padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);
+}
+
+/* ============================================
+   📦 CONTAINER SYSTEM
+   ============================================ */
+
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+}
+
+@media (min-width: --bp-md) {
+    .container {
+        max-width: var(--container-md);
+    }
+}
+
+@media (min-width: --bp-lg) {
+    .container {
+        max-width: var(--container-lg);
+    }
+}
+
+@media (min-width: --bp-xl) {
+    .container {
+        max-width: var(--container-xl);
+    }
+}
+
+@media (min-width: --bp-2xl) {
+    .container {
+        max-width: var(--container-2xl);
+    }
+}
+
+.container-fluid {
+    width: 100%;
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+}
+
+/* ============================================   🎨 BENTO GRID LAYOUT SYSTEM [[8]], [[13]]
+   ============================================ */
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, minmax(120px, auto));
+    gap: var(--space-3);
+    padding: var(--space-4);
+    width: 100%;
+}
+
+/* Card Size Variants */
+.bento-large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.bento-medium {
+    grid-column: span 2;
+}
+
+.bento-small {
+    grid-column: span 1;
+}
+
+.bento-tall {
+    grid-row: span 2;
+}
+
+.bento-wide {
+    grid-column: span 4;
+}
+
+/* Full Width Card */
+.bento-full {
+    grid-column: 1 / -1;
+}
+
+/* ============================================
+   📱 MOBILE FIRST - PHONE LAYOUT (320px - 480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: var(--space-3);
+        padding: var(--space-3);
+    }    
+    .bento-large,
+    .bento-medium,
+    .bento-small,
+    .bento-tall,
+    .bento-wide {
+        grid-column: 1 / -1;
+        grid-row: auto;
+    }
+    
+    /* Stack all cards vertically on mobile */
+    .stack-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+    
+    /* Hide non-essential elements on mobile */
+    .hide-mobile {
+        display: none !important;
+    }
+    
+    /* Reduce padding for mobile */
+    .section {
+        padding: var(--space-4) var(--space-3);
+    }
+    
+    /* Typography scale down */
+    .text-display-mobile {
+        font-size: 1.75rem;
+        line-height: 2.25rem;
+    }
+    
+    .text-h1-mobile {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+}
+
+/* ============================================
+   📱 TABLET LAYOUT (481px - 768px)
+   ============================================ */
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        gap: var(--space-4);
+        padding: var(--space-4);
+    }    
+    .bento-large {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    .bento-medium {
+        grid-column: span 2;
+    }
+    
+    .bento-small {
+        grid-column: span 1;
+    }
+    
+    .bento-tall {
+        grid-row: span 2;
+    }
+    
+    .bento-wide {
+        grid-column: span 2;
+    }
+    
+    /* Hide elements only on tablet */
+    .hide-tablet {
+        display: none !important;
+    }
+    
+    .section {
+        padding: var(--space-6) var(--space-4);
+    }
+}
+
+/* ============================================
+   💻 DESKTOP LAYOUT (769px - 1024px)
+   ============================================ */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .bento-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        gap: var(--space-5);
+        padding: var(--space-6);
+    }
+    
+    .bento-large {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    .bento-medium {        grid-column: span 2;
+    }
+    
+    .bento-small {
+        grid-column: span 1;
+    }
+    
+    .bento-tall {
+        grid-row: span 2;
+    }
+    
+    .bento-wide {
+        grid-column: span 3;
+    }
+    
+    .hide-desktop {
+        display: none !important;
+    }
+    
+    .section {
+        padding: var(--space-8) var(--space-6);
+    }
+}
+
+/* ============================================
+   🖥️ LARGE DESKTOP LAYOUT (1025px+)
+   ============================================ */
+
+@media (min-width: 1025px) {
+    .bento-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        gap: var(--space-6);
+        padding: var(--space-8);
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+    
+    .bento-large {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    .bento-medium {
+        grid-column: span 2;
+    }
+    
+    .bento-small {
+        grid-column: span 1;
+    }    
+    .bento-tall {
+        grid-row: span 2;
+    }
+    
+    .bento-wide {
+        grid-column: span 4;
+    }
+    
+    .section {
+        padding: var(--space-10) var(--space-8);
+    }
+}
+
+/* ============================================
+   🎯 THUMB ZONE OPTIMIZATION [[40]], [[43]]
+   ============================================ */
+
+/* Natural thumb reach zone for mobile */
+.thumb-zone {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(var(--safe-bottom) + 80px);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: var(--space-3) var(--space-4) calc(var(--space-3) + var(--safe-bottom));
+    z-index: 999;
+}
+
+/* Interactive elements within thumb reach */
+.thumb-reach {
+    min-width: 48px;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+@media (max-width: 480px) {
+    .thumb-zone {
+        justify-content: space-evenly;
+    }
+    
+    .thumb-reach {
+        min-width: 56px;        min-height: 56px;
+    }
+}
+
+/* ============================================
+   📱 BOTTOM NAVIGATION RESPONSIVE
+   ============================================ */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: var(--space-3) var(--space-4) calc(var(--space-3) + var(--safe-bottom));
+    z-index: 999;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    padding: var(--space-2);
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.nav-item-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Tablet - Show icons only */
+@media (min-width: 481px) and (max-width: 768px) {
+    .nav-item-label {
+        display: none;    }
+    
+    .nav-item {
+        min-width: 56px;
+        min-height: 56px;
+    }
+}
+
+/* Desktop - Hide bottom nav, show sidebar */
+@media (min-width: 769px) {
+    .bottom-nav {
+        display: none;
+    }
+}
+
+/* ============================================
+   📊 SIDEBAR NAVIGATION - DESKTOP
+   ============================================ */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    height: 100dvh;
+    padding: var(--safe-top) var(--space-4) var(--safe-bottom);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+@media (min-width: 769px) {
+    .sidebar {
+        display: flex;
+    }
+    
+    .main-content {
+        margin-left: 280px;
+    }
+}
+
+.sidebar-header {
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.sidebar-nav {
+    display: flex;    flex-direction: column;
+    gap: var(--space-2);
+    flex: 1;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 48px;
+}
+
+.sidebar-item:hover {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.sidebar-item.active {
+    background: rgba(16, 185, 129, 0.15);
+}
+
+/* ============================================
+   📐 GRID SYSTEM - FLEXIBLE
+   ============================================ */
+
+.grid {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.grid-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 480px) {
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .grid-3,    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ============================================
+   📦 FLEX SYSTEM - RESPONSIVE
+   ============================================ */
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-nowrap {
+    flex-wrap: nowrap;
+}
+
+.flex-1 { flex: 1; }
+.flex-2 { flex: 2; }
+.flex-3 { flex: 3; }
+
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
+
+@media (max-width: 480px) {
+    .flex-mobile-col {        flex-direction: column;
+    }
+    
+    .flex-mobile-wrap {
+        flex-wrap: wrap;
+    }
+}
+
+/* ============================================
+   🎭 HEADER RESPONSIVE
+   ============================================ */
+
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: var(--space-4);
+    padding-top: var(--safe-top);
+    z-index: 998;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.header-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: var(--space-3);
+        padding-top: var(--safe-top);
+    }
+    
+    .header-title {        font-size: 1rem;
+    }
+    
+    .hide-mobile-header {
+        display: none;
+    }
+}
+
+/* ============================================
+   📄 MAIN CONTENT AREA
+   ============================================ */
+
+.main-content {
+    padding: var(--space-4);
+    padding-top: calc(var(--space-4) + var(--safe-top));
+    padding-bottom: calc(var(--space-4) + var(--safe-bottom) + 80px);
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+@media (min-width: 769px) {
+    .main-content {
+        margin-left: 280px;
+        padding-bottom: calc(var(--space-4) + var(--safe-bottom));
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: var(--space-3);
+        padding-top: calc(var(--space-3) + var(--safe-top));
+        padding-bottom: calc(var(--space-3) + var(--safe-bottom) + 80px);
+    }
+}
+
+/* ============================================
+   🃏 CARD LAYOUT RESPONSIVE
+   ============================================ */
+
+.card {
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    width: 100%;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);    margin-bottom: var(--space-4);
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: var(--space-4);
+        border-radius: var(--radius-lg);
+    }
+    
+    .card-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* ============================================
+   📈 METRIC DISPLAY RESPONSIVE
+   ============================================ */
+
+.metric-display {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.metric-label {
+    font-size: 0.75rem;
+    color: rgba(148, 163, 184, 0.8);
+    text-transform: uppercase;    letter-spacing: 0.5px;
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.metric-trend {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .metric-value {
+        font-size: 1.75rem;
+    }
+    
+    .metric-label {
+        font-size: 0.625rem;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .metric-value {
+        font-size: 2rem;
+    }
+}
+
+/* ============================================
+   🎯 FLOATING ACTION BUTTON - RESPONSIVE
+   ============================================ */
+
+.fab {
+    position: fixed;
+    bottom: calc(var(--safe-bottom) + 100px);
+    right: var(--space-4);
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 997;
+    cursor: pointer;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);}
+
+.fab:hover {
+    transform: scale(1.05);
+}
+
+.fab:active {
+    transform: scale(0.95);
+}
+
+/* Center FAB for mobile */
+@media (max-width: 480px) {
+    .fab-center {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+    
+    .fab-center:hover {
+        transform: translateX(-50%) scale(1.05);
+    }
+    
+    .fab-center:active {
+        transform: translateX(-50%) scale(0.95);
+    }
+}
+
+/* Hide FAB on desktop if needed */
+@media (min-width: 1025px) {
+    .hide-desktop-fab {
+        display: none;
+    }
+}
+
+/* ============================================
+   📬 MODAL RESPONSIVE
+   ============================================ */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+}
+.modal {
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6);
+}
+
+@media (max-width: 480px) {
+    .modal {
+        max-width: 100%;
+        max-height: 85vh;
+        border-radius: var(--radius-xl);
+        padding: var(--space-4);
+    }
+}
+
+/* ============================================
+   📊 TABLE RESPONSIVE
+   ============================================ */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.table th,
+.table td {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.table th {
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table td {    font-size: 0.875rem;
+}
+
+/* Card view for mobile tables */
+@media (max-width: 480px) {
+    .table-mobile-card {
+        display: block;
+    }
+    
+    .table-mobile-card tr {
+        display: block;
+        margin-bottom: var(--space-4);
+        padding: var(--space-4);
+        border-radius: var(--radius-lg);
+    }
+    
+    .table-mobile-card td {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space-2) 0;
+        border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+    }
+    
+    .table-mobile-card td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+    }
+}
+
+/* ============================================
+   🎨 VISUAL HIDING UTILITIES
+   ============================================ */
+
+.hide-mobile { display: none !important; }
+.hide-tablet { display: none !important; }
+.hide-desktop { display: none !important; }
+
+@media (max-width: 480px) {
+    .hide-mobile { display: none !important; }
+    .show-mobile { display: block !important; }
+    .show-mobile-flex { display: flex !important; }
+    .show-mobile-grid { display: grid !important; }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .hide-tablet { display: none !important; }
+    .show-tablet { display: block !important; }
+    .show-tablet-flex { display: flex !important; }}
+
+@media (min-width: 769px) {
+    .hide-desktop { display: none !important; }
+    .show-desktop { display: block !important; }
+    .show-desktop-flex { display: flex !important; }
+    .show-desktop-grid { display: grid !important; }
+}
+
+/* ============================================
+   ♿ ACCESSIBILITY - REDUCED MOTION [[8]]
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ============================================
+   🌙 DARK MODE - ALWAYS ON (Dream OS Default)
+   ============================================ */
+
+/* Dream OS uses dark mode as default */
+/* No light mode toggle needed for enterprise security */
+
+/* ============================================
+   📐 SPACING UTILITIES
+   ============================================ */
+
+.p-0 { padding: 0; }
+.p-1 { padding: var(--space-1); }
+.p-2 { padding: var(--space-2); }
+.p-3 { padding: var(--space-3); }
+.p-4 { padding: var(--space-4); }
+.p-5 { padding: var(--space-5); }
+.p-6 { padding: var(--space-6); }
+.p-8 { padding: var(--space-8); }
+
+.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
+.py-4 { padding-top: var(--space-4); padding-bottom: var(--space-4); }
+
+.m-0 { margin: 0; }
+.m-1 { margin: var(--space-1); }
+.m-2 { margin: var(--space-2); }
+.m-3 { margin: var(--space-3); }
+.m-4 { margin: var(--space-4); }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* ============================================
+   🎯 ORIENTATION SUPPORT
+   ============================================ */
+
+@media (orientation: landscape) and (max-height: 500px) {
+    .hide-landscape {
+        display: none !important;
+    }
+    
+    .bento-grid {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(2, minmax(100px, auto));
+    }
+}
+
+/* ============================================
+   📱 PWA STANDALONE MODE
+   ============================================ */
+
+@media all and (display-mode: standalone) {
+    .hide-standalone {
+        display: none !important;
+    }
+    
+    body {
+        overscroll-behavior-y: contain;
+    }
+}
+
+/* ============================================
+   🖨️ PRINT STYLES
+   ============================================ */
+
+@media print {
+    .no-print,
+    .bottom-nav,
+    .sidebar,
+    .fab,
+    .header {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin: 0;
+        padding: 0;
+    }
+        .bento-grid {
+        display: block;
+    }
+    
+    .bento-card {
+        break-inside: avoid;
+        margin-bottom: 16px;
+    }
+}

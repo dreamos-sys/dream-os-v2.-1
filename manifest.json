@@ -1,20 +1,53 @@
 {
-  "modules": [
+  "name": "Dream OS 2026 Enterprise Edition",
+  "short_name": "Dream OS",
+  "description": "Smart Facility Management Platform with AI Orchestration",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#10b981",
+  "orientation": "portrait",
+  "scope": "./",
+  "lang": "id",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
     {
+<<<<<<< HEAD
       "id": "sekuriti",
       "name": "SEKURITI",
      "icon": "🛡️",
     "path": "/modules/sekuriti/module.js",
       "permissions": ["all", "sekuriti"]
+=======
+      "src": "./assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+>>>>>>> 33d66cf76aaa69d0cdcd8999d3a4b7e0684a0911
     },
     {
-      "id": "booking",
-      "name": "BOOKING",
-      "icon": "📅",
-      "path": "/modules/booking/module.js",
-      "permissions": ["all", "booking"]
+      "src": "./assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-    // Tambahkan modul lain nanti
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Home",
+      "description": "Open main dashboard",
+      "url": "./index.html?module=home",
+      "icons": [{ "src": "./assets/icons/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Security",
+      "short_name": "Security",
+      "description": "Open security module",
+      "url": "./index.html?module=sekuriti",
+      "icons": [{ "src": "./assets/icons/icon-96x96.png", "sizes": "96x96" }]
+    }
   ]
 }
 nano shell.css
