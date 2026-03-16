@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no">
+    <meta name="theme-color" content="#10b981">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Dream OS v2.1 - Sovereign Enterprise</title>
     
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- Core CSS - PATH SUDAH FIX! -->
+    <!-- Core CSS - PATH FIX! -->
     <link rel="stylesheet" href="./core/engine.css">
     
-    <!-- Theme Manager - PATH SUDAH FIX! (Capital U) -->
+    <!-- Theme Manager -->
     <script type="module" src="./js/Utils/theme-manager.js"></script>
 </head>
 <body>
@@ -21,15 +25,15 @@
         <div style="text-align:center;">
             <div class="loader"></div>
             <p style="margin-top:1rem;color:var(--color-primary);font-size:0.875rem;">Bismillah bi idznillah</p>
-            <h1 style="margin-top:0.5rem;color:var(--text-primary);font-size:2rem;letter-spacing:2px;">DREAM OS</h1>
-            <p style="margin-top:0.5rem;color:var(--text-muted);font-size:0.75rem;">v2.1 Sovereign Enterprise</p>
+            <h1 style="margin-top:0.5rem;color:var(--color-text);font-size:2rem;letter-spacing:2px;">DREAM OS</h1>
+            <p style="margin-top:0.5rem;color:var(--color-text-muted);font-size:0.75rem;">v2.1 Sovereign Enterprise</p>
         </div>
     </div>
 
     <!-- Toast Container -->
     <div id="toast-container"></div>
 
-    <!-- App Shell -->
+    <!-- App Shell - Dynamic Content -->
     <div id="app-shell"></div>
 
     <!-- Main Shell Script -->
