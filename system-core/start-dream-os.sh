@@ -6,15 +6,34 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 echo "╔════════════════════════════════════════════════════════════════╗"
 echo -e "║   ${GREEN}🚀 DREAM OS STARTUP SEQUENCE${NC}                              ║"
-echo "╠════════════════════════════════════════════════════════════════╣"
-echo -e "║   ${BLUE}[1/3] Checking MariaDB...${NC}                                   ║"
-if service mariadb status > /dev/null 2>&1; then
-    echo -e "║   ${GREEN}✅ MariaDB: RUNNING${NC}                                     ║"
+# --- [1/3] Jantung MariaDB ---
+if pgrep -x "mariadbd" > /dev/null; then
+    echo -e "║   ✅ MariaDB: ALREADY RUNNING"
 else
-    echo -e "║   ${YELLOW}⚠️  MariaDB: Starting...${NC}                                ║"
-    service mariadb start
-    sleep 2
+    echo -e "║   ⏳ Memaksa MariaDB Bangun..."
+    # Pakai mysqld_safe (standar Termux mariadb)
+    mysqld_safe --datadir=$PREFIX/var/lib/mysql > /dev/null 2>&1 &
+    sleep 6
+    if pgrep -x "mariadbd" > /dev/null; then
+        echo -e "║   ✅ MariaDB: ONLINE NOW"
+    else
+        echo -e "║   ❌ MariaDB: GAGAL (Coba ketik 'mariadbd' manual)"
+    fi
 fi
+
+# --- [2/3] Jantung Bridge API ---
+echo -e "║   ⏳ Menghubungkan Bridge..."
+# Pastikan bridge.js ada di folder home (~)
+nohup node ~/bridge.js > ~/bridge.log 2>&1 &
+sleep 3
+if pgrep -f "node.*bridge.js" > /dev/null; then
+    echo -e "║   ✅ Bridge: ACTIVE"
+else
+    echo -e "║   ❌ Bridge: CRASHED (Cek log di ~/bridge.log)"
+fi
+
+
+
 echo -e "║   ${BLUE}[2/3] Checking Bridge API...${NC}                                ║"
 if pgrep -f "node.*bridge.js" > /dev/null; then
     echo -e "║   ${GREEN}✅ Bridge API: RUNNING${NC}                                  ║"

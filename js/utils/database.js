@@ -2,7 +2,9 @@
 // FILE: js/utils/database.js
 // ════════════════════════════════════════════
 
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+import { createClient } from '@supabase/supabase-js';
+global.window = global;
+global.DREAM = { config: { supabase: { url: 'https://xyz.supabase.co', key: 'eyJhbG...' } } };
 
 export const Database = {
     client: null,
