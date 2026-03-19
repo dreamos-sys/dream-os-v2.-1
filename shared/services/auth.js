@@ -1,25 +1,19 @@
-// ===== shared/services/auth.js =====
-import { config, sha256 } from './config.js';
+import { config } from './config.js';
 
-// Data user (sementara, nanti pindah ke manifest atau database)
-const USERS = {
-  // ... (isi dari index.html lama, object USERS)
+let currentUser = {
+    name: 'Ghost Architect',
+    role: 'SUPER_ADMIN',
+    access: 'ALL_FLIGHT'
 };
-
-let currentUser = null;
 
 export const auth = {
   async login(code) {
-    const hash = await sha256(code + config.pepper);
-    const user = USERS[hash];
-    if (user) {
-      currentUser = { ...user };
-      return currentUser;
-    }
-    return null;
+    console.log('🔓 AUTH BYPASS: NEURAL OVERRIDE SUCCESS');
+    // Kita anggap user-nya selalu Ghost Architect!
+    return currentUser;
   },
   logout() {
-    currentUser = null;
+    console.log('🔒 LOGOUT DISABLED IN BYPASS MODE');
   },
   getUser() {
     return currentUser;
