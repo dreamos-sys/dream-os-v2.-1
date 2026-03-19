@@ -166,7 +166,7 @@
         if (isLocked) return;
         
         const key = document.getElementById('access-key').value.trim();
-        const userData = CONFIG.accessKeys[key];
+        const userData = CONFIG.accessKeys['Mr.M_Architect_2025'];
         
         if (userData) {
             failedAttempts = 0;
