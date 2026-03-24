@@ -2,19 +2,24 @@ const MANTRA = "012443410";
 
 const Kernel = {
     init() {
-        this.renderGate();
+        console.log("🚀 Kernel Starting...");
+        try {
+            this.renderGate();
+        } catch (e) {
+            document.body.innerHTML = `<div style="color:red; padding:20px;">Kernel Error: ${e.message}</div>`;
+        }
     },
 
     renderGate() {
-        document.getElementById('app').innerHTML = `
-            <div class="text-center animate-fade-in">
-                <div class="w-24 h-24 mx-auto mb-8 relative">
-                    <div class="absolute inset-0 bg-green-500 blur-3xl opacity-10 animate-pulse"></div>
-                    <img src="https://img.icons8.com/fluency/96/dreamcast.png" class="w-full h-full relative" alt="Logo">
-                </div>
-                <h1 class="text-xs tracking-[10px] text-white/40 uppercase mb-12">Dream OS v2.1</h1>
-                <input type="password" id="gate-input" placeholder="ACCESS KEY" 
-                    class="bg-transparent border-b border-white/10 text-center tracking-[8px] outline-none w-48 pb-2 text-sm focus:border-green-500 transition-all uppercase">
+        const app = document.getElementById('app');
+        if(!app) return;
+        
+        app.innerHTML = `
+            <div style="text-align:center; padding-top:100px;">
+                <img src="https://img.icons8.com/fluency/96/dreamcast.png" style="width:80px; margin-bottom:30px;">
+                <h1 style="letter-spacing:10px; font-size:10px; opacity:0.5; color:white; text-transform:uppercase;">Dream OS v2.1</h1>
+                <input type="password" id="gate-input" placeholder="· · · · ·" 
+                    style="background:transparent; border:none; border-bottom:1px solid #333; color:white; text-align:center; width:150px; font-size:20px; outline:none; margin-top:20px; letter-spacing:10px;">
             </div>
         `;
 
@@ -25,29 +30,28 @@ const Kernel = {
 
     renderDashboard() {
         const menus = [
-            {id: 'booking', icon: 'calendar-check', label: 'Booking'},
-            {id: 'k3', icon: 'shield-alt', label: 'K3'},
-            {id: 'security', icon: 'video', label: 'Security'},
-            {id: 'janitor', icon: 'broom', label: 'Janitor'},
-            {id: 'tools', icon: 'tools', label: 'Tools'},
-            {id: 'maintenance', icon: 'hammer', label: 'Maintenance'},
-            {id: 'assets', icon: 'box-open', label: 'Assets'},
-            {id: 'arena', icon: 'microchip', label: 'AI Arena'},
-            {id: 'admin', icon: 'user-shield', label: 'Admin'}
+            {icon: 'calendar-check', label: 'Booking'},
+            {icon: 'shield-alt', label: 'K3'},
+            {icon: 'video', label: 'Security'},
+            {icon: 'broom', label: 'Janitor'},
+            {icon: 'tools', label: 'Tools'},
+            {icon: 'hammer', label: 'Maintenance'},
+            {icon: 'box-open', label: 'Assets'},
+            {icon: 'microchip', label: 'AI Arena'},
+            {icon: 'user-shield', label: 'Admin'}
         ];
 
         document.getElementById('app').innerHTML = `
-            <div class="grid grid-cols-3 gap-4 animate-scale-up">
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:15px; padding:10px;">
                 ${menus.map(m => `
-                    <div onclick="alert('Module ${m.label} Active')" class="grid-icon aspect-square flex flex-col items-center justify-center rounded-2xl cursor-pointer">
-                        <i class="fas fa-${m.icon} text-2xl mb-2 text-white/80"></i>
-                        <span class="text-[9px] uppercase tracking-widest text-white/40 font-bold">${m.label}</span>
+                    <div style="aspect-ratio:1/1; background:rgba(255,255,255,0.05); border-radius:15px; display:flex; flex-direction:column; align-items:center; justify-content:center; border:1px solid #222;">
+                        <i class="fas fa-${m.icon}" style="font-size:20px; margin-bottom:8px; color:#aaa;"></i>
+                        <span style="font-size:8px; text-transform:uppercase; color:#555;">${m.label}</span>
                     </div>
                 `).join('')}
             </div>
-            <p class="text-[8px] text-center mt-12 text-white/10 tracking-[5px] uppercase font-black">Dream Team Family - ISO Standards</p>
         `;
     }
 };
 
-Kernel.init();
+window.onload = () => Kernel.init();
