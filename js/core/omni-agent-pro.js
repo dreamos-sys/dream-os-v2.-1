@@ -69,3 +69,4 @@ export const OmniAgent = {
 
 // Auto-Initialize Omni Agent
 OmniAgent.syncAllModules();
+OmniAgent.performance = PerformanceEngine;
