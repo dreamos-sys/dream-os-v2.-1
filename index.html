@@ -3,17 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dream OS v2.-1- Master M</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Dream OS v13.4 | Sovereign Core</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/img/icon-192.png">
+    <style>
+        :root {
+            --win-blue: #005A9E;
+            --win-light-grey: #F3F3F3;
+            --win-border: #CCCCCC;
+            --accent: #0078D4;
+        }
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle, #001f3f 0%, #000000 100%);
+            color: white; height: 100vh; overflow: hidden;
+        }
+        /* Dashboard Grid Ala Windows XL */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px; padding: 20px;
+            margin-top: 50px;
+        }
+        .tile {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            aspect-ratio: 1 / 1;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            border-radius: 8px; transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .tile:active { transform: scale(0.95); background: var(--accent); }
+        .tile i { font-size: 2rem; margin-bottom: 8px; }
+        .tile-label { font-size: 0.8rem; font-weight: 500; }
+
+        /* Status Bar ISO Standard */
+        .status-bar {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 5px 15px; font-size: 0.7rem;
+            display: flex; justify-content: space-between;
+            border-bottom: 1px solid var(--accent);
+            z-index: 100;
+        }
+        .brand { font-weight: bold; color: var(--accent); }
+    </style>
 </head>
-<body class="bg-[#020617] text-white overflow-x-hidden">
-    <div id="app-shell">
-        <div class="flex flex-col items-center justify-center h-screen space-y-4">
-            <div class="w-12 h-12 border-4 border-lime-500 border-t-transparent rounded-full animate-spin"></div>
-            <p class="text-lime-500 font-bold tracking-[3px] animate-pulse uppercase text-[10px]">Initializing Dream OS...</p>
-        </div>
+<body>
+
+    <div class="status-bar">
+        <span class="brand">DREAM OS v13.4 | ISO 27001</span>
+        <span id="clock">00:00:00</span>
     </div>
-    <script type="module" src="./js/shell.js?v=${Date.now()}"></script>
+
+    <div class="dashboard">
+        <div class="tile" onclick="loadModule('stok')">📦 <span class="tile-label">Gudang</span></div>
+        <div class="tile" onclick="loadModule('booking')">📅 <span class="tile-label">Booking</span></div>
+        <div class="tile" onclick="loadModule('security')">🛡️ <span class="tile-label">Security</span></div>
+        <div class="tile" onclick="loadModule('ai')">🧠 <span class="tile-label">AI Hub</span></div>
+        <div class="tile" onclick="loadModule('config')">⚙️ <span class="tile-label">Settings</span></div>
+        <div class="tile" onclick="location.reload()">🔄 <span class="tile-label">Sync</span></div>
+    </div>
+
+    <script src="js/app-core.js"></script>
+    <script>
+        function loadModule(name) {
+            console.log("Loading module: " + name);
+            // Logika pemanggil modul dari app-core.js Master
+            if(window.DreamCore) window.DreamCore.init(name);
+            else alert("Bismillah, Modul " + name + " siap dijalankan!");
+        }
+
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+    </script>
 </body>
 </html>
+
