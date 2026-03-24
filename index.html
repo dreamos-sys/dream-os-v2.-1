@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Dream OS v13.2 - Sovereign AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; overflow: hidden; }
+        .glass { background: rgba(15,15,15,0.8); backdrop-filter: blur(15px); border: 1px solid #333; }
+        .nav-item.active { color: #a78bfa; filter: drop-shadow(0 0 8px #a78bfa); }
+        #main-content::-webkit-scrollbar { display: none; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-up { animation: slideUp 0.5s ease-out forwards; }
+    </style>
+</head>
+<body>
+    <div id="app-shell" class="h-screen flex flex-col"></div>
+    <script type="module" src="./shell.js"></script>
+</body>
+</html>
