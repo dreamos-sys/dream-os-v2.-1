@@ -83,9 +83,9 @@ function showDashboard() {
                     <div><i class="fas fa-warehouse" style="font-size:28px;color:#6366f1;"></i></div>
                     <div style="font-size:12px;margin-top:8px;">Asset</div>
                 </div>
-                <div onclick="showModule('command')" style="background:rgba(15,23,42,0.6);border:1px solid rgba(16,185,129,0.15);border-radius:20px;padding:16px;text-align:center;cursor:pointer;transition:all 0.3s;">
+                <div onclick="showModule('commandcenter')" style="background:rgba(15,23,42,0.6);border:1px solid rgba(16,185,129,0.15);border-radius:20px;padding:16px;text-align:center;cursor:pointer;transition:all 0.3s;">
                     <div><i class="fas fa-desktop" style="font-size:28px;color:#a855f7;"></i></div>
-                    <div style="font-size:12px;margin-top:8px;">Command</div>
+                    <div style="font-size:12px;margin-top:8px;">Command Center</div>
                 </div>
                 <div onclick="showModule('qr')" style="background:rgba(15,23,42,0.6);border:1px solid rgba(16,185,129,0.15);border-radius:20px;padding:16px;text-align:center;cursor:pointer;transition:all 0.3s;">
                     <div><i class="fas fa-qrcode" style="font-size:28px;color:#06b6d4;"></i></div>
@@ -132,7 +132,7 @@ function showModule(module) {
         booking: () => `<div><h3 style="color:#3b82f6;">📅 Booking System</h3><div style="background:rgba(15,23,42,0.5);border-radius:20px;padding:20px;margin-top:15px;"><p>Booking hari ini: 3 ruangan</p><ul><li>Ruang Rapat Utama - 10:00</li><li>Meeting Room 2 - 13:00</li><li>Ruang VIP - 14:00</li></ul></div></div>`,
         k3: () => `<div><h3 style="color:#f97316;">⚠️ K3 Safety</h3><div style="background:rgba(15,23,42,0.5);border-radius:20px;padding:20px;margin-top:15px;"><p>Status: <span style="color:#10b981;">Aman ✓</span></p><p>Insiden: 0 hari ini</p><p>Patroli: Rutin setiap 2 jam</p></div></div>`,
         asset: () => `<div><h3 style="color:#6366f1;">🏢 Asset Management</h3><div style="background:rgba(15,23,42,0.5);border-radius:20px;padding:20px;margin-top:15px;"><p>Total aset: 1,234</p><p>Dalam maintenance: 45</p><p>Aset baru: 12 bulan ini</p></div></div>`,
-        command: () => `<div><h3 style="color:#a855f7;">🎮 Command Center</h3><div style="background:rgba(15,23,42,0.5);border-radius:20px;padding:20px;margin-top:15px;"><p>Status: <span style="color:#10b981;">Operational ✓</span></p><p>Uptime: 99.9%</p><p>Active users: 1</p></div></div>`
+        commandcenter: () => `<div><h3 style="color:#a855f7;">🎮 Command Center</h3><div style="background:rgba(15,23,42,0.5);border-radius:20px;padding:20px;margin-top:15px;"><p>Status: <span style="color:#10b981;">Operational ✓</span></p><p>Uptime: 99.9%</p><p>Active users: 1</p><button onclick="alert('Command Center v3.0 - Full features coming soon!\\n\\nFitur: Dashboard, Dana, SPJ, Approval, Slides, Files, QR, Activity, Analytics, System')" style="background:#a855f7;border:none;padding:12px;border-radius:12px;cursor:pointer;margin-top:15px;width:100%;">Launch Command Center</button></div></div>`,
     };
     content.innerHTML = modules[module]?.() || `<div style="text-align:center;"><p>Modul ${module} sedang dalam pengembangan</p><button onclick="showModule('home')" style="background:#10b981;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;">Kembali</button></div>`;
 }
@@ -172,12 +172,10 @@ function sendChat() {
     const msg = input.value.trim();
     if (!msg) return;
     
-    // Add user message
     messages.innerHTML += `<div style="margin-bottom:8px;text-align:right;"><span style="background:#8b5cf6;padding:8px 12px;border-radius:18px;display:inline-block;">${msg}</span></div>`;
     input.value = '';
     messages.scrollTop = messages.scrollHeight;
     
-    // Process response
     const lower = msg.toLowerCase();
     let reply = '';
     if (lower.includes('stok')) reply = '📦 Stok saat ini: 245 item aktif. Stok menipis: 3 item (Kabel HDMI, Adaptor, Mouse).';
@@ -186,7 +184,8 @@ function sendChat() {
     else if (lower.includes('booking')) reply = '📅 Booking hari ini: 3 ruangan. Ruang Rapat Utama (10:00), Meeting Room 2 (13:00), Ruang VIP (14:00).';
     else if (lower.includes('k3')) reply = '⚠️ K3 Safety: Semua aman. Patroli rutin setiap 2 jam. Tidak ada insiden.';
     else if (lower.includes('asset')) reply = '🏢 Asset Management: Total 1,234 aset, 45 dalam maintenance, 12 aset baru bulan ini.';
-    else reply = '💚 Saya asisten Dream OS. Tanyakan tentang: stok, maintenance, security, booking, k3, atau asset.';
+    else if (lower.includes('command')) reply = '🎮 Command Center v3.0: Fitur lengkap Dashboard, Dana, SPJ, Approval, Slides, Files, QR, Activity, Analytics, System. Buka modul Command Center untuk detail.';
+    else reply = '💚 Saya asisten Dream OS. Tanyakan tentang: stok, maintenance, security, booking, k3, asset, atau command.';
     
     setTimeout(() => {
         messages.innerHTML += `<div style="margin-bottom:8px;"><span style="background:#334155;padding:8px 12px;border-radius:18px;display:inline-block;">${reply}</span></div>`;
