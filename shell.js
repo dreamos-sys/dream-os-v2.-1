@@ -83,7 +83,7 @@ function showDashboard() {
                     <div><i class="fas fa-warehouse" style="font-size:28px;color:#6366f1;"></i></div>
                     <div style="font-size:12px;margin-top:8px;">Asset</div>
                 </div>
-                <div onclick="showModule('commandcenter')" style="background:rgba(15,23,42,0.6);border:1px solid rgba(16,185,129,0.15);border-radius:20px;padding:16px;text-align:center;cursor:pointer;transition:all 0.3s;">
+                <div onclick="loadCommandCenter()" style="background:rgba(15,23,42,0.6);border:1px solid rgba(16,185,129,0.15);border-radius:20px;padding:16px;text-align:center;cursor:pointer;transition:all 0.3s;">
                     <div><i class="fas fa-desktop" style="font-size:28px;color:#a855f7;"></i></div>
                     <div style="font-size:12px;margin-top:8px;">Command Center</div>
                 </div>
@@ -132,7 +132,6 @@ function showModule(module) {
         booking: () => `<div><h3 style="color:#3b82f6;">📅 Booking System</h3><div style="background:rgba(15,23,42,0.5);border-radius:20px;padding:20px;margin-top:15px;"><p>Booking hari ini: 3 ruangan</p><ul><li>Ruang Rapat Utama - 10:00</li><li>Meeting Room 2 - 13:00</li><li>Ruang VIP - 14:00</li></ul></div></div>`,
         k3: () => `<div><h3 style="color:#f97316;">⚠️ K3 Safety</h3><div style="background:rgba(15,23,42,0.5);border-radius:20px;padding:20px;margin-top:15px;"><p>Status: <span style="color:#10b981;">Aman ✓</span></p><p>Insiden: 0 hari ini</p><p>Patroli: Rutin setiap 2 jam</p></div></div>`,
         asset: () => `<div><h3 style="color:#6366f1;">🏢 Asset Management</h3><div style="background:rgba(15,23,42,0.5);border-radius:20px;padding:20px;margin-top:15px;"><p>Total aset: 1,234</p><p>Dalam maintenance: 45</p><p>Aset baru: 12 bulan ini</p></div></div>`,
-        commandcenter: () => `<div><h3 style="color:#a855f7;">🎮 Command Center</h3><div style="background:rgba(15,23,42,0.5);border-radius:20px;padding:20px;margin-top:15px;"><p>Status: <span style="color:#10b981;">Operational ✓</span></p><p>Uptime: 99.9%</p><p>Active users: 1</p><button onclick="alert('Command Center v3.0 - Full features coming soon!\\n\\nFitur: Dashboard, Dana, SPJ, Approval, Slides, Files, QR, Activity, Analytics, System')" style="background:#a855f7;border:none;padding:12px;border-radius:12px;cursor:pointer;margin-top:15px;width:100%;">Launch Command Center</button></div></div>`,
     };
     content.innerHTML = modules[module]?.() || `<div style="text-align:center;"><p>Modul ${module} sedang dalam pengembangan</p><button onclick="showModule('home')" style="background:#10b981;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;">Kembali</button></div>`;
 }
@@ -220,3 +219,27 @@ setTimeout(() => {
     const loading = document.getElementById('loading-screen');
     if (loading) loading.style.display = 'none';
 }, 500);
+
+// Load Command Center Module
+async function loadCommandCenter() {
+    const content = document.getElementById('moduleContent');
+    content.innerHTML = '<div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-pulse" style="font-size:32px;"></i><p>Loading Command Center...</p></div>';
+    try {
+        const module = await import('./modules/commandcenter/module.js');
+        if (module.default && typeof module.default.render === 'function') {
+            const html = await module.default.render({
+                user: { name: 'Master M', role: 'master' },
+                toast: (msg, type) => { const t = document.createElement('div'); t.textContent = msg; t.style.cssText = 'position:fixed;bottom:100px;left:20px;right:20px;background:#000;color:#10b981;padding:12px;border-radius:12px;text-align:center;z-index:10000;'; document.body.appendChild(t); setTimeout(() => t.remove(), 3000); },
+                navigate: (id) => showModule(id)
+            });
+            content.innerHTML = html;
+            if (module.default.afterRender) await module.default.afterRender({
+                user: { name: 'Master M', role: 'master' },
+                toast: (msg, type) => { const t = document.createElement('div'); t.textContent = msg; t.style.cssText = 'position:fixed;bottom:100px;left:20px;right:20px;background:#000;color:#10b981;padding:12px;border-radius:12px;text-align:center;z-index:10000;'; document.body.appendChild(t); setTimeout(() => t.remove(), 3000); },
+                navigate: (id) => showModule(id)
+            });
+        }
+    } catch(e) {
+        content.innerHTML = `<div style="text-align:center;padding:40px;"><i class="fas fa-exclamation-triangle" style="font-size:48px;color:#f59e0b;"></i><p>Error: ${e.message}</p><button onclick="showModule('home')" style="margin-top:20px;background:#10b981;border:none;padding:10px 20px;border-radius:12px;">Kembali</button></div>`;
+    }
+}
