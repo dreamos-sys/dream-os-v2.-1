@@ -10,7 +10,7 @@
         v:()=> {
             if(lock) return;
             const p=document.getElementById('p').value, m=document.getElementById('m');
-            if(p==='DREAM13'){ document.getElementById('app').style.display='none'; document.getElementById('g').style.display='grid'; DREAM.r(); }
+            if(p==='b15m1ll4h_012443410'){ document.getElementById('app').style.display='none'; document.getElementById('g').style.display='grid'; DREAM.r(); }
             else { att++; if(att>=3){ lock=true; m.innerText='TERKUNCI 5 MENIT'; setTimeout(()=>{lock=false;att=0;m.innerText=''},300000) } else m.innerText=`SALAH (${att}/3)`; }
         },
         r:()=> {
