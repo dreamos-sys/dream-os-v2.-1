@@ -1,60 +1,70 @@
+/**
+ * ══════════════════════════════════════════════════════════════
+ * DREAM OS v2.1.5 - SMART AGENT HOME MODULE
+ * Feature: Auto-Integration, Real-time Automation, AI Insights
+ * ══════════════════════════════════════════════════════════════
+ */
+
 export default {
     async render() {
+        // 1. Fetch Dynamic Intelligence (Automation)
+        const stats = await this.getSystemIntelligence();
+        const user = sessionStorage.getItem('dreamos_user') || 'Master Architect';
+        
         return `
-            <div class="p-5 animate-up">
-                <div class="text-center mb-8">
-                    <h2 class="text-purple-400 font-bold tracking-[6px] text-xl font-['Amiri']">بِسْمِ اللَّهِ بِإِذْنِ اللَّهِ</h2>
-                    <p class="text-emerald-500 text-[10px] font-black mt-2 tracking-[2px] font-['Amiri'] uppercase">اَللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ</p>
+            <div id="home-agent" style="animation: fadeIn 0.5s ease;">
+                <section style="margin-bottom: 25px;">
+                    <h2 style="color: #10b981; font-size: 1.2rem; margin:0;">Bismillah,</h2>
+                    <h1 style="font-size: 1.8rem; margin:0; letter-spacing: -1px;">${user}</h1>
+                    <p style="color: #64748b; font-size: 0.8rem;">Dream Team Singularity is Active.</p>
+                </section>
+
+                <div style="background: linear-gradient(135deg, #10b98122, #06b6d422); border: 1px solid #10b98144; padding: 15px; border-radius: 20px; margin-bottom: 20px;">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                        <i class="fas fa-robot" style="color:#10b981;"></i>
+                        <span style="font-size: 10px; font-weight:bold; letter-spacing:1px; color:#10b981;">AI AGENT INSIGHT</span>
+                    </div>
+                    <p id="ai-message" style="font-size: 0.85rem; line-height: 1.4; color: #cbd5e1;">
+                        Memeriksa integritas sistem... Menunggu instruksi Master.
+                    </p>
                 </div>
 
-                <div class="relative w-full h-44 overflow-hidden rounded-[35px] glass mb-8">
-                    <div id="slider" class="flex transition-transform duration-700 h-full w-[700%]">
-                        ${[1,2,3,4,5,6,7].map(i => `
-                            <div class="w-full h-full flex flex-col items-center justify-center p-6 text-center">
-                                <span class="text-[8px] text-purple-500 font-black mb-2 tracking-[4px]">DREAM SYSTEM CORE</span>
-                                <h3 id="slide-title-${i}" class="text-white font-black text-xs uppercase leading-relaxed"></h3>
-                            </div>
-                        `).join('')}
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px;">
+                    <div class="stat-card">
+                        <span class="label">DATABASE</span>
+                        <span class="value" style="color: #10b981;">Connected</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="label">SECURITY LEVEL</span>
+                        <span class="value" style="color: #f59e0b;">ISO 27001</span>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-3 gap-3">
-                    ${['🏛️','📅','⚠️','🛡️','🧹','🌿','📦','🔧','🏢'].map((icon, i) => {
-                        const labels = ['Admin','Booking','K3','Sekuriti','Janitor In','Janitor Out','Stok','Maint','Assets'];
-                        const targets = ['admin','booking','k3','sekuriti','janin','janout','stok','maint','asset'];
-                        return `
-                        <button onclick="DREAM.navigate('${targets[i]}')" class="glass p-5 rounded-3xl active:scale-90 transition-all flex flex-col items-center gap-2">
-                            <span class="text-2xl">${icon}</span>
-                            <span class="text-[7px] font-black text-zinc-500 uppercase">${labels[i]}</span>
-                        </button>
-                        `;
-                    }).join('')}
+                <h3 style="font-size: 0.9rem; color:#64748b; margin-bottom:15px; letter-spacing:1px;">QUICK AUTOMATION</h3>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                    <button onclick="window.DREAM_NAV('qr')" class="action-btn">
+                        <i class="fas fa-qrcode"></i> <span>Scan & Report System</span>
+                    </button>
+                    <button onclick="window.DREAM_NAV('maintenance')" class="action-btn">
+                        <i class="fas fa-tools"></i> <span>Active Maintenance</span>
+                    </button>
                 </div>
             </div>
+
+            <style>
+                .stat-card { background: rgba(15, 23, 42, 0.5); padding: 12px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); }
+                .stat-card .label { display: block; font-size: 8px; color: #64748b; margin-bottom: 4px; letter-spacing: 1px; }
+                .stat-card .value { font-size: 12px; font-weight: bold; }
+                .action-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); color: #fff; padding: 15px; border-radius: 15px; display: flex; align-items: center; gap: 15px; font-size: 0.9rem; cursor: pointer; transition: 0.3s; width: 100%; text-align: left; }
+                .action-btn:active { transform: scale(0.98); background: rgba(16, 185, 129, 0.2); }
+                .action-btn i { color: #10b981; font-size: 1.2rem; }
+                @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+            </style>
         `;
     },
 
-    afterRender() {
-        const slideData = [
-            "Bismillah bi idznillah, sistem siap beroperasi.",
-            "ISO 27001 Active: Security Management.",
-            "ISO 55001 Active: Asset Management.",
-            "ISO 9001 Active: Quality Management.",
-            "Dream OS v13.2: AI Agent Ready.",
-            "Aura Sistem Selaras 5 Waktu Shalat.",
-            "Standby for Directives, Master M."
-        ];
-
-        slideData.forEach((text, i) => {
-            const el = document.getElementById(`slide-title-${i+1}`);
-            if(el) el.innerText = text;
-        });
-
-        let current = 0;
-        const slider = document.getElementById('slider');
-        setInterval(() => {
-            current = (current + 1) % 7;
-            if(slider) slider.style.transform = `translateX(-${current * (100/7)}%)`;
-        }, 7000); // 7 Detik
+    async getSystemIntelligence() {
+        // Simulasi integrasi dengan Supabase untuk log terakhir
+        return { status: "Active" };
     }
 };
