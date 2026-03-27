@@ -184,3 +184,68 @@
         to { opacity: 1; }
     }
 </style>
+<script>
+    // Secret Code Console
+    window.secretConsole = {
+        codes: {
+            'GHOST_DEBUG': () => { console.log('%c👻 GHOST DEBUG MODE', 'color: #a855f7; font-size: 14px;'); window.ghost?.debug(); return 'Ghost debug mode enabled'; },
+            'DREAM_DEV_MODE': () => { console.log('%c🔧 DEVELOPER MODE ACTIVE', 'color: #10b981; font-size: 14px;'); localStorage.setItem('dev_mode', 'true'); return 'Developer mode enabled'; },
+            'RECOVER_SYSTEM': () => { window.ghost?.emergencyRecovery(); return 'Emergency recovery initiated'; },
+            'EXPORT_ALL': () => { window.ghost?.exportAllData(); return 'Exporting all data...'; },
+            'FIX_MODULES': () => { window.ghost?.autoFix(); return 'Auto-fix initiated'; },
+            'RESET_CACHE': () => { localStorage.clear(); sessionStorage.clear(); location.reload(); return 'Cache cleared, reloading...'; },
+            'SHOW_STATS': () => { window.ghost?.showStats(); return 'Stats displayed in console'; },
+            'DEBUG_DB': () => { console.table(localStorage); return 'LocalStorage data displayed'; },
+            'EMERGENCY_2026': () => { window.ghost?.emergencyRecovery(); return 'Emergency recovery'; },
+            'FORCE_RECOVER': () => { window.location.href = '/command-center.html'; return 'Redirecting to command center'; },
+            'BACKUP_NOW': () => { window.ghost?.backup(); return 'Backup created'; },
+            'SCAN_DEEP': () => { window.ghost?.scan(); return 'Deep scan initiated'; },
+            'REPAIR_ALL': () => { window.ghost?.fix(); return 'Repairing all modules'; },
+            'EXPORT_FULL': () => { window.ghost?.export(); return 'Full export started'; },
+            'DUMP_LOGS': () => { console.log(JSON.parse(localStorage.getItem('ghost_scan') || '{}')); return 'Logs dumped to console'; }
+        },
+        
+        execute(code) {
+            const fn = this.codes[code];
+            if (fn) {
+                const result = fn();
+                alert(`✅ ${result}`);
+                return result;
+            }
+            return null;
+        }
+    };
+    
+    // Monitor console for secret codes
+    const originalLog = console.log;
+    console.log = function(...args) {
+        originalLog.apply(console, args);
+        const msg = args.join(' ');
+        for (const code in window.secretConsole.codes) {
+            if (msg.includes(code)) {
+                window.secretConsole.execute(code);
+            }
+        }
+    };
+    
+    // Secret key combination: Ctrl+Shift+G
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.shiftKey && e.key === 'G') {
+            e.preventDefault();
+            const code = prompt('🔑 Enter Secret Code:');
+            if (code && window.secretConsole.codes[code]) {
+                window.secretConsole.execute(code);
+            } else if (code) {
+                alert('❌ Invalid secret code');
+            }
+        }
+    });
+    
+    console.log('%c🔐 Secret Codes Active', 'color: #10b981; font-size: 12px;');
+    console.log('📜 Available secret codes:');
+    console.log('   GHOST_DEBUG, DREAM_DEV_MODE, RECOVER_SYSTEM, EXPORT_ALL');
+    console.log('   FIX_MODULES, RESET_CACHE, SHOW_STATS, DEBUG_DB');
+    console.log('   EMERGENCY_2026, FORCE_RECOVER, BACKUP_NOW, SCAN_DEEP');
+    console.log('   REPAIR_ALL, EXPORT_FULL, DUMP_LOGS');
+    console.log('💡 Press Ctrl+Shift+G to enter secret code');
+</script>
