@@ -47,49 +47,21 @@ function createModal() {
     modal = document.createElement('div');
     modal.id = 'module-modal';
     modal.style.cssText = `
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.85);
-        backdrop-filter: blur(8px);
-        z-index: 10000;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        box-sizing: border-box;
+        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 10000;
+        align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;
     `;
     const modalContent = document.createElement('div');
     modalContent.style.cssText = `
-        background: #0f172a;
-        border-radius: 24px;
-        max-width: 800px;
-        width: 100%;
-        max-height: 90%;
-        overflow-y: auto;
-        position: relative;
-        border: 1px solid #10b981;
-        box-shadow: 0 20px 35px rgba(0,0,0,0.5);
+        background: #0f172a; border-radius: 24px; max-width: 800px; width: 100%;
+        max-height: 90%; overflow-y: auto; position: relative; border: 1px solid #10b981;
     `;
     const closeBtn = document.createElement('button');
     closeBtn.innerHTML = '&times;';
     closeBtn.style.cssText = `
-        position: sticky;
-        top: 10px;
-        right: 10px;
-        float: right;
-        background: #10b981;
-        border: none;
-        color: #000;
-        font-size: 24px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        cursor: pointer;
-        margin: 10px;
-        z-index: 1;
+        position: sticky; top: 10px; right: 10px; float: right;
+        background: #10b981; border: none; color: #000; font-size: 24px;
+        width: 40px; height: 40px; border-radius: 50%; cursor: pointer; margin: 10px;
     `;
     closeBtn.onclick = () => modal.style.display = 'none';
     const modalBody = document.createElement('div');
@@ -121,7 +93,7 @@ async function loadModuleInModal(moduleId) {
     }
 }
 
-// ========== LOGIN MODAL with Supabase Auth ==========
+// ========== LOGIN MODAL ==========
 function showLoginModal() {
     return new Promise((resolve) => {
         const modal = document.createElement('div');
@@ -172,7 +144,6 @@ function showLoginModal() {
             try {
                 const { data, error } = await supabase.auth.signInWithPassword({ email, password });
                 if (error) throw error;
-                // Ambil profile
                 const { data: profile, error: profileError } = await supabase
                     .from('profiles')
                     .select('role, full_name')
@@ -255,7 +226,6 @@ function renderApp() {
 
 // ========== INIT ==========
 window.onload = async () => {
-    // Load Supabase library
     if (typeof window.supabase === 'undefined') {
         const script = document.createElement('script');
         script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
