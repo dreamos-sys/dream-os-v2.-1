@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Dream OS - Sovereign Enterprise</title>
+    
+    <!-- PWA Meta -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0a0f1e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Dream OS">
+    <link rel="apple-touch-icon" href="/assets/img/icon-192.png">
+    
+    <!-- SEO & Social -->
+    <meta name="description" content="Dream OS - AI Agent Operational System Enterprise Ready">
+    <meta name="keywords" content="Dream OS, AI Agent, Enterprise, PWA, Indonesia">
+    <meta name="author" content="Dream Team">
+    <meta property="og:title" content="Dream OS - Sovereign Enterprise">
+    <meta property="og:description" content="AI Agent Operational System Enterprise Ready">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/assets/img/icon-512.png">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://lfavawkzvdhdpaaplaiq.supabase.co">
+    
+    <!-- Critical CSS (inline) -->
+    <style>
+        /* Critical styles for loading screen and base layout */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #0a0f1e 0%, #0c1222 100%);
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #e2e8f0;
+            min-height: 100vh;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        body.loaded { opacity: 1; }
+        
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background: #0a0f1e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s;
+        }
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(16,185,129,0.3);
+            border-top-color: #10b981;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none;
+        }
+        
+        /* Ghost mode badge (if active) */
+        .ghost-badge {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(168,85,247,0.2);
+            backdrop-filter: blur(8px);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            z-index: 9999;
+            border: 1px solid #a855f7;
+            pointer-events: none;
+            display: none;
+        }
+        
+        /* Fallback content (if JS fails) */
+        .fallback-ui {
+            max-width: 500px;
+            margin: 50px auto;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .loader { animation: none; }
+        }
+    </style>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/core/system.js" as="script">
+    <link rel="preload" href="/config/app.js" as="script">
+    
+    <!-- Non-critical CSS (loaded async) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri&display=swap"></noscript>
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="loader"></div>
+        <p style="margin-top: 20px; color: #10b981;">DREAM OS BOOTING...</p>
+        <p style="margin-top: 8px; color: #64748b; font-size: 12px;">The Power Soul of Shalawat</p>
+    </div>
+    <div id="toast-container"></div>
+    <div id="app-shell"></div>
+    <div id="ghost-badge" class="ghost-badge">👻 GHOST MODE</div>
+    
+    <!-- Fallback if JavaScript is disabled -->
+    <noscript>
+        <div class="fallback-ui">
+            <h2>JavaScript Required</h2>
+            <p>Please enable JavaScript to run Dream OS.</p>
+        </div>
+    </noscript>
+    
+    <!-- Main script with dynamic loading and error handling -->
+    <script type="module">
+        // ========== CONFIGURATION ==========
+        const APP_CONFIG = {
+            version: '7.0.0',
+            name: 'Dream OS',
+            debug: window.location.search.includes('debug') || localStorage.getItem('dreamos_debug') === 'true',
+            ghostCode: 'dreamos2026',
+            supabase: {
+                url: 'https://lfavawkzvdhdpaaplaiq.supabase.co',
+                key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmYXZhd2t6dmRoZHBhYXBsYWlxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5Mjc0NjgsImV4cCI6MjA4OTUwMzQ2OH0.EhwnhAd20lUVaWHHB51UdWCGWxkyTaWIrsPY8xvhwE00'
+            }
+        };
+        
+        // ========== UTILITIES ==========
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.textContent = message;
+            const colors = { success: '#10b981', error: '#ef4444', warning: '#f59e0b', info: '#3b82f6' };
+            toast.style.cssText = `
+                background: rgba(15,23,42,0.95);
+                backdrop-filter: blur(10px);
+                border: 1px solid ${colors[type]};
+                border-left: 4px solid ${colors[type]};
+                border-radius: 12px;
+                padding: 12px 20px;
+                margin-bottom: 10px;
+                color: #e2e8f0;
+                font-size: 13px;
+                max-width: 350px;
+                animation: fadeInUp 0.3s ease;
+            `;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+        
+        // ========== ERROR HANDLING & RECOVERY ==========
+        let ghostModeActive = sessionStorage.getItem('ghost_emergency') !== null;
+        let errorLog = [];
+        
+        function logError(error, context = {}) {
+            const entry = {
+                timestamp: new Date().toISOString(),
+                message: error.message || error,
+                stack: error.stack,
+                context,
+                url: window.location.href
+            };
+            errorLog.push(entry);
+            if (APP_CONFIG.debug) console.error('[Ghost]', entry);
+            localStorage.setItem('ghost_error_log', JSON.stringify(errorLog.slice(-50)));
+            return entry;
+        }
+        
+        function enterGhostMode(reason) {
+            if (ghostModeActive) return;
+            ghostModeActive = true;
+            sessionStorage.setItem('ghost_emergency', reason);
+            document.getElementById('ghost-badge').style.display = 'block';
+            showToast(`👻 Ghost Mode Active: ${reason}`, 'warning');
+            logError({ message: `Ghost mode activated: ${reason}` });
+            // Attempt to load fallback UI
+            loadFallbackUI();
+        }
+        
+        function loadFallbackUI() {
+            const appShell = document.getElementById('app-shell');
+            if (!appShell) return;
+            appShell.innerHTML = `
+                <div style="max-width:500px; margin:50px auto; background:rgba(15,23,42,0.8); border-radius:24px; padding:32px; text-align:center;">
+                    <div style="width:70px; height:70px; background:#a855f7; border-radius:20px; display:flex; align-items:center; justify-content:center; margin:0 auto 20px;">
+                        <i class="fas fa-ghost" style="font-size:32px; color:white;"></i>
+                    </div>
+                    <h2 style="color:#a855f7;">Ghost Recovery Mode</h2>
+                    <p style="margin:16px 0;">System encountered an error. Running in emergency mode.</p>
+                    <button onclick="window.location.reload()" style="background:#10b981; border:none; padding:10px 24px; border-radius:12px; cursor:pointer;">Retry</button>
+                    <button onclick="window.ghostScanner?.scan()" style="margin-left:12px; background:#a855f7; border:none; padding:10px 24px; border-radius:12px; cursor:pointer;">Run Scan</button>
+                    <details style="margin-top:20px; text-align:left;">
+                        <summary style="cursor:pointer;">Error Details</summary>
+                        <pre style="background:#000; padding:8px; border-radius:8px; font-size:10px; margin-top:8px;">${errorLog.slice(-3).map(e => e.message).join('\n')}</pre>
+                    </details>
+                </div>
+            `;
+            document.getElementById('loading-screen')?.remove();
+        }
+        
+        // ========== DYNAMIC MODULE LOADER ==========
+        async function loadCore() {
+            try {
+                // Load core system dynamically
+                const { dreamOS } = await import('/core/system.js');
+                const { dbRecovery } = await import('/core/database-recovery.js');
+                const { ghostScanner } = await import('/core/ghost-scanner.js');
+                
+                // Expose globally for console
+                window.dreamOS = dreamOS;
+                window.dbRecovery = dbRecovery;
+                window.ghostScanner = ghostScanner;
+                
+                // Initialize services
+                await dbRecovery.init();
+                await dreamOS.init();
+                
+                // Check ghost mode
+                if (dreamOS.isGhostMode()) {
+                    ghostModeActive = true;
+                    document.getElementById('ghost-badge').style.display = 'block';
+                }
+                
+                // Load authentication module
+                const authModule = await dreamOS.loadModule('auth');
+                const appHtml = await authModule.render({
+                    user: null,
+                    toast: showToast,
+                    supabase: null, // will be initialized later
+                    navigate: (id) => dreamOS.loadModule(id)
+                });
+                
+                document.getElementById('app-shell').innerHTML = appHtml;
+                
+                // Initialize Supabase if available
+                if (window.supabase) {
+                    const supabase = window.supabase.createClient(APP_CONFIG.supabase.url, APP_CONFIG.supabase.key);
+                    window.__supabase = supabase;
+                }
+                
+                // Hide loading screen
+                const loading = document.getElementById('loading-screen');
+                if (loading) {
+                    loading.style.opacity = '0';
+                    setTimeout(() => loading.remove(), 500);
+                }
+                
+                // Mark body as loaded
+                document.body.classList.add('loaded');
+                
+                // Log success
+                if (APP_CONFIG.debug) console.log('✅ Dream OS initialized successfully');
+                
+            } catch (error) {
+                logError(error, { stage: 'core_load' });
+                console.error('Failed to load core:', error);
+                enterGhostMode('core_load_failed');
+            }
+        }
+        
+        // ========== PWA SERVICE WORKER ==========
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => {
+                        if (APP_CONFIG.debug) console.log('✅ Service Worker registered', reg);
+                    })
+                    .catch(err => {
+                        logError(err, { stage: 'sw_register' });
+                        console.warn('Service Worker registration failed:', err);
+                    });
+            }
+        }
+        
+        // ========== GHOST MODE TRIGGER (Triple Click) ==========
+        let clickCount = 0;
+        let clickTimer;
+        document.addEventListener('click', () => {
+            clickCount++;
+            if (clickTimer) clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => clickCount = 0, 1000);
+            if (clickCount === 3 && !ghostModeActive) {
+                const code = prompt('👻 Enter Ghost Code:');
+                if (code === APP_CONFIG.ghostCode) {
+                    enterGhostMode('user_triggered');
+                    if (window.ghostScanner) window.ghostScanner.scan();
+                } else if (code !== null) {
+                    showToast('Invalid ghost code', 'error');
+                }
+                clickCount = 0;
+            }
+        });
+        
+        // ========== INITIALIZATION ==========
+        (async function init() {
+            // Load Supabase library (critical for auth)
+            if (typeof window.supabase === 'undefined') {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+                script.onload = () => {
+                    console.log('Supabase loaded');
+                    loadCore();
+                };
+                script.onerror = () => {
+                    logError({ message: 'Supabase library failed to load' }, { stage: 'supabase_load' });
+                    loadCore(); // continue without supabase
+                };
+                document.head.appendChild(script);
+            } else {
+                loadCore();
+            }
+            
+            registerServiceWorker();
+            
+            // Set a timeout to hide loading screen even if something goes wrong
+            setTimeout(() => {
+                const loading = document.getElementById('loading-screen');
+                if (loading && loading.parentNode) {
+                    loading.style.opacity = '0';
+                    setTimeout(() => loading.remove(), 500);
+                    if (!document.getElementById('app-shell').innerHTML) {
+                        loadFallbackUI();
+                    }
+                }
+            }, 8000);
+        })();
+        
+        // Log start
+        console.log('🚀 Dream OS v7.0 - Smart Entry');
+    </script>
+</body>
+</html>
