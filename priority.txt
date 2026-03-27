@@ -10,3 +10,4 @@ commandcenter
 profile
 settings
 audit
+ai-chat
