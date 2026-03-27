@@ -27,45 +27,44 @@ function logout() {
     location.reload();
 }
 
-// Mapping dari nama modul di card ke folder yang sebenarnya
-const moduleMap = {
-    inventory: 'stok',      // Stok
-    maintenance: 'maintenance',
-    security: 'sekuriti',   // Security
-    report: 'inventaris',   // Report -> inventaris (bisa diubah nanti)
-    profile: 'profile',
-    settings: 'settings'
-};
-
-async function loadModule(moduleName) {
+async function loadModule(moduleId) {
     const contentDiv = document.getElementById('content');
     contentDiv.innerHTML = '<div style="text-align:center; padding:20px;">⏳ Memuat modul...</div>';
-    const folder = moduleMap[moduleName] || moduleName;
     try {
-        const module = await import(`./modules/${folder}/module.js`);
+        const module = await import(`./modules/${moduleId}/module.js`);
         const html = module.default.render({ user: currentUser, toast: (msg) => alert(msg) });
         contentDiv.innerHTML = html;
         if (module.default.afterRender) module.default.afterRender({ user: currentUser });
     } catch (err) {
         console.error(err);
-        contentDiv.innerHTML = `<div style="background:#0f172a; padding:20px; border-radius:12px;">❌ Modul "${moduleName}" (folder ${folder}) belum siap: ${err.message}</div>`;
+        contentDiv.innerHTML = `<div style="background:#0f172a; padding:20px; border-radius:12px;">❌ Modul "${moduleId}" belum siap: ${err.message}</div>`;
     }
 }
 
 function renderApp() {
     document.getElementById('loading').style.display = 'none';
     const app = document.getElementById('app');
+
+    // Ambil daftar modul dari window.MODULES (dari modules-list.js)
+    const modules = window.MODULES || [];
+
+    // Generate card grid
+    const cardsHtml = modules.map(mod => `
+        <div class="card" data-module="${mod.id}">
+            <div class="card-icon"><i class="fas ${mod.icon}"></i></div>
+            <div class="card-title">${mod.name}</div>
+            <div class="card-desc">${mod.description || ''}</div>
+        </div>
+    `).join('');
+
     app.innerHTML = `
         <div class="header">
             <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
             <div style="font-size: 12px; color: #94a3b8;">THE POWER SOUL OF SHALAWAT</div>
             <div style="margin-top: 20px;">Selamat datang, <strong>${currentUser}</strong></div>
         </div>
-        <div class="grid">
-            <div class="card" data-module="inventory"><i class="fas fa-boxes"></i><div>Stok</div></div>
-            <div class="card" data-module="maintenance"><i class="fas fa-screwdriver-wrench"></i><div>Maintenance</div></div>
-            <div class="card" data-module="security"><i class="fas fa-shield-halved"></i><div>Security</div></div>
-            <div class="card" data-module="report"><i class="fas fa-chart-line"></i><div>Report</div></div>
+        <div class="grid" id="module-grid">
+            ${cardsHtml}
         </div>
         <div id="content" style="margin: 20px 0; text-align: center; color: #94a3b8;">Pilih menu di atas</div>
         <nav class="nav">
@@ -77,15 +76,15 @@ function renderApp() {
         <footer>DREAM TEAM © 2026 · v2.1</footer>
     `;
 
-    // Event listener untuk card
+    // Attach event listeners to cards
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', () => {
-            const module = card.dataset.module;
-            loadModule(module);
+            const moduleId = card.dataset.module;
+            loadModule(moduleId);
         });
     });
 
-    // Event listener untuk navigasi bawah
+    // Navigasi bawah
     document.querySelectorAll('.nav button').forEach(btn => {
         btn.addEventListener('click', () => {
             const page = btn.dataset.page;
@@ -101,11 +100,21 @@ function renderApp() {
 }
 
 window.onload = () => {
-    const saved = sessionStorage.getItem('user');
-    if (saved === 'master' || saved === 'admin') {
-        currentUser = saved === 'master' ? 'Master M' : 'Administrator';
-        renderApp();
-    } else {
-        showLogin();
-    }
+    // Load modules list first
+    const script = document.createElement('script');
+    script.src = './modules-list.js';
+    script.onload = () => {
+        const saved = sessionStorage.getItem('user');
+        if (saved === 'master' || saved === 'admin') {
+            currentUser = saved === 'master' ? 'Master M' : 'Administrator';
+            renderApp();
+        } else {
+            showLogin();
+        }
+    };
+    script.onerror = () => {
+        console.error('Failed to load modules list');
+        alert('Gagal memuat daftar modul. Periksa file modules-list.js');
+    };
+    document.head.appendChild(script);
 };
