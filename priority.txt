@@ -7,5 +7,6 @@ booking
 k3
 asset
 commandcenter
-inventaris
+profile
+settings
 audit
