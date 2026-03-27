@@ -249,3 +249,38 @@
     console.log('   REPAIR_ALL, EXPORT_FULL, DUMP_LOGS');
     console.log('💡 Press Ctrl+Shift+G to enter secret code');
 </script>
+<script>
+    // Global error tracking for Ghost Stealth
+    window.__GHOST_ERRORS__ = [];
+    
+    // Capture all errors before Ghost loads
+    const originalOnError = window.onerror;
+    window.onerror = function(message, source, lineno, colno, error) {
+        window.__GHOST_ERRORS__.push({
+            timestamp: new Date().toISOString(),
+            message: message,
+            source: source,
+            line: lineno,
+            column: colno,
+            stack: error?.stack
+        });
+        
+        if (originalOnError) {
+            return originalOnError(message, source, lineno, colno, error);
+        }
+        return false;
+    };
+    
+    // Capture promise rejections
+    window.addEventListener('unhandledrejection', function(event) {
+        window.__GHOST_ERRORS__.push({
+            timestamp: new Date().toISOString(),
+            message: event.reason?.message || String(event.reason),
+            type: 'unhandledrejection',
+            stack: event.reason?.stack
+        });
+    });
+    
+    console.log('👻 Ghost Error Tracker Active');
+    console.log('📊 Errors will be logged to Ghost Stealth Analyzer');
+</script>

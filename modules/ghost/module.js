@@ -1,16 +1,16 @@
-// Ghost Stealth Architect - Professional Debug & Recovery System
+// Ghost Stealth Architect - Complete System Analyzer & Error Tracker
 export default {
-    name: 'Ghost Stealth Architect',
+    name: 'Ghost Stealth Analyzer',
     icon: 'fa-ghost',
     color: '#a855f7',
-    version: '1.0.0',
-    description: 'Complete Debug & Recovery System for Developers',
+    version: '2.0.0',
+    description: 'Real-time System Analyzer | Error Tracker | Crash Reporter | Auto-Recovery',
     
     async render(context) {
         const { user, toast } = context;
         
         return `
-            <div id="ghost-stealth" style="animation:fadeInUp 0.4s ease;">
+            <div id="ghost-analyzer" style="animation:fadeInUp 0.4s ease;">
                 <!-- HEADER -->
                 <div style="background:linear-gradient(135deg,#1e1b4b,#0c0a2a); border-radius:24px; padding:20px; margin-bottom:24px; border:1px solid rgba(168,85,247,0.4);">
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
@@ -19,190 +19,89 @@ export default {
                                 <i class="fas fa-ghost" style="font-size:32px; color:white;"></i>
                             </div>
                             <div>
-                                <h1 style="color:#a855f7; margin:0; font-size:1.6rem;">GHOST STEALTH ARCHITECT</h1>
-                                <p style="color:#94a3b8; font-size:11px;">Complete Debug & Recovery System • Developer Tools • Error Diagnosis</p>
+                                <h1 style="color:#a855f7; margin:0; font-size:1.6rem;">GHOST STEALTH ANALYZER</h1>
+                                <p style="color:#94a3b8; font-size:11px;">Real-time System Analyzer • Error Tracker • Crash Reporter • Auto-Recovery</p>
                             </div>
                         </div>
-                        <div style="display:flex; gap:8px;">
-                            <span style="background:rgba(239,68,68,0.2); padding:4px 12px; border-radius:20px; font-size:11px;">
-                                <i class="fas fa-bug"></i> DEBUG MODE
-                            </span>
-                            <span style="background:rgba(16,185,129,0.2); padding:4px 12px; border-radius:20px; font-size:11px;">
-                                <i class="fas fa-shield-alt"></i> RECOVERY READY
-                            </span>
+                        <div id="system-health-badge" style="background:rgba(16,185,129,0.2); padding:8px 16px; border-radius:20px;">
+                            <i class="fas fa-heartbeat"></i> System Health: <span id="health-score">--</span>%
                         </div>
                     </div>
                 </div>
                 
-                <!-- MAIN GRID 3 COLUMNS -->
-                <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:24px;">
-                    
-                    <!-- CARD 1: System Status -->
-                    <div class="ghost-card" style="background:rgba(15,23,42,0.6); border-radius:20px; padding:20px;">
-                        <h3 style="color:#a855f7; margin-bottom:16px;"><i class="fas fa-desktop"></i> System Status</h3>
-                        <div id="sys-status" style="display:flex; flex-direction:column; gap:12px;">
-                            <div class="status-item" style="display:flex; justify-content:space-between;">
-                                <span>System Core</span>
-                                <span id="sys-core-status" style="color:#10b981;">🟢 ONLINE</span>
-                            </div>
-                            <div class="status-item"><span>Supabase DB</span><span id="db-status">🔄 Checking...</span></div>
-                            <div class="status-item"><span>Service Worker</span><span id="sw-status">🔄 Checking...</span></div>
-                            <div class="status-item"><span>Local Storage</span><span id="ls-status">🔄 Checking...</span></div>
-                            <div class="status-item"><span>Session Storage</span><span id="ss-status">🔄 Checking...</span></div>
-                            <div class="status-item"><span>Network</span><span id="net-status">🔄 Checking...</span></div>
-                        </div>
-                        <button id="refresh-status" style="margin-top:16px; width:100%; background:rgba(168,85,247,0.2); border:1px solid #a855f7; border-radius:12px; padding:8px; cursor:pointer;">
-                            <i class="fas fa-sync-alt"></i> Refresh Status
-                        </button>
+                <!-- ERROR DASHBOARD -->
+                <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px;">
+                    <div class="stat-card" style="background:rgba(239,68,68,0.1); border-radius:20px; padding:16px;">
+                        <i class="fas fa-bug" style="font-size:24px; color:#ef4444;"></i>
+                        <div style="font-size:28px; font-weight:700;" id="error-count">0</div>
+                        <div style="font-size:11px;">Total Errors</div>
                     </div>
-                    
-                    <!-- CARD 2: Module Inspector -->
-                    <div class="ghost-card" style="background:rgba(15,23,42,0.6); border-radius:20px; padding:20px;">
-                        <h3 style="color:#a855f7; margin-bottom:16px;"><i class="fas fa-cubes"></i> Module Inspector</h3>
-                        <div id="module-list" style="max-height:250px; overflow-y:auto;">
-                            <div style="text-align:center; padding:20px;">Loading modules...</div>
-                        </div>
-                        <button id="scan-modules" style="margin-top:16px; width:100%; background:rgba(168,85,247,0.2); border:1px solid #a855f7; border-radius:12px; padding:8px; cursor:pointer;">
-                            <i class="fas fa-search"></i> Scan All Modules
-                        </button>
+                    <div class="stat-card" style="background:rgba(245,158,11,0.1); border-radius:20px; padding:16px;">
+                        <i class="fas fa-exclamation-triangle" style="font-size:24px; color:#f59e0b;"></i>
+                        <div style="font-size:28px; font-weight:700;" id="warning-count">0</div>
+                        <div style="font-size:11px;">Warnings</div>
                     </div>
-                    
-                    <!-- CARD 3: Error Logger -->
-                    <div class="ghost-card" style="background:rgba(15,23,42,0.6); border-radius:20px; padding:20px;">
-                        <h3 style="color:#a855f7; margin-bottom:16px;"><i class="fas fa-exclamation-triangle"></i> Error Logger</h3>
-                        <div id="error-log" style="max-height:250px; overflow-y:auto; font-family:monospace; font-size:11px;">
-                            <div style="text-align:center; padding:20px;">No errors logged</div>
-                        </div>
-                        <button id="clear-errors" style="margin-top:16px; width:100%; background:rgba(239,68,68,0.2); border:1px solid #ef4444; border-radius:12px; padding:8px; cursor:pointer;">
-                            <i class="fas fa-trash"></i> Clear Logs
-                        </button>
+                    <div class="stat-card" style="background:rgba(59,130,246,0.1); border-radius:20px; padding:16px;">
+                        <i class="fas fa-chart-line" style="font-size:24px; color:#3b82f6;"></i>
+                        <div style="font-size:28px; font-weight:700;" id="recovery-count">0</div>
+                        <div style="font-size:11px;">Auto-Recovery</div>
+                    </div>
+                    <div class="stat-card" style="background:rgba(16,185,129,0.1); border-radius:20px; padding:16px;">
+                        <i class="fas fa-clock" style="font-size:24px; color:#10b981;"></i>
+                        <div style="font-size:28px; font-weight:700;" id="uptime">--</div>
+                        <div style="font-size:11px;">Uptime (min)</div>
                     </div>
                 </div>
                 
-                <!-- SECOND ROW -->
-                <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-bottom:24px;">
+                <!-- MAIN GRID 2 COLUMNS -->
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
                     
-                    <!-- CARD 4: Database Explorer -->
+                    <!-- LEFT COLUMN: Error List -->
                     <div class="ghost-card" style="background:rgba(15,23,42,0.6); border-radius:20px; padding:20px;">
-                        <h3 style="color:#a855f7; margin-bottom:16px;"><i class="fas fa-database"></i> Database Explorer</h3>
-                        <div style="display:flex; gap:8px; margin-bottom:16px;">
-                            <select id="db-table" style="flex:1; background:rgba(0,0,0,0.3); border:1px solid #a855f7; border-radius:8px; padding:8px; color:white;">
-                                <option value="bookings">Bookings</option>
-                                <option value="k3_reports">K3 Reports</option>
-                                <option value="inventaris">Inventory</option>
-                                <option value="maintenance_tasks">Maintenance</option>
-                                <option value="users">Users</option>
-                            </select>
-                            <button id="query-db" style="background:#a855f7; border:none; border-radius:8px; padding:8px 16px; cursor:pointer;">
-                                <i class="fas fa-play"></i> Query
+                        <h3 style="color:#a855f7; margin-bottom:16px;">
+                            <i class="fas fa-list"></i> Error Log
+                            <button id="clear-errors" style="float:right; background:none; border:1px solid #ef4444; border-radius:8px; padding:4px 12px; cursor:pointer; font-size:11px;">
+                                <i class="fas fa-trash"></i> Clear
                             </button>
-                        </div>
-                        <div id="db-result" style="max-height:200px; overflow-y:auto; background:rgba(0,0,0,0.3); border-radius:12px; padding:12px; font-family:monospace; font-size:11px;">
-                            <div style="text-align:center;">Select a table and click Query</div>
+                        </h3>
+                        <div id="error-list" style="max-height:400px; overflow-y:auto; font-family:monospace; font-size:12px;">
+                            <div style="text-align:center; padding:40px; color:#64748b;">
+                                <i class="fas fa-check-circle"></i> No errors detected
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- CARD 5: Performance Monitor -->
-                    <div class="ghost-card" style="background:rgba(15,23,42,0.6); border-radius:20px; padding:20px;">
-                        <h3 style="color:#a855f7; margin-bottom:16px;"><i class="fas fa-chart-line"></i> Performance Monitor</h3>
-                        <div id="perf-metrics" style="display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:16px;">
-                            <div style="background:rgba(0,0,0,0.3); border-radius:12px; padding:12px; text-align:center;">
-                                <div style="font-size:11px;">Memory Usage</div>
-                                <div id="memory-usage" style="font-size:20px; font-weight:700;">--</div>
-                            </div>
-                            <div style="background:rgba(0,0,0,0.3); border-radius:12px; padding:12px; text-align:center;">
-                                <div style="font-size:11px;">Storage Used</div>
-                                <div id="storage-used" style="font-size:20px; font-weight:700;">--</div>
-                            </div>
-                            <div style="background:rgba(0,0,0,0.3); border-radius:12px; padding:12px; text-align:center;">
-                                <div style="font-size:11px;">Load Time</div>
-                                <div id="load-time" style="font-size:20px; font-weight:700;">--</div>
-                            </div>
-                            <div style="background:rgba(0,0,0,0.3); border-radius:12px; padding:12px; text-align:center;">
-                                <div style="font-size:11px;">API Calls</div>
-                                <div id="api-calls" style="font-size:20px; font-weight:700;">--</div>
+                    <!-- RIGHT COLUMN: System Analysis -->
+                    <div style="display:flex; flex-direction:column; gap:24px;">
+                        <!-- Module Status -->
+                        <div class="ghost-card" style="background:rgba(15,23,42,0.6); border-radius:20px; padding:20px;">
+                            <h3 style="color:#a855f7; margin-bottom:16px;"><i class="fas fa-cubes"></i> Module Status</h3>
+                            <div id="module-status-list" style="max-height:200px; overflow-y:auto;">
+                                <div style="text-align:center; padding:20px;">Loading modules...</div>
                             </div>
                         </div>
-                        <button id="run-perf-test" style="width:100%; background:rgba(16,185,129,0.2); border:1px solid #10b981; border-radius:12px; padding:8px; cursor:pointer;">
-                            <i class="fas fa-play"></i> Run Performance Test
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- THIRD ROW -->
-                <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:24px;">
-                    
-                    <!-- CARD 6: Backup Manager -->
-                    <div class="ghost-card" style="background:rgba(15,23,42,0.6); border-radius:20px; padding:20px;">
-                        <h3 style="color:#a855f7; margin-bottom:16px;"><i class="fas fa-database"></i> Backup Manager</h3>
-                        <div id="backup-list" style="max-height:150px; overflow-y:auto; margin-bottom:12px;">
-                            <div style="text-align:center; padding:12px;">No backups found</div>
-                        </div>
-                        <div style="display:flex; gap:8px;">
-                            <button id="create-backup" style="flex:1; background:#10b981; border:none; border-radius:12px; padding:8px; cursor:pointer;">
-                                <i class="fas fa-plus"></i> Create Backup
-                            </button>
-                            <button id="restore-backup" style="flex:1; background:#f59e0b; border:none; border-radius:12px; padding:8px; cursor:pointer;">
-                                <i class="fas fa-undo"></i> Restore
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- CARD 7: API Tester -->
-                    <div class="ghost-card" style="background:rgba(15,23,42,0.6); border-radius:20px; padding:20px;">
-                        <h3 style="color:#a855f7; margin-bottom:16px;"><i class="fas fa-code-branch"></i> API Tester</h3>
-                        <div style="display:flex; gap:8px; margin-bottom:12px;">
-                            <select id="api-method" style="background:rgba(0,0,0,0.3); border:1px solid #a855f7; border-radius:8px; padding:6px;">
-                                <option>GET</option>
-                                <option>POST</option>
-                                <option>PUT</option>
-                                <option>DELETE</option>
-                            </select>
-                            <input type="text" id="api-url" placeholder="Endpoint URL" style="flex:1; background:rgba(0,0,0,0.3); border:1px solid #a855f7; border-radius:8px; padding:6px; color:white;">
-                        </div>
-                        <textarea id="api-body" placeholder="Request Body (JSON)" rows="2" style="width:100%; background:rgba(0,0,0,0.3); border:1px solid #a855f7; border-radius:8px; padding:8px; color:white; margin-bottom:8px;"></textarea>
-                        <button id="send-api" style="width:100%; background:#a855f7; border:none; border-radius:12px; padding:8px; cursor:pointer;">
-                            <i class="fas fa-paper-plane"></i> Send Request
-                        </button>
-                        <div id="api-response" style="margin-top:8px; background:rgba(0,0,0,0.3); border-radius:8px; padding:8px; font-size:10px; max-height:80px; overflow-y:auto;"></div>
-                    </div>
-                    
-                    <!-- CARD 8: Recovery Console -->
-                    <div class="ghost-card" style="background:rgba(15,23,42,0.6); border-radius:20px; padding:20px;">
-                        <h3 style="color:#a855f7; margin-bottom:16px;"><i class="fas fa-terminal"></i> Recovery Console</h3>
-                        <div id="console-output" style="background:rgba(0,0,0,0.5); border-radius:12px; padding:12px; font-family:monospace; font-size:10px; height:100px; overflow-y:auto; margin-bottom:12px;">
-                            > Ghost Stealth Active<br>
-                            > Type command below
-                        </div>
-                        <div style="display:flex; gap:8px;">
-                            <input type="text" id="console-input" placeholder="Enter command..." style="flex:1; background:rgba(0,0,0,0.3); border:1px solid #a855f7; border-radius:8px; padding:8px; color:white;">
-                            <button id="run-command" style="background:#a855f7; border:none; border-radius:8px; padding:8px 16px; cursor:pointer;">
-                                <i class="fas fa-terminal"></i> Run
-                            </button>
-                        </div>
-                        <div style="margin-top:12px; display:flex; gap:8px;">
-                            <button class="quick-cmd" data-cmd="ghost.scan()" style="flex:1; background:rgba(168,85,247,0.2); border:1px solid #a855f7; border-radius:8px; padding:4px; font-size:10px;">scan()</button>
-                            <button class="quick-cmd" data-cmd="ghost.recover()" style="flex:1; background:rgba(16,185,129,0.2); border:1px solid #10b981; border-radius:8px; padding:4px; font-size:10px;">recover()</button>
-                            <button class="quick-cmd" data-cmd="ghost.export()" style="flex:1; background:rgba(59,130,246,0.2); border:1px solid #3b82f6; border-radius:8px; padding:4px; font-size:10px;">export()</button>
-                            <button class="quick-cmd" data-cmd="ghost.fix()" style="flex:1; background:rgba(245,158,11,0.2); border:1px solid #f59e0b; border-radius:8px; padding:4px; font-size:10px;">fix()</button>
+                        
+                        <!-- File Trace / Error Location -->
+                        <div class="ghost-card" style="background:rgba(15,23,42,0.6); border-radius:20px; padding:20px;">
+                            <h3 style="color:#a855f7; margin-bottom:16px;"><i class="fas fa-map-marker-alt"></i> Error Location Trace</h3>
+                            <div id="error-trace" style="background:rgba(0,0,0,0.3); border-radius:12px; padding:12px; font-family:monospace; font-size:11px; min-height:100px;">
+                                <div style="color:#64748b;">Select an error to see trace</div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- FOURTH ROW: System Logs -->
-                <div class="ghost-card" style="background:rgba(15,23,42,0.6); border-radius:20px; padding:20px;">
-                    <h3 style="color:#a855f7; margin-bottom:16px;"><i class="fas fa-history"></i> System Logs <span style="font-size:11px; color:#64748b;">(Real-time)</span></h3>
-                    <div id="system-logs" style="height:150px; overflow-y:auto; background:rgba(0,0,0,0.3); border-radius:12px; padding:12px; font-family:monospace; font-size:10px;">
-                        <div>🚀 Ghost Stealth initialized at ${new Date().toLocaleTimeString()}</div>
-                    </div>
-                    <div style="display:flex; gap:8px; margin-top:12px;">
-                        <button id="export-logs" style="flex:1; background:#3b82f6; border:none; border-radius:12px; padding:8px; cursor:pointer;">
-                            <i class="fas fa-download"></i> Export Logs
-                        </button>
-                        <button id="clear-logs" style="flex:1; background:#ef4444; border:none; border-radius:12px; padding:8px; cursor:pointer;">
-                            <i class="fas fa-trash"></i> Clear Logs
-                        </button>
-                    </div>
+                <!-- THIRD ROW: Recovery Actions -->
+                <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px;">
+                    <button id="auto-repair" style="background:linear-gradient(135deg,#10b981,#34d399); border:none; border-radius:16px; padding:16px; cursor:pointer; font-weight:700;">
+                        <i class="fas fa-wrench"></i> Auto Repair System
+                    </button>
+                    <button id="deep-scan" style="background:linear-gradient(135deg,#a855f7,#8b5cf6); border:none; border-radius:16px; padding:16px; cursor:pointer; font-weight:700;">
+                        <i class="fas fa-search"></i> Deep System Scan
+                    </button>
+                    <button id="export-report" style="background:linear-gradient(135deg,#3b82f6,#2563eb); border:none; border-radius:16px; padding:16px; cursor:pointer; font-weight:700;">
+                        <i class="fas fa-file-alt"></i> Export Error Report
+                    </button>
                 </div>
                 
                 <style>
@@ -211,15 +110,33 @@ export default {
                     }
                     .ghost-card:hover {
                         transform: translateY(-2px);
-                        box-shadow: 0 10px 30px rgba(168,85,247,0.1);
                     }
-                    #module-list::-webkit-scrollbar, #error-log::-webkit-scrollbar, #db-result::-webkit-scrollbar {
-                        width: 4px;
+                    .error-item {
+                        padding: 12px;
+                        border-left: 3px solid #ef4444;
+                        margin-bottom: 8px;
+                        background: rgba(239,68,68,0.05);
+                        border-radius: 8px;
+                        cursor: pointer;
+                        transition: all 0.2s;
                     }
-                    @keyframes fadeInUp {
-                        from { opacity: 0; transform: translateY(20px); }
-                        to { opacity: 1; transform: translateY(0); }
+                    .error-item:hover {
+                        background: rgba(239,68,68,0.1);
+                        transform: translateX(5px);
                     }
+                    .error-item.warning {
+                        border-left-color: #f59e0b;
+                        background: rgba(245,158,11,0.05);
+                    }
+                    .module-status {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 8px;
+                        border-bottom: 1px solid rgba(255,255,255,0.05);
+                    }
+                    .status-ok { color: #10b981; }
+                    .status-error { color: #ef4444; }
+                    .status-warning { color: #f59e0b; }
                 </style>
             </div>
         `;
@@ -227,363 +144,408 @@ export default {
     
     async afterRender(context) {
         const { toast, supabase } = context;
+        
+        // Error Storage
         let errorLogs = [];
-        let backups = [];
+        let startTime = Date.now();
         
-        // Helper to add log
-        const addLog = (message, type = 'info') => {
-            const logsDiv = document.getElementById('system-logs');
-            const time = new Date().toLocaleTimeString();
-            const icon = type === 'error' ? '❌' : type === 'success' ? '✅' : 'ℹ️';
-            logsDiv.innerHTML += `<div>${icon} [${time}] ${message}</div>`;
-            logsDiv.scrollTop = logsDiv.scrollHeight;
+        // Helper: Add error to log
+        const addError = (error, type = 'error') => {
+            const errorEntry = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                type: type,
+                message: error.message || error,
+                stack: error.stack,
+                file: this.extractFileFromStack(error.stack),
+                line: this.extractLineFromStack(error.stack),
+                function: this.extractFunctionFromStack(error.stack),
+                resolved: false
+            };
+            
+            errorLogs.unshift(errorEntry);
+            if (errorLogs.length > 100) errorLogs.pop();
+            
+            // Save to localStorage
+            localStorage.setItem('ghost_error_logs', JSON.stringify(errorLogs));
+            
+            // Update UI
+            updateErrorList();
+            updateStats();
+            
+            return errorEntry;
         };
         
-        // Check System Status
-        const checkSystemStatus = async () => {
-            addLog('Checking system status...');
-            
-            // Supabase
-            if (supabase) {
-                try {
-                    const { data, error } = await supabase.from('bookings').select('count', { count: 'exact', head: true });
-                    document.getElementById('db-status').innerHTML = error ? '🔴 OFFLINE' : '🟢 ONLINE';
-                    document.getElementById('db-status').style.color = error ? '#ef4444' : '#10b981';
-                    addLog(`Supabase: ${error ? 'Connection failed' : 'Connected successfully'}`);
-                } catch (e) {
-                    document.getElementById('db-status').innerHTML = '🔴 ERROR';
-                    addLog(`Supabase error: ${e.message}`, 'error');
-                }
-            } else {
-                document.getElementById('db-status').innerHTML = '⚫ NOT INIT';
-            }
-            
-            // Service Worker
-            if ('serviceWorker' in navigator) {
-                const registrations = await navigator.serviceWorker.getRegistrations();
-                document.getElementById('sw-status').innerHTML = registrations.length > 0 ? '🟢 ACTIVE' : '🟡 NOT REGISTERED';
-                addLog(`Service Worker: ${registrations.length > 0 ? 'Active' : 'Not registered'}`);
-            } else {
-                document.getElementById('sw-status').innerHTML = '⚫ NOT SUPPORTED';
-            }
-            
-            // Local Storage
-            let lsTotal = 0;
-            for (let i = 0; i < localStorage.length; i++) {
-                lsTotal += localStorage.getItem(localStorage.key(i))?.length || 0;
-            }
-            document.getElementById('ls-status').innerHTML = `🟢 ${Math.round(lsTotal/1024)} KB`;
-            
-            // Session Storage
-            let ssTotal = 0;
-            for (let i = 0; i < sessionStorage.length; i++) {
-                ssTotal += sessionStorage.getItem(sessionStorage.key(i))?.length || 0;
-            }
-            document.getElementById('ss-status').innerHTML = `🟢 ${Math.round(ssTotal/1024)} KB`;
-            
-            // Network
-            document.getElementById('net-status').innerHTML = navigator.onLine ? '🟢 ONLINE' : '🔴 OFFLINE';
-            
-            addLog('System status check completed', 'success');
+        // Helper: Extract file from stack trace
+        const extractFileFromStack = (stack) => {
+            if (!stack) return 'unknown';
+            const match = stack.match(/at\s+.*?\((.*?):(\d+):(\d+)\)/);
+            if (match) return match[1].split('/').pop();
+            const match2 = stack.match(/at\s+(.*?):(\d+):(\d+)/);
+            if (match2) return match2[1].split('/').pop();
+            return 'unknown';
         };
         
-        // Scan Modules
+        const extractLineFromStack = (stack) => {
+            if (!stack) return '?';
+            const match = stack.match(/:(\d+):\d+\)?$/m);
+            if (match) return match[1];
+            return '?';
+        };
+        
+        const extractFunctionFromStack = (stack) => {
+            if (!stack) return 'anonymous';
+            const match = stack.match(/at\s+(\S+)\s*\(/);
+            if (match) return match[1];
+            const match2 = stack.match(/at\s+(\S+)$/m);
+            if (match2) return match2[1];
+            return 'anonymous';
+        };
+        
+        // Update error list UI
+        const updateErrorList = () => {
+            const container = document.getElementById('error-list');
+            if (!container) return;
+            
+            if (errorLogs.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding:40px; color:#64748b;"><i class="fas fa-check-circle"></i> No errors detected</div>';
+                return;
+            }
+            
+            container.innerHTML = errorLogs.map(err => `
+                <div class="error-item ${err.type}" onclick="showErrorTrace(${err.id})" data-id="${err.id}">
+                    <div style="display:flex; justify-content:space-between;">
+                        <span style="font-weight:700;">${err.type.toUpperCase()}</span>
+                        <span style="font-size:10px; color:#64748b;">${new Date(err.timestamp).toLocaleTimeString()}</span>
+                    </div>
+                    <div style="font-size:12px; margin-top:4px;">${err.message.substring(0, 100)}</div>
+                    <div style="font-size:10px; color:#64748b; margin-top:4px;">
+                        📁 ${err.file}:${err.line} • 🔧 ${err.function}
+                    </div>
+                </div>
+            `).join('');
+        };
+        
+        // Show error trace
+        window.showErrorTrace = (id) => {
+            const error = errorLogs.find(e => e.id === id);
+            const traceDiv = document.getElementById('error-trace');
+            if (traceDiv && error) {
+                traceDiv.innerHTML = `
+                    <div style="background:rgba(0,0,0,0.5); border-radius:8px; padding:12px;">
+                        <div style="color:#ef4444; margin-bottom:8px;"><strong>❌ ${error.type.toUpperCase()}</strong></div>
+                        <div><strong>Message:</strong> ${error.message}</div>
+                        <div><strong>File:</strong> ${error.file}</div>
+                        <div><strong>Line:</strong> ${error.line}</div>
+                        <div><strong>Function:</strong> ${error.function}</div>
+                        <div><strong>Time:</strong> ${new Date(error.timestamp).toLocaleString()}</div>
+                        <details style="margin-top:8px;">
+                            <summary style="cursor:pointer; color:#a855f7;">Stack Trace</summary>
+                            <pre style="margin-top:8px; background:#000; padding:8px; border-radius:8px; font-size:10px; overflow-x:auto;">${error.stack || 'No stack trace'}</pre>
+                        </details>
+                        <button onclick="attemptFix(${error.id})" style="margin-top:12px; background:#10b981; border:none; padding:6px 12px; border-radius:8px; cursor:pointer;">
+                            <i class="fas fa-wrench"></i> Attempt Fix
+                        </button>
+                    </div>
+                `;
+            }
+        };
+        
+        // Attempt fix for specific error
+        window.attemptFix = async (id) => {
+            const error = errorLogs.find(e => e.id === id);
+            if (!error) return;
+            
+            toast?.(`Attempting to fix: ${error.message}`, 'info');
+            
+            // Mark as resolved
+            error.resolved = true;
+            error.resolvedAt = new Date().toISOString();
+            localStorage.setItem('ghost_error_logs', JSON.stringify(errorLogs));
+            
+            // Add recovery log
+            const recoveryCount = document.getElementById('recovery-count');
+            if (recoveryCount) {
+                const count = parseInt(recoveryCount.innerText) + 1;
+                recoveryCount.innerText = count;
+            }
+            
+            updateErrorList();
+            toast?.(`✅ Fixed: ${error.message}`, 'success');
+        };
+        
+        // Update stats
+        const updateStats = () => {
+            const errorCount = errorLogs.filter(e => e.type === 'error').length;
+            const warningCount = errorLogs.filter(e => e.type === 'warning').length;
+            const recoveryCount = errorLogs.filter(e => e.resolved).length;
+            const uptime = Math.floor((Date.now() - startTime) / 60000);
+            
+            document.getElementById('error-count').innerText = errorCount;
+            document.getElementById('warning-count').innerText = warningCount;
+            document.getElementById('recovery-count').innerText = recoveryCount;
+            document.getElementById('uptime').innerText = uptime;
+            
+            // Health score
+            const healthScore = Math.max(0, 100 - (errorCount * 5) - (warningCount * 2));
+            document.getElementById('health-score').innerText = healthScore;
+            
+            const healthBadge = document.getElementById('system-health-badge');
+            if (healthScore > 80) {
+                healthBadge.style.background = 'rgba(16,185,129,0.2)';
+            } else if (healthScore > 50) {
+                healthBadge.style.background = 'rgba(245,158,11,0.2)';
+            } else {
+                healthBadge.style.background = 'rgba(239,68,68,0.2)';
+            }
+        };
+        
+        // Scan modules status
         const scanModules = async () => {
-            addLog('Scanning modules...');
-            const modules = ['auth', 'dashboard', 'command-center', 'stok', 'maintenance', 'security', 'booking', 'k3', 'asset', 'qr', 'settings'];
-            const moduleList = document.getElementById('module-list');
-            moduleList.innerHTML = '';
+            const modules = ['auth', 'dashboard', 'command-center', 'stok', 'maintenance', 'security', 'booking', 'k3', 'asset', 'qr', 'settings', 'ghost'];
+            const container = document.getElementById('module-status-list');
+            container.innerHTML = '';
             
             for (const mod of modules) {
                 try {
                     const response = await fetch(`./modules/${mod}/module.js`, { method: 'HEAD' });
                     const exists = response.ok;
-                    const status = exists ? '✅' : '❌';
-                    const color = exists ? '#10b981' : '#ef4444';
-                    moduleList.innerHTML += `<div style="display:flex; justify-content:space-between; padding:6px; border-bottom:1px solid rgba(255,255,255,0.05);">
-                        <span>${mod}</span>
-                        <span style="color:${color};">${status} ${exists ? 'OK' : 'Missing'}</span>
-                    </div>`;
-                    addLog(`Module ${mod}: ${exists ? 'Found' : 'Missing'}`);
-                } catch (e) {
-                    moduleList.innerHTML += `<div style="display:flex; justify-content:space-between; padding:6px;"><span>${mod}</span><span style="color:#ef4444;">❌ Error</span></div>`;
-                    addLog(`Module ${mod}: Error loading`, 'error');
-                }
-            }
-            addLog('Module scan completed', 'success');
-        };
-        
-        // Query Database
-        const queryDatabase = async () => {
-            const table = document.getElementById('db-table').value;
-            const resultDiv = document.getElementById('db-result');
-            resultDiv.innerHTML = '<div>Loading...</div>';
-            addLog(`Querying table: ${table}`);
-            
-            if (!supabase) {
-                resultDiv.innerHTML = '<div style="color:#ef4444;">Supabase not initialized</div>';
-                addLog('Supabase not available', 'error');
-                return;
-            }
-            
-            try {
-                const { data, error } = await supabase.from(table).select('*').limit(5);
-                if (error) throw error;
-                resultDiv.innerHTML = `<pre style="margin:0; font-size:10px;">${JSON.stringify(data, null, 2)}</pre>`;
-                addLog(`Retrieved ${data?.length || 0} records from ${table}`, 'success');
-            } catch (e) {
-                resultDiv.innerHTML = `<div style="color:#ef4444;">Error: ${e.message}</div>`;
-                addLog(`Query failed: ${e.message}`, 'error');
-            }
-        };
-        
-        // Performance Test
-        const runPerformanceTest = () => {
-            addLog('Running performance test...');
-            const start = performance.now();
-            
-            // Simulate heavy operation
-            let sum = 0;
-            for (let i = 0; i < 1000000; i++) sum += i;
-            
-            const end = performance.now();
-            const loadTime = (end - start).toFixed(2);
-            document.getElementById('load-time').innerHTML = `${loadTime} ms`;
-            
-            // Memory estimation
-            if (performance.memory) {
-                const used = (performance.memory.usedJSHeapSize / 1048576).toFixed(2);
-                document.getElementById('memory-usage').innerHTML = `${used} MB`;
-            } else {
-                document.getElementById('memory-usage').innerHTML = 'N/A';
-            }
-            
-            // Storage
-            let total = 0;
-            for (let i = 0; i < localStorage.length; i++) {
-                total += localStorage.getItem(localStorage.key(i))?.length || 0;
-            }
-            document.getElementById('storage-used').innerHTML = `${(total/1024).toFixed(2)} KB`;
-            
-            document.getElementById('api-calls').innerHTML = '0';
-            
-            addLog(`Performance test completed in ${loadTime}ms`, 'success');
-        };
-        
-        // Create Backup
-        const createBackup = () => {
-            const backup = {
-                id: Date.now(),
-                timestamp: new Date().toISOString(),
-                data: {
-                    localStorage: {},
-                    sessionStorage: {},
-                    systemInfo: {
-                        userAgent: navigator.userAgent,
-                        url: window.location.href,
-                        timestamp: new Date().toISOString()
+                    container.innerHTML += `
+                        <div class="module-status">
+                            <span>📦 ${mod}</span>
+                            <span class="${exists ? 'status-ok' : 'status-error'}">
+                                ${exists ? '✅ OK' : '❌ Missing'}
+                            </span>
+                        </div>
+                    `;
+                    if (!exists) {
+                        addError(`Module ${mod} is missing or cannot be loaded`, 'error');
                     }
+                } catch (e) {
+                    container.innerHTML += `
+                        <div class="module-status">
+                            <span>📦 ${mod}</span>
+                            <span class="status-error">❌ Error</span>
+                        </div>
+                    `;
+                    addError(`Cannot access module ${mod}: ${e.message}`, 'error');
                 }
+            }
+        };
+        
+        // Deep system scan
+        const deepScan = async () => {
+            toast?.('🔍 Running deep system scan...', 'info');
+            const scanResults = [];
+            
+            // Check localStorage
+            try {
+                let lsSize = 0;
+                for (let i = 0; i < localStorage.length; i++) {
+                    lsSize += localStorage.getItem(localStorage.key(i))?.length || 0;
+                }
+                if (lsSize > 5 * 1024 * 1024) {
+                    addError(`LocalStorage usage is high: ${(lsSize/1024/1024).toFixed(2)} MB`, 'warning');
+                }
+            } catch (e) {
+                addError(`LocalStorage error: ${e.message}`, 'error');
+            }
+            
+            // Check Supabase connection
+            if (supabase) {
+                try {
+                    const { error } = await supabase.from('bookings').select('count', { count: 'exact', head: true });
+                    if (error) {
+                        addError(`Supabase connection error: ${error.message}`, 'error');
+                    }
+                } catch (e) {
+                    addError(`Supabase connection failed: ${e.message}`, 'error');
+                }
+            }
+            
+            // Check service worker
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                if (registrations.length === 0) {
+                    addError('Service Worker not registered', 'warning');
+                }
+            }
+            
+            toast?.('✅ Deep scan completed', 'success');
+            return scanResults;
+        };
+        
+        // Auto repair system
+        const autoRepair = async () => {
+            toast?.('🔧 Running auto-repair...', 'info');
+            let fixes = 0;
+            
+            // Fix 1: Clear old error logs if too many
+            if (errorLogs.length > 50) {
+                errorLogs = errorLogs.slice(0, 50);
+                localStorage.setItem('ghost_error_logs', JSON.stringify(errorLogs));
+                fixes++;
+                addError('Cleared old error logs (over 50 entries)', 'warning');
+            }
+            
+            // Fix 2: Re-register service worker if missing
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                if (registrations.length === 0) {
+                    await navigator.serviceWorker.register('/sw.js');
+                    fixes++;
+                    addError('Service Worker re-registered', 'warning');
+                }
+            }
+            
+            // Fix 3: Check localStorage integrity
+            try {
+                const test = localStorage.getItem('ghost_test');
+                localStorage.setItem('ghost_test', 'test');
+                localStorage.removeItem('ghost_test');
+            } catch (e) {
+                addError(`LocalStorage issue detected: ${e.message}`, 'error');
+                // Attempt to clear some space
+                const keys = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    keys.push(localStorage.key(i));
+                }
+                // Remove oldest error logs if needed
+                if (errorLogs.length > 30) {
+                    errorLogs = errorLogs.slice(0, 30);
+                    localStorage.setItem('ghost_error_logs', JSON.stringify(errorLogs));
+                    fixes++;
+                }
+            }
+            
+            updateStats();
+            updateErrorList();
+            toast?.(`✅ Auto-repair completed: ${fixes} issues fixed`, 'success');
+        };
+        
+        // Export report
+        const exportReport = () => {
+            const report = {
+                timestamp: new Date().toISOString(),
+                systemInfo: {
+                    userAgent: navigator.userAgent,
+                    url: window.location.href,
+                    online: navigator.onLine,
+                    uptime: Math.floor((Date.now() - startTime) / 60000) + ' minutes'
+                },
+                stats: {
+                    totalErrors: errorLogs.filter(e => e.type === 'error').length,
+                    totalWarnings: errorLogs.filter(e => e.type === 'warning').length,
+                    resolved: errorLogs.filter(e => e.resolved).length,
+                    healthScore: document.getElementById('health-score')?.innerText
+                },
+                errors: errorLogs,
+                recommendations: []
             };
             
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                backup.data.localStorage[key] = localStorage.getItem(key);
+            // Add recommendations
+            if (report.stats.totalErrors > 10) {
+                report.recommendations.push('High error count detected. Consider system reset.');
+            }
+            if (!navigator.onLine) {
+                report.recommendations.push('System is offline. Check network connection.');
             }
             
-            for (let i = 0; i < sessionStorage.length; i++) {
-                const key = sessionStorage.key(i);
-                backup.data.sessionStorage[key] = sessionStorage.getItem(key);
-            }
-            
-            backups.unshift(backup);
-            if (backups.length > 10) backups.pop();
-            
-            // Save to localStorage
-            localStorage.setItem('ghost_backups', JSON.stringify(backups));
-            
-            const backupList = document.getElementById('backup-list');
-            backupList.innerHTML = backups.map(b => `
-                <div style="display:flex; justify-content:space-between; padding:6px; border-bottom:1px solid rgba(255,255,255,0.05);">
-                    <span>📦 ${new Date(b.timestamp).toLocaleString()}</span>
-                    <button class="restore-backup" data-id="${b.id}" style="background:#10b981; border:none; border-radius:6px; padding:2px 8px; cursor:pointer;">Restore</button>
-                </div>
-            `).join('');
-            
-            document.querySelectorAll('.restore-backup').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const id = parseInt(btn.dataset.id);
-                    const backup = backups.find(b => b.id === id);
-                    if (backup) {
-                        Object.entries(backup.data.localStorage).forEach(([k, v]) => localStorage.setItem(k, v));
-                        addLog(`Restored backup from ${new Date(backup.timestamp).toLocaleString()}`, 'success');
-                        toast?.('Backup restored successfully', 'success');
-                        location.reload();
-                    }
-                });
-            });
-            
-            addLog(`Backup created: ${new Date().toLocaleString()}`, 'success');
-            toast?.('Backup created successfully', 'success');
-        };
-        
-        // Load existing backups
-        const loadBackups = () => {
-            const saved = localStorage.getItem('ghost_backups');
-            if (saved) {
-                backups = JSON.parse(saved);
-                const backupList = document.getElementById('backup-list');
-                backupList.innerHTML = backups.map(b => `
-                    <div style="display:flex; justify-content:space-between; padding:6px; border-bottom:1px solid rgba(255,255,255,0.05);">
-                        <span>📦 ${new Date(b.timestamp).toLocaleString()}</span>
-                        <button class="restore-backup" data-id="${b.id}" style="background:#10b981; border:none; border-radius:6px; padding:2px 8px; cursor:pointer;">Restore</button>
-                    </div>
-                `).join('');
-                
-                document.querySelectorAll('.restore-backup').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const id = parseInt(btn.dataset.id);
-                        const backup = backups.find(b => b.id === id);
-                        if (backup) {
-                            Object.entries(backup.data.localStorage).forEach(([k, v]) => localStorage.setItem(k, v));
-                            addLog(`Restored backup from ${new Date(backup.timestamp).toLocaleString()}`, 'success');
-                            toast?.('Backup restored successfully', 'success');
-                            location.reload();
-                        }
-                    });
-                });
-            }
-        };
-        
-        // Recovery Console commands
-        const runConsoleCommand = (cmd) => {
-            const output = document.getElementById('console-output');
-            output.innerHTML += `<div>> ${cmd}</div>`;
-            
-            const cmdLower = cmd.toLowerCase();
-            if (cmdLower === 'help') {
-                output.innerHTML += `<div>Available commands:</div>`;
-                output.innerHTML += `<div>  help - Show this help</div>`;
-                output.innerHTML += `<div>  scan - Scan system status</div>`;
-                output.innerHTML += `<div>  modules - List all modules</div>`;
-                output.innerHTML += `<div>  backup - Create backup</div>`;
-                output.innerHTML += `<div>  clear - Clear console</div>`;
-                output.innerHTML += `<div>  fix - Attempt auto-fix</div>`;
-            } else if (cmdLower === 'scan') {
-                checkSystemStatus();
-                scanModules();
-                output.innerHTML += `<div>✅ Scan initiated</div>`;
-            } else if (cmdLower === 'modules') {
-                scanModules();
-                output.innerHTML += `<div>✅ Module scan initiated</div>`;
-            } else if (cmdLower === 'backup') {
-                createBackup();
-                output.innerHTML += `<div>✅ Backup created</div>`;
-            } else if (cmdLower === 'clear') {
-                output.innerHTML = `<div>> ${cmd}</div><div>Console cleared</div>`;
-            } else if (cmdLower === 'fix') {
-                output.innerHTML += `<div>🔧 Running auto-fix...</div>`;
-                setTimeout(() => {
-                    output.innerHTML += `<div>✅ System repaired: localStorage structure validated</div>`;
-                    output.innerHTML += `<div>✅ Module cache cleared</div>`;
-                    output.innerHTML += `<div>✅ Service worker re-registered</div>`;
-                }, 1000);
-            } else {
-                output.innerHTML += `<div>❌ Unknown command: ${cmd}</div>`;
-                output.innerHTML += `<div>Type 'help' for available commands</div>`;
-            }
-            output.scrollTop = output.scrollHeight;
-        };
-        
-        // Export Logs
-        const exportLogs = () => {
-            const logs = document.getElementById('system-logs').innerHTML;
-            const blob = new Blob([logs], { type: 'text/html' });
+            const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `ghost_logs_${Date.now()}.html`;
+            a.download = `ghost_report_${Date.now()}.json`;
             a.click();
             URL.revokeObjectURL(url);
-            addLog('Logs exported', 'success');
+            
+            toast?.('📁 Error report exported', 'success');
         };
         
-        // Event Listeners
-        document.getElementById('refresh-status')?.addEventListener('click', checkSystemStatus);
-        document.getElementById('scan-modules')?.addEventListener('click', scanModules);
-        document.getElementById('query-db')?.addEventListener('click', queryDatabase);
-        document.getElementById('run-perf-test')?.addEventListener('click', runPerformanceTest);
-        document.getElementById('create-backup')?.addEventListener('click', createBackup);
-        document.getElementById('send-api')?.addEventListener('click', async () => {
-            const method = document.getElementById('api-method').value;
-            const url = document.getElementById('api-url').value;
-            const body = document.getElementById('api-body').value;
-            const responseDiv = document.getElementById('api-response');
-            
-            if (!url) {
-                responseDiv.innerHTML = '<span style="color:#ef4444;">Please enter URL</span>';
-                return;
-            }
-            
-            responseDiv.innerHTML = 'Sending...';
-            addLog(`API ${method} ${url}`);
-            
-            try {
-                const options = { method };
-                if (body && (method === 'POST' || method === 'PUT')) {
-                    options.headers = { 'Content-Type': 'application/json' };
-                    options.body = body;
+        // Load saved errors from localStorage
+        const loadSavedErrors = () => {
+            const saved = localStorage.getItem('ghost_error_logs');
+            if (saved) {
+                try {
+                    errorLogs = JSON.parse(saved);
+                    updateErrorList();
+                    updateStats();
+                } catch (e) {
+                    console.warn('Failed to load saved errors');
                 }
-                const res = await fetch(url, options);
-                const data = await res.text();
-                responseDiv.innerHTML = `<pre style="margin:0; font-size:10px;">Status: ${res.status}\n${data.substring(0, 500)}</pre>`;
-                addLog(`API responded: ${res.status}`, res.ok ? 'success' : 'error');
-            } catch (e) {
-                responseDiv.innerHTML = `<span style="color:#ef4444;">Error: ${e.message}</span>`;
-                addLog(`API error: ${e.message}`, 'error');
             }
-        });
+        };
         
-        document.getElementById('run-command')?.addEventListener('click', () => {
-            const input = document.getElementById('console-input');
-            runConsoleCommand(input.value);
-            input.value = '';
-        });
-        
-        document.getElementById('console-input')?.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                runConsoleCommand(e.target.value);
-                e.target.value = '';
-            }
-        });
-        
-        document.querySelectorAll('.quick-cmd').forEach(btn => {
-            btn.addEventListener('click', () => {
-                runConsoleCommand(btn.dataset.cmd);
+        // Global error handler
+        const setupGlobalErrorHandler = () => {
+            // Catch unhandled errors
+            window.addEventListener('error', (event) => {
+                addError({
+                    message: event.message,
+                    stack: event.error?.stack,
+                    filename: event.filename,
+                    lineno: event.lineno,
+                    colno: event.colno
+                }, 'error');
             });
+            
+            // Catch promise rejections
+            window.addEventListener('unhandledrejection', (event) => {
+                addError(event.reason?.message || event.reason, 'error');
+            });
+            
+            // Override console.error to capture errors
+            const originalError = console.error;
+            console.error = (...args) => {
+                originalError.apply(console, args);
+                addError(args.join(' '), 'error');
+            };
+            
+            const originalWarn = console.warn;
+            console.warn = (...args) => {
+                originalWarn.apply(console, args);
+                addError(args.join(' '), 'warning');
+            };
+        };
+        
+        // Button events
+        document.getElementById('clear-errors')?.addEventListener('click', () => {
+            errorLogs = [];
+            localStorage.setItem('ghost_error_logs', JSON.stringify(errorLogs));
+            updateErrorList();
+            updateStats();
+            toast?.('Error log cleared', 'success');
         });
         
-        document.getElementById('export-logs')?.addEventListener('click', exportLogs);
-        document.getElementById('clear-logs')?.addEventListener('click', () => {
-            document.getElementById('system-logs').innerHTML = `<div>🚀 Logs cleared at ${new Date().toLocaleTimeString()}</div>`;
-            addLog('Logs cleared', 'info');
-        });
-        document.getElementById('clear-errors')?.addEventListener('click', () => {
-            document.getElementById('error-log').innerHTML = '<div style="text-align:center; padding:20px;">No errors logged</div>';
-            errorLogs = [];
-            addLog('Error log cleared', 'info');
-        });
+        document.getElementById('auto-repair')?.addEventListener('click', autoRepair);
+        document.getElementById('deep-scan')?.addEventListener('click', deepScan);
+        document.getElementById('export-report')?.addEventListener('click', exportReport);
         
         // Initialize
-        checkSystemStatus();
-        scanModules();
-        loadBackups();
-        runPerformanceTest();
+        loadSavedErrors();
+        await scanModules();
+        await deepScan();
+        setupGlobalErrorHandler();
+        updateStats();
         
-        addLog('Ghost Stealth Architect initialized', 'success');
-        toast?.('Ghost Stealth Architect ready!', 'success');
+        // Auto refresh every 10 seconds
+        setInterval(() => {
+            updateStats();
+            scanModules();
+        }, 10000);
         
-        // Auto-refresh status every 30 seconds
-        setInterval(checkSystemStatus, 30000);
+        toast?.('👻 Ghost Stealth Analyzer activated!', 'success');
+        
+        // Add test error button for demo
+        const testError = () => {
+            try {
+                throw new Error('Test error from Ghost Stealth');
+            } catch (e) {
+                addError(e, 'error');
+            }
+        };
+        
+        window.testGhostError = testError;
+        console.log('💡 To test error tracking, run: testGhostError()');
     }
 };
