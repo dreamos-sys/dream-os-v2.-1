@@ -71,7 +71,6 @@ function createModal() {
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
 
-    // Tutup modal jika klik di luar konten
     modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.style.display = 'none';
     });
@@ -98,7 +97,7 @@ async function loadModuleInModal(moduleId) {
     }
 }
 
-// ========== LOGIN MODAL ==========
+// ========== LOGIN MODAL with Eye Toggle & Logo ==========
 function showLoginModal() {
     return new Promise((resolve) => {
         const modal = document.createElement('div');
@@ -115,12 +114,15 @@ function showLoginModal() {
         `;
         modal.innerHTML = `
             <div style="background: #0f172a; border-radius: 28px; padding: 32px; width: 90%; max-width: 380px; border: 1px solid #10b981; text-align: center;">
-                <i class="fas fa-dharmachakra" style="font-size: 48px; color: #10b981;"></i>
-                <h2 style="color: #10b981; margin: 16px 0;">Dream OS</h2>
+                <img src="./assets/img/icon-512.png" style="width: 80px; height: 80px; border-radius: 20px; margin-bottom: 16px;">
+                <h2 style="color: #10b981; margin: 0 0 16px;">Dream OS</h2>
                 <p style="color: #94a3b8; font-size: 12px;">Masukkan password</p>
-                <input type="password" id="login-pw" placeholder="Password" autocomplete="off"
-                    style="width: 100%; padding: 14px; margin: 16px 0; background: #1e293b; border: 1px solid #334155; border-radius: 16px; color: white;">
-                <button id="login-submit" style="width: 100%; padding: 14px; background: #10b981; border: none; border-radius: 24px; font-weight: bold; cursor: pointer;">Login</button>
+                <div style="position: relative;">
+                    <input type="password" id="login-pw" placeholder="Password" autocomplete="off"
+                        style="width: 100%; padding: 14px; margin: 8px 0; background: #1e293b; border: 1px solid #334155; border-radius: 16px; color: white; padding-right: 45px;">
+                    <i id="toggle-pw" class="fas fa-eye" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #94a3b8;"></i>
+                </div>
+                <button id="login-submit" style="width: 100%; padding: 14px; margin-top: 16px; background: #10b981; border: none; border-radius: 24px; font-weight: bold; cursor: pointer;">Login</button>
                 <div id="login-error" style="color: #ef4444; font-size: 12px; margin-top: 12px;"></div>
             </div>
         `;
@@ -129,6 +131,14 @@ function showLoginModal() {
         const input = modal.querySelector('#login-pw');
         const submit = modal.querySelector('#login-submit');
         const errorDiv = modal.querySelector('#login-error');
+        const toggleIcon = modal.querySelector('#toggle-pw');
+
+        // Toggle password visibility
+        toggleIcon.addEventListener('click', () => {
+            const type = input.type === 'password' ? 'text' : 'password';
+            input.type = type;
+            toggleIcon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+        });
 
         const attempt = () => {
             const pw = input.value.trim();
@@ -185,7 +195,6 @@ function renderApp() {
         <footer>DREAM TEAM © 2026 · v2.1</footer>
     `;
 
-    // Card klik -> modal
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', () => {
             const moduleId = card.dataset.module;
@@ -193,7 +202,6 @@ function renderApp() {
         });
     });
 
-    // Navigasi bawah juga modal
     document.querySelectorAll('.nav button').forEach(btn => {
         btn.addEventListener('click', () => {
             const page = btn.dataset.page;
@@ -203,7 +211,6 @@ function renderApp() {
         });
     });
 
-    // Logout
     document.getElementById('logout-btn').addEventListener('click', () => {
         sessionStorage.clear();
         location.reload();
