@@ -1,13 +1,10 @@
-// 🐚 DREAM OS SHELL ENGINE v2.1 - MODULAR EDITION
-console.log("🐚 Shell.js: JRENG MODE ON!");
-const SHELL = {
-    init() {
-        console.log("🚀 Shell: Initializing...");
-        if (typeof renderApp === 'function') renderApp();
-    },
-    navigate(page) {
-        if (typeof loadModuleInModal === 'function') loadModuleInModal(page);
+console.log("🐚 Shell: Force Start!");
+window.onload = () => {
+    console.log("🚀 System: Triggering Render...");
+    if (typeof renderApp === 'function') {
+        renderApp();
+    } else {
+        console.error("❌ renderApp gak ketemu! Cek dream-os.js lo!");
+        document.getElementById('loading').innerHTML = "⚠️ Core Error: renderApp Missing";
     }
 };
-window.DREAM = SHELL;
-window.onload = () => SHELL.init();
