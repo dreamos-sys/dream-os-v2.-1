@@ -25,20 +25,14 @@ export default {
             log.scrollTop = log.scrollHeight;
         };
 
-        // Versi test: respon statis, untuk memastikan modul berfungsi
         const callAI = async (prompt) => {
-            return `Kamu bilang: "${prompt}". Ini respon statis dari AI Chat. Edge Function akan segera dihubungkan.`;
-        };
-
-        send.onclick = async () => {
-            const msg = input.value.trim();
-            if (!msg) return;
-            addMessage(msg, true);
-            input.value = '';
-            addMessage('⏳ Mengetik...', false);
-            const reply = await callAI(msg);
-            log.lastChild.remove();
-            addMessage(reply, false);
-        };
-    }
+    const url = 'https://lfavawkzvdhdpaaplaiq.supabase.co/functions/v1/ai-chat';
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    return data.reply || 'Maaf, tidak ada respons.';
 };
