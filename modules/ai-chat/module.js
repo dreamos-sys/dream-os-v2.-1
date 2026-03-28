@@ -1,7 +1,7 @@
 export default {
     render: () => {
         return `
-            <div style="padding:20px;">
+            <div style="padding:20px; background:#0f172a; border-radius:12px;">
                 <h3>AI Chat</h3>
                 <div id="chat-log" style="height:300px; overflow-y:auto; background:#1e293b; padding:10px; border-radius:8px; margin-bottom:10px;"></div>
                 <input type="text" id="chat-input" placeholder="Ketik pesan..." style="width:80%; padding:8px; border-radius:8px;">
@@ -25,9 +25,16 @@ export default {
             log.scrollTop = log.scrollHeight;
         };
 
-        // Versi statis – selalu merespon dengan teks tetap
         const callAI = async (prompt) => {
-            return `👋 Kamu bilang: "${prompt}".\n\nFitur AI Chat akan segera tersambung ke model pintar. Terima kasih sudah mencoba Dream OS!`;
+            const url = 'https://lfavawkzvdhdpaaplaiq.supabase.co/functions/v1/ai-chat';
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt })
+            });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            return data.reply || 'Maaf, tidak ada respons.';
         };
 
         send.onclick = async () => {
@@ -36,9 +43,14 @@ export default {
             addMessage(msg, true);
             input.value = '';
             addMessage('⏳ Mengetik...', false);
-            const reply = await callAI(msg);
-            log.lastChild.remove();
-            addMessage(reply, false);
+            try {
+                const reply = await callAI(msg);
+                log.lastChild.remove();
+                addMessage(reply, false);
+            } catch (err) {
+                log.lastChild.remove();
+                addMessage('⚠️ Error: ' + err.message, false);
+            }
         };
     }
 };
