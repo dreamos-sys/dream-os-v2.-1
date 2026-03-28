@@ -25,14 +25,20 @@ export default {
             log.scrollTop = log.scrollHeight;
         };
 
+        // Versi statis – selalu merespon dengan teks tetap
         const callAI = async (prompt) => {
-    const url = 'https://lfavawkzvdhdpaaplaiq.supabase.co/functions/v1/ai-chat';
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt })
-    });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    return data.reply || 'Maaf, tidak ada respons.';
+            return `👋 Kamu bilang: "${prompt}".\n\nFitur AI Chat akan segera tersambung ke model pintar. Terima kasih sudah mencoba Dream OS!`;
+        };
+
+        send.onclick = async () => {
+            const msg = input.value.trim();
+            if (!msg) return;
+            addMessage(msg, true);
+            input.value = '';
+            addMessage('⏳ Mengetik...', false);
+            const reply = await callAI(msg);
+            log.lastChild.remove();
+            addMessage(reply, false);
+        };
+    }
 };
