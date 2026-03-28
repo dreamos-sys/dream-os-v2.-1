@@ -42,7 +42,6 @@ function renderDashboard() {
         <footer>DREAM TEAM © 2026 · v2.1</footer>
     `;
 
-    // Event handler untuk card
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', () => {
             const moduleId = card.dataset.module;
@@ -50,14 +49,11 @@ function renderDashboard() {
         });
     });
 
-    // Home button
     document.querySelector('[data-page="home"]').addEventListener('click', () => renderDashboard());
-    // Profile dan Settings sementara alert
     document.querySelector('[data-page="profile"]').addEventListener('click', () => alert("Modul profile akan menyusul"));
     document.querySelector('[data-page="settings"]').addEventListener('click', () => alert("Modul settings akan menyusul"));
 }
 
-// ========== LOAD MODULE IN MODAL ==========
 function loadModule(moduleId) {
     const modal = document.createElement('div');
     modal.id = 'temp-modal';
