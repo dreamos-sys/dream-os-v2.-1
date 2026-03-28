@@ -215,29 +215,16 @@ export default {
         };
         
         tabs.forEach(tab => {
-            tab.addEventListener('click', () => switchTab(tab.dataset.tab));
-        });
-        
-        // Default active tab
+            tab.addEventListener('click', 
+        // Default active ta
         switchTab('dashboard');
         
         // Refresh AI Prediction (simulasi)
         const refreshBtn = document.getElementById('refresh-ai-prediction');
         if (refreshBtn) {
-            refreshBtn.addEventListener('click', () => {
+            refreshBtn.addEventListener('click', () => 
                 const predictionDiv = document.getElementById('ai-prediction-content');
-                const recommendationDiv = document.getElementById('ai-recommendation');
+                const recommendationDiv = document.getElementById('ai-recommendation'
                 if (predictionDiv && recommendationDiv) {
                     // Simulasi data baru (bisa juga panggil AI)
-                    predictionDiv.innerHTML = `
-                        <div><strong>Booking Forecast</strong><div style="font-size:24px;">+18%</div><span>vs last month</span></div>
-                        <div><strong>Stok Kritis</strong><div style="font-size:24px;">4</div><span>AC, Proyektor, Meja, Kursi</span></div>
-                        <div><strong>Maintenance Trend</strong><div style="font-size:24px;">+25%</div><span>need immediate action</span></div>
-                        <div><strong>Division Score</strong><div style="font-size:24px;">95%</div><span>top: Security</span></div>
-                    `;
-                    recommendationDiv.innerHTML = '<i class="fas fa-robot"></i> <strong>AI Recommendation:</strong> Prioritaskan pengecekan AC dan kursi rusak, alokasikan dana untuk pembelian proyektor cadangan.';
-                }
-            });
-        }
-    }
-};
+            
