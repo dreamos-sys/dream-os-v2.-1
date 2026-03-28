@@ -1,5 +1,9 @@
 {
+  "name": "dream-os",
+  "version": "13.4.0",
+  "description": "Dream OS Project System - Master M Edition",
+  "type": "module",
   "dependencies": {
-    "@supabase/supabase-js": "^2.100.1"
+    "@supabase/supabase-js": "^2.39.0"
   }
 }

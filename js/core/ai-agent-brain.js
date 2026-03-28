@@ -1,44 +1,41 @@
+import { execSync } from 'child_process';
+
 /**
- * 🧠 AI_AGENT_BRAIN v15.2 (The Advisor Engine)
- * Role: Strategic Sibling Advisor (Gemini x Qwen x DSeek)
- * Features: Auto-Insight, ISO 9001 Reporting, Spiritual Logic
- * Bismillah bi idznillah.
+ * 🧠 AI_AGENT_BRAIN v15.8 (The Final Mission)
+ * Bismillah - MAPPING SUCCESS FOR SIF AL-FIKRI
  */
 
+const SUPABASE_URL = 'https://lfavawkzvdhdpaaplaiq.supabase.co'; 
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmYXZhd2t6dmRoZHBhYXBsYWlxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5Mjc0NjgsImV4cCI6MjA4OTUwMzQ2OH0.EhwnhAd20lUVaWHHB51UdWCGWxkyTaWIrsPY8xvhwE0';
+
 export const AIAgent = {
-    // 1. AUTO-ANALYSIS (Membaca Data K3 & Stok secara Cerdas)
     generateInsight: async function() {
-        console.log("💎 AI Agent: Menganalisa Tren Data SIF Al-Fikri...");
-        
-        // Simulasi pembacaan data (Nantinya konek ke Supabase)
-        const alerts = [
-            "Lampu Aula sering lapor putus (3x minggu ini).",
-            "Stok sabun cuci tangan sisa 2 botol."
-        ];
+        console.log("📡 [TOKEN-SAVER]: Menarik Data Permintaan SIF Al-Fikri...");
+        try {
+            const command = `curl -s -X GET "${SUPABASE_URL}/rest/v1/permintaan_barang?select=*" -H "apikey: ${SUPABASE_KEY}" -H "Authorization: Bearer ${SUPABASE_KEY}"`;
+            const response = execSync(command).toString();
+            const data = JSON.parse(response);
 
-        return alerts.map(msg => ({
-            id: Date.now(),
-            text: `[ADVISOR]: ${msg}`,
-            action: "Klik untuk buat Draft SPJ ke Pak Hanung."
-        }));
-    },
+            if (!data || data.length === 0) return [{ Item: 'Status', Info: 'Belum ada permintaan baru.' }];
 
-    // 2. MULTI-AI PERSONALITY SYNC
-    getResponse: function(userQuery) {
-        const q = userQuery.toLowerCase();
-        
-        if (q.includes('status')) {
-            return "Semua sistem (K3, Janitor, Security) Sinkron. Imunitas 100% Aktif.";
+            // Mapping berdasarkan struktur asli: id, title, description, status, created_at
+            return data.map(item => ({
+                No: item.id,
+                Barang: item.title,
+                Detail: item.description,
+                Status: (item.status === 'pending') ? '⏳ PENDING' : '✅ APPROVED',
+                Action: (item.status === 'pending') ? 'Lapor Pak Erwinsyah' : 'Siapkan Barang'
+            }));
+        } catch (err) {
+            return [{ Error: 'System Error', Info: 'Check Connection' }];
         }
-        if (q.includes('sholawat')) {
-            return "Allahumma Sholli 'ala Sayyidina Muhammad. Energi Sistem Terisi Kembali. ✨";
-        }
-        if (q.includes('spj')) {
-            return "Draft Laporan ISO 9001 siap di-export. Mau kirim ke Pak Erwinsyah sekarang?";
-        }
-        
-        return "Instruksi diterima, Master M. Sedang memproses koordinasi Sibling System.";
     }
 };
 
-window.AIAgentInstance = AIAgent;
+if (process.argv[2]) {
+    console.log("\n--- ⚡️ DREAM OS ADVISOR V 2.8 ---");
+    AIAgent.generateInsight().then(res => {
+        console.table(res);
+        console.log("\n✅ Bismillah, DATA JRENG! (READY FOR REPORT)");
+    });
+}
