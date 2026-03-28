@@ -13,4 +13,5 @@ window.MODULES = [
   { id: 'settings', name: 'settings', icon: 'fa-folder', description: '' },
   { id: 'audit', name: 'audit', icon: 'fa-folder', description: '' },
   { id: 'ai-chat', name: 'ai-chat', icon: 'fa-folder', description: '' },
+  { id: 'ghost', name: 'ghost', icon: 'fa-folder', description: '' },
 ];

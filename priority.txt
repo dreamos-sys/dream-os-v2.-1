@@ -11,3 +11,4 @@ profile
 settings
 audit
 ai-chat
+ghost
