@@ -1,6 +1,5 @@
 stok
 maintenance
-sekuriti
 janitor-in
 janitor-out
 booking
@@ -12,4 +11,6 @@ settings
 audit
 ai-chat
 ghost
+janitor-indoor
+janitor-outdoor
 sekuriti

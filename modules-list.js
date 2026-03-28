@@ -2,7 +2,6 @@
 window.MODULES = [
   { id: 'stok', name: 'Stok Management', icon: 'fa-boxes', description: 'Kelola stok barang' },
   { id: 'maintenance', name: 'maintenance', icon: 'fa-folder', description: '' },
-  { id: 'sekuriti', name: 'sekuriti', icon: 'fa-folder', description: '' },
   // Warning: module 'janitor-in' not found
   // Warning: module 'janitor-out' not found
   { id: 'booking', name: 'booking', icon: 'fa-folder', description: '' },
@@ -14,5 +13,7 @@ window.MODULES = [
   { id: 'audit', name: 'audit', icon: 'fa-folder', description: '' },
   { id: 'ai-chat', name: 'ai-chat', icon: 'fa-folder', description: '' },
   { id: 'ghost', name: 'ghost', icon: 'fa-folder', description: '' },
+  { id: 'janitor-indoor', name: 'janitor-indoor', icon: 'fa-folder', description: '' },
+  { id: 'janitor-outdoor', name: 'janitor-outdoor', icon: 'fa-folder', description: '' },
   { id: 'sekuriti', name: 'sekuriti', icon: 'fa-folder', description: '' },
 ];
