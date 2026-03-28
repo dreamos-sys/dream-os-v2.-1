@@ -2,7 +2,7 @@ export default {
     render: () => {
         return `
             <div style="padding:20px; background:#0f172a; border-radius:12px;">
-                <h3>AI Chat (Test)</h3>
+                <h3>AI Chat</h3>
                 <div id="chat-log" style="height:300px; overflow-y:auto; background:#1e293b; padding:10px; border-radius:8px; margin-bottom:10px;"></div>
                 <input type="text" id="chat-input" placeholder="Ketik pesan..." style="width:80%; padding:8px; border-radius:8px;">
                 <button id="chat-send">Kirim</button>
@@ -26,25 +26,15 @@ export default {
         };
 
         const callAI = async (prompt) => {
-            // Gunakan proxy alternatif (corsproxy.io) yang tidak perlu aktivasi
-            const proxyUrl = 'https://corsproxy.io/?';
-            const targetUrl = 'https://ollama.com/api/chat';
-            const url = proxyUrl + encodeURIComponent(targetUrl);
+            const url = 'https://lfavawkzvdhdpaaplaiq.supabase.co/functions/v1/ai-chat';
             const response = await fetch(url, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer a5cf7826213041019f9d7a9bf3e9ad22.Zt7Uj0jJhPjv2s31wDEYCOec'
-                },
-                body: JSON.stringify({
-                    model: 'gpt-oss:120b-cloud',
-                    messages: [{ role: 'user', content: prompt }],
-                    stream: false
-                })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt })
             });
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const data = await response.json();
-            return data.message?.content || data.response || 'Maaf, tidak ada respons.';
+            return data.reply || 'Maaf, tidak ada respons.';
         };
 
         send.onclick = async () => {
