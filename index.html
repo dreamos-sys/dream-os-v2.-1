@@ -20,5 +20,6 @@
     <script src="dream-os.js"></script>
 
     <script src="splash.js"></script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js"); navigator.serviceWorker.addEventListener("message",e=>{if(e.data.type==="NEW_FILE")console.log("Radar: Sel Baru!",e.data.url)})}</script>
 </body>
 </html>
