@@ -3,18 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>DREAM OS v2.1</title>
+    <title>DREAM OS v2.1 PRO</title>
     <base href="/dream/">
-    <link rel="manifest" href="./manifest.json">
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon-32x32.png">
-    <link rel="apple-touch-icon" href="./assets/img/apple-touch-icon.png">
-    <meta name="theme-color" content="#34C759"></head>
+    <link rel="icon" type="image/png" href="./assets/img/favicon-32x32.png">
+    <meta name="theme-color" content="#34C759">
+</head>
 <body>
     <div id="app"></div>
-    <!-- Load Girangati FIRST -->
-    <script src="./girangati.js"></script>
-    <!-- Then load main app -->
-    <script src="./dream-os.js"></script>
-    <script>if ("serviceWorker" in navigator) { navigator.serviceWorker.register("/sw.js"); }</script>
+    <script src="./js/app.js"></script>
 </body>
 </html>
