@@ -1,11 +1,20 @@
-/* 🧬 DREAM OS v2.1 - COMPLETE ANTI-BLANK
-   Fix: Semua fungsi lengkap, tidak ada yang kosong!
+/* 🧬 DREAM OS v2.1 - ICON ASSETS FIXED
+   Fix: Semua icon path sesuai folder assets/img
 */
 
 const VERSION = "v2.1";
 const GHOST_MASTER = 'GhostArchitect2026!@#';
 
-// ✅ CREDENTIALS LENGKAP
+// ✅ ICON PATHS (LENGKAP!)
+const ICONS = {
+    logo: './assets/img/icon-512.png',      // Golden D logo (premium!)
+    apple: './assets/img/apple-touch-icon.png',
+    favicon: './assets/img/favicon-32x32.png',
+    icon192: './assets/img/icon-192.png',
+    icon512: './assets/img/icon-512.png',
+    maskable: './assets/img/icon-maskable.png'
+};
+
 const CREDENTIALS = {
     'developer': 'b15m1ll4h_012443410',
     'master': 'Mr.M_Architect_2025',
@@ -23,57 +32,72 @@ const CREDENTIALS = {
 
 window.onload = () => {
     console.log('✅ Dream OS Loading...');
+    console.log('🎨 Icons loaded:', ICONS);
     if(!sessionStorage.getItem('dream_session')) renderLogin();
     else renderDashboard();
 };
 
-// ✅ LOGIN SCREEN (LENGKAP!)
+// ✅ LOGIN WITH ICON
 function renderLogin() {
-    console.log('[UI] Rendering login...');
     const app = document.getElementById('app');
-    if(!app) {
-        console.error('❌ App element not found!');
-        return;
-    }
+    if(!app) { console.error('❌ App not found!'); return; }
     
     app.innerHTML = `
         <div style="background:#F2F2F7;height:100vh;display:flex;justify-content:center;align-items:center;">
-            <div style="background:#FFFFFF;padding:40px 30px;border-radius:28px;box-shadow:0 8px 25px rgba(0,0,0,0.1);text-align:center;max-width:320px;width:90%;">
+            <div style="background:#FFFFFF;padding:40px 30px;border-radius:28px;box-shadow:0 8px 25px rgba(0,0,0,0.1);text-align:center;max-width:320px;width:90%;">                <!-- GOLDEN LOGO -->
+                <img src="${ICONS.logo}" alt="Dream OS" style="width:80px;height:80px;margin-bottom:15px;border-radius:18px;box-shadow:0 4px 15px rgba(212,175,55,0.3);">
+                
                 <div style="font-size:28px;color:#064e3b;font-family:serif;margin-bottom:10px;">بِسْمِ اللَّهِ</div>
                 <div style="font-size:10px;color:#34C759;font-weight:800;letter-spacing:1px;margin-bottom:20px;">DREAM OS ${VERSION}</div>
-                <input type="text" id="username" placeholder="Username" style="width:100%;padding:14px;margin-bottom:12px;border:1px solid #E5E5EA;border-radius:12px;background:#F2F2F7;font-size:14px;">
-                <input type="password" id="password" placeholder="Password" style="width:100%;padding:14px;margin-bottom:20px;border:1px solid #E5E5EA;border-radius:12px;background:#F2F2F7;font-size:14px;">
+                
+                <!-- Username -->
+                <div style="position:relative;margin-bottom:12px;">
+                    <input type="text" id="username" placeholder="Username" style="width:100%;padding:14px;border:1px solid #E5E5EA;border-radius:12px;background:#F2F2F7;font-size:14px;">
+                </div>
+                
+                <!-- Password WITH EYE ICON -->
+                <div style="position:relative;margin-bottom:20px;">
+                    <input type="password" id="password" placeholder="Password" style="width:100%;padding:14px 45px 14px 14px;border:1px solid #E5E5EA;border-radius:12px;background:#F2F2F7;font-size:14px;">
+                    <button type="button" onclick="togglePassword()" style="position:absolute;right:15px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px;color:#8E8E93;">👁️</button>
+                </div>
+                
                 <button onclick="doLogin()" style="width:100%;padding:16px;background:#34C759;color:#fff;border:none;border-radius:15px;font-weight:bold;font-size:14px;box-shadow:0 10px 20px rgba(52,199,89,0.3);">🔐 LOGIN</button>
-                <div id="error" style="color:#FF3B30;font-size:11px;margin-top:15px;display:none;">⚠️ ACCESS DENIED</div>            </div>
+                <div id="error" style="color:#FF3B30;font-size:11px;margin-top:15px;display:none;">⚠️ ACCESS DENIED</div>
+            </div>
         </div>
     `;
 }
 
-// ✅ LOGIN FUNCTION (LENGKAP!)
+// ✅ TOGGLE PASSWORD
+window.togglePassword = function() {
+    const pwd = document.getElementById('password');
+    const btn = pwd.nextElementSibling;
+    if(pwd.type === 'password') {
+        pwd.type = 'text';
+        btn.innerHTML = '🙈';
+    } else {
+        pwd.type = 'password';
+        btn.innerHTML = '👁️';
+    }
+};
+
+// ✅ LOGIN
 function doLogin() {
-    console.log('[Login] Attempt...');
     const user = document.getElementById('username').value.toLowerCase().trim();
     const pass = document.getElementById('password').value;
     const error = document.getElementById('error');
     
-    console.log('[Login] User:', user);
-    console.log('[Login] Expected:', CREDENTIALS[user]);
-    
     if(CREDENTIALS[user] && CREDENTIALS[user] === pass) {
         sessionStorage.setItem('dream_session', 'ACTIVE');
         sessionStorage.setItem('dream_user', user.toUpperCase());
-        console.log('[Login] SUCCESS!');
         renderDashboard();
     } else {
         error.style.display = 'block';
-        console.log('[Login] FAILED!');
-        if(navigator.vibrate) navigator.vibrate([50,50,50]);
-    }
+        if(navigator.vibrate) navigator.vibrate([50,50,50]);    }
 }
 
-// ✅ DASHBOARD (LENGKAP!)
+// ✅ DASHBOARD WITH ICONS
 function renderDashboard() {
-    console.log('[UI] Rendering dashboard...');
     const immunityData = JSON.parse(localStorage.getItem('dream_vaccines') || '{}');
     const app = document.getElementById('app');
     if(!app) return;
@@ -87,17 +111,21 @@ function renderDashboard() {
     app.innerHTML = `
         <div class="main-container">
             <header class="header-sync">
+                <!-- GOLDEN LOGO AS GHOST TRIGGER -->
                 <div onclick="triggerGhost()" class="hu-icon">
-                    <img src="assets/img/apple-touch-icon.png" style="width:40px;height:40px;border-radius:10px;">
+                    <img src="${ICONS.logo}" alt="Dream OS" style="width:45px;height:45px;border-radius:12px;box-shadow:0 4px 15px rgba(212,175,55,0.3);">
                 </div>
                 <div class="spiritual-block">
                     <div class="mahkota-text">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
                     <div class="mahkota-text shalawat-margin">اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ</div>
-                </div>            </header>
+                </div>
+            </header>
             
             <div class="immunity-badge">🛡️ IMMUNITY: ${immunityData.immunityLevel || 0}% (${immunityData.count || 0} Vaccines)</div>
             
             <div class="mega-slider">
+                <!-- LOGO IN SLIDER -->
+                <img src="${ICONS.logo}" alt="Dream OS" style="width:60px;height:60px;margin-bottom:10px;border-radius:15px;box-shadow:0 4px 15px rgba(212,175,55,0.3);">
                 <div class="status-title">DREAM OS ${VERSION} PRO</div>
                 <div class="status-badge">Global Immunity System Active</div>
             </div>
@@ -114,23 +142,23 @@ function renderDashboard() {
             <div style="height:180px;width:100%;"></div>
 
             <nav class="ios-dock">
-                <div class="nav-btn"><span>🏠</span><p>HOME</p></div>
-                <div class="nav-btn"><span>👤</span><p>PROFILE</p></div>
+                <div class="nav-btn"><span>🏠</span><p>HOME</p></div>                <div class="nav-btn"><span>👤</span><p>PROFILE</p></div>
                 <div class="qr-btn-container"><div class="qr-btn">🔳</div></div>
                 <div class="nav-btn"><span>ℹ️</span><p>ABOUT</p></div>
                 <div class="nav-btn"><span>⚙️</span><p>SETTING</p></div>
             </nav>
             
             <style>
-                :root { --bg: #F2F2F7; --white: #FFFFFF; --green: #34C759; --dark: #1C1C1E; }
+                :root { --bg: #F2F2F7; --white: #FFFFFF; --green: #34C759; --dark: #1C1C1E; --gold: #D4AF37; }
                 body { margin: 0; background: var(--bg); font-family: -apple-system, sans-serif; overflow-x: hidden; }
-                .main-container { display: flex; flex-direction: column; align-items: center; width: 100%; }
+                .main-container { display: flex; flex-direction: column; align-items: center; width: 100%; padding-bottom: 20px; }
                 .header-sync { padding: 50px 15px 10px; text-align: center; }
-                .hu-icon { margin-bottom: 10px; animation: huPulse 8s infinite; cursor: pointer; }
+                .hu-icon { margin-bottom: 10px; animation: huPulse 8s infinite; cursor: pointer; display: inline-block; }
+                .hu-icon:hover { transform: scale(1.05); }
                 .mahkota-text { font-size: 24px; color: #064e3b; font-family: serif; font-weight: 700; line-height: 1.2; }
                 .shalawat-margin { font-size: 22px; margin-top: 5px; }
                 .immunity-badge { background: var(--green); color: #fff; padding: 8px 15px; border-radius: 20px; font-size: 10px; font-weight: 800; margin: 15px 0; box-shadow: 0 4px 10px rgba(52,199,89,0.2); }
-                .mega-slider { width: 92%; height: 160px; background: var(--white); border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 25px; border: 0.5px solid #E5E5EA; }
+                .mega-slider { width: 92%; height: 180px; background: var(--white); border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 25px; border: 0.5px solid #E5E5EA; }
                 .status-title { font-size: 18px; font-weight: 700; color: var(--dark); }
                 .status-badge { font-size: 10px; color: var(--green); font-weight: 600; margin-top: 5px; }
                 .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 92%; padding-bottom: 20px; }
@@ -142,30 +170,28 @@ function renderDashboard() {
                 .nav-btn span { font-size: 24px; }
                 .nav-btn p { font-size: 7px; color: #8E8E93; margin-top: 3px; font-weight: bold; }
                 .qr-btn { background: var(--green); width: 60px; height: 60px; border-radius: 20px; margin-top: -40px; display: flex; align-items: center; justify-content: center; border: 4px solid var(--bg); color: #fff; font-size: 28px; }
-                @keyframes huPulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }            </style>
+                @keyframes huPulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
+            </style>
         </div>
     `;
 }
 
-// ✅ GHOST MODE (LENGKAP!)
+// ✅ GHOST MODE
 let ghostTapCount = 0;
 let ghostLastTap = 0;
 
 function triggerGhost() {
-    console.log('[Ghost] Tap detected');
     const now = Date.now();
     if(now - ghostLastTap > 800) ghostTapCount = 0;
     ghostTapCount++;
     ghostLastTap = now;
     
     if(ghostTapCount === 5) {
-        console.log('[Ghost] 5x tap detected!');
         const pwd = prompt('👻 GHOST IMMUNE MODE\n\nEnter Password:');
         if(pwd === GHOST_MASTER || pwd === getPrayerPassword()) {
             activateGhostImmune();
         } else {
-            alert('❌ WRONG PASSWORD\n\nTry: ' + getPrayerPassword());
-        }
+            alert('❌ WRONG PASSWORD\n\nTry: ' + getPrayerPassword());        }
         ghostTapCount = 0;
     }
 }
@@ -181,17 +207,14 @@ function getPrayerPassword() {
 }
 
 function activateGhostImmune() {
-    console.log('[Ghost] Activating immune protocol...');
-    
     if('caches' in window) {
-        caches.keys().then(names => {
-            names.forEach(n => caches.delete(n));
-        });
+        caches.keys().then(names => names.forEach(n => caches.delete(n)));
     }
     
     const errors = JSON.parse(localStorage.getItem('girangati_errors') || '[]');
     const oldVaccines = JSON.parse(localStorage.getItem('dream_vaccines') || '{}');
-    const newCount = (oldVaccines.count || 0) + errors.length;    const newLevel = Math.min(100, newCount * 5);
+    const newCount = (oldVaccines.count || 0) + errors.length;
+    const newLevel = Math.min(100, newCount * 5);
     
     localStorage.setItem('dream_vaccines', JSON.stringify({
         count: newCount,
@@ -217,4 +240,4 @@ window.loadModule = function(moduleName) {
     setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2000);
 };
 
-console.log('✅ Dream OS v2.1 COMPLETE Loaded!');
+console.log('✅ Dream OS v2.1 WITH GOLDEN ICONS Loaded!');console.log('🎨 Available icons:', ICONS);
