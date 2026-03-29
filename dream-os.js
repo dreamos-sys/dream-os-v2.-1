@@ -1,5 +1,5 @@
-/* 🧬 DREAM OS v2.1 - FULLY INTEGRATED
-   TinyGo + Baby AI + Girangati Neural Core
+/* 🧬 DREAM OS v2.1 - 7 SLIDE CAROUSEL UPDATED
+   Content: Greeting, Booking, K3, Weather, Management Info, Umum Info, Ucapan
 */
 
 const VERSION = "v2.1";
@@ -10,6 +10,7 @@ const ICONS = {
     apple: './assets/img/apple-touch-icon.png',
     favicon: './assets/img/favicon-32x32.png'
 };
+
 const CREDENTIALS = {
     'developer': 'b15m1ll4h_012443410',
     'master': 'Mr.M_Architect_2025',
@@ -25,15 +26,221 @@ const CREDENTIALS = {
     'k3': 'user_@2345'
 };
 
+// 🎠 7 SLIDE CONTENT (NO ICONS)
+const SLIDES = [
+    {
+        id: 1,
+        title: '👋 Say Greeting',
+        content: `
+            <div style="text-align:center;padding:20px;">
+                <h2 style="color:#34C759;font-size:22px;margin-bottom:15px;">Selamat Datang</h2>
+                <p style="color:#1C1C1E;font-size:14px;margin-bottom:10px;">Dream OS v2.1 PRO</p>
+                <p style="color:#8E8E93;font-size:12px;">Global Immunity System Active</p>
+                <div style="background:#F2F2F7;padding:15px;border-radius:15px;margin-top:15px;">
+                    <p style="color:#064e3b;font-size:16px;font-family:serif;margin-bottom:10px;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+                    <p style="color:#8E8E93;font-size:11px;">The Power Soul of Shalawat</p>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: 2,        title: '📅 Booking Realtime',
+        content: `
+            <div style="padding:20px;">
+                <h2 style="color:#34C759;font-size:18px;margin-bottom:15px;">Booking Hari Ini & Besok</h2>
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+                    <div style="background:#F2F2F7;padding:12px;border-radius:12px;">
+                        <div style="color:#34C759;font-size:20px;font-weight:800;">12</div>
+                        <div style="color:#8E8E93;font-size:10px;">Hari Ini</div>
+                    </div>
+                    <div style="background:#F2F2F7;padding:12px;border-radius:12px;">
+                        <div style="color:#34C759;font-size:20px;font-weight:800;">8</div>
+                        <div style="color:#8E8E93;font-size:10px;">Besok</div>
+                    </div>
+                </div>
+                <div style="margin-top:15px;">
+                    <div style="background:#F2F2F7;padding:10px;border-radius:10px;margin-bottom:8px;">
+                        <div style="color:#1C1C1E;font-size:11px;font-weight:700;">Ruang Meeting A</div>
+                        <div style="color:#8E8E93;font-size:9px;">09:00 - 11:00 · APPROVED</div>
+                    </div>
+                    <div style="background:#F2F2F7;padding:10px;border-radius:10px;margin-bottom:8px;">
+                        <div style="color:#1C1C1E;font-size:11px;font-weight:700;">Aula Utama</div>
+                        <div style="color:#8E8E93;font-size:9px;">13:00 - 15:00 · PENDING</div>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: 3,
+        title: '⚠️ K3 Reports',
+        content: `
+            <div style="padding:20px;">
+                <h2 style="color:#34C759;font-size:18px;margin-bottom:15px;">K3 Progress Today</h2>
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:15px;">
+                    <div style="background:#F2F2F7;padding:12px;border-radius:12px;">
+                        <div style="color:#34C759;font-size:20px;font-weight:800;">7</div>
+                        <div style="color:#8E8E93;font-size:10px;">Resolved</div>
+                    </div>
+                    <div style="background:#F2F2F7;padding:12px;border-radius:12px;">
+                        <div style="color:#FF9500;font-size:20px;font-weight:800;">3</div>
+                        <div style="color:#8E8E93;font-size:10px;">Pending</div>
+                    </div>
+                </div>
+                <div style="background:#F2F2F7;padding:10px;border-radius:10px;margin-bottom:8px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                        <span style="color:#1C1C1E;font-size:10px;font-weight:700;">🔧 Maintenance</span>
+                        <span style="color:#34C759;font-size:10px;font-weight:700;">75%</span>
+                    </div>
+                    <div style="background:#E5E5EA;height:4px;border-radius:2px;overflow:hidden;">
+                        <div style="background:#34C759;width:75%;height:100%;"></div>                    </div>
+                </div>
+                <div style="background:#F2F2F7;padding:10px;border-radius:10px;margin-bottom:8px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                        <span style="color:#1C1C1E;font-size:10px;font-weight:700;">🛡️ Security</span>
+                        <span style="color:#34C759;font-size:10px;font-weight:700;">95%</span>
+                    </div>
+                    <div style="background:#E5E5EA;height:4px;border-radius:2px;overflow:hidden;">
+                        <div style="background:#34C759;width:95%;height:100%;"></div>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: 4,
+        title: '🌤️ Weather & 🚦 Lalin',
+        content: `
+            <div style="padding:20px;">
+                <h2 style="color:#34C759;font-size:18px;margin-bottom:15px;">Weather & Traffic</h2>
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:15px;">
+                    <div style="background:linear-gradient(135deg,#34C759,#30B350);padding:15px;border-radius:15px;text-align:center;">
+                        <div style="font-size:30px;">🌤️</div>
+                        <div style="color:#fff;font-size:24px;font-weight:800;">28°C</div>
+                        <div style="color:#fff;font-size:10px;">Depok, ID</div>
+                    </div>
+                    <div style="background:linear-gradient(135deg,#FF9500,#FF8A00);padding:15px;border-radius:15px;text-align:center;">
+                        <div style="font-size:30px;">🚦</div>
+                        <div style="color:#fff;font-size:14px;font-weight:800;">MODERATE</div>
+                        <div style="color:#fff;font-size:10px;">Traffic</div>
+                    </div>
+                </div>
+                <div style="background:#F2F2F7;padding:12px;border-radius:12px;">
+                    <div style="color:#1C1C1E;font-size:11px;font-weight:700;margin-bottom:8px;">📍 Real-time Location</div>
+                    <div style="color:#8E8E93;font-size:10px;font-family:monospace;">-6.4025° S, 106.7942° E</div>
+                    <div style="color:#34C759;font-size:9px;margin-top:5px;">● GPS Active</div>
+                </div>
+                <div style="background:#FFF4E5;padding:10px;border-radius:10px;margin-top:10px;">
+                    <div style="color:#FF9500;font-size:10px;font-weight:700;">⚠️ Prediction</div>
+                    <div style="color:#8E8E93;font-size:9px;margin-top:3px;">Rain expected at 15:00 · Traffic heavy at 17:00</div>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: 5,
+        title: '👔 Info Management',
+        content: `
+            <div style="padding:20px;">
+                <h2 style="color:#34C759;font-size:18px;margin-bottom:15px;">Info Khusus Management</h2>                <div style="background:#F2F2F7;padding:15px;border-radius:15px;margin-bottom:10px;">
+                    <div style="color:#1C1C1E;font-size:11px;font-weight:700;margin-bottom:10px;">📊 Approval Pending</div>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;">
+                        <div>
+                            <div style="color:#34C759;font-size:18px;font-weight:800;">5</div>
+                            <div style="color:#8E8E93;font-size:8px;">Booking</div>
+                        </div>
+                        <div>
+                            <div style="color:#34C759;font-size:18px;font-weight:800;">3</div>
+                            <div style="color:#8E8E93;font-size:8px;">Dana</div>
+                        </div>
+                        <div>
+                            <div style="color:#34C759;font-size:18px;font-weight:800;">2</div>
+                            <div style="color:#8E8E93;font-size:8px;">K3</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background:#F2F2F7;padding:15px;border-radius:15px;">
+                    <div style="color:#1C1C1E;font-size:11px;font-weight:700;margin-bottom:8px;">💰 Budget Overview</div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                        <span style="color:#8E8E93;font-size:10px;">Spent</span>
+                        <span style="color:#1C1C1E;font-size:10px;font-weight:700;">Rp 2.5M / Rp 3.0M</span>
+                    </div>
+                    <div style="background:#E5E5EA;height:6px;border-radius:3px;overflow:hidden;">
+                        <div style="background:#34C759;width:83%;height:100%;"></div>
+                    </div>
+                    <div style="color:#8E8E93;font-size:9px;margin-top:5px;">83% utilized</div>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: 6,
+        title: '🏢 Info Umum',
+        content: `
+            <div style="padding:20px;">
+                <h2 style="color:#34C759;font-size:18px;margin-bottom:15px;">Info Khusus Bagian Umum</h2>
+                <div style="background:#F2F2F7;padding:15px;border-radius:15px;margin-bottom:10px;">
+                    <div style="color:#1C1C1E;font-size:11px;font-weight:700;margin-bottom:10px;">📋 Today's Tasks</div>
+                    <div style="margin-bottom:8px;">
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                            <span style="color:#34C759;font-size:12px;">✓</span>
+                            <span style="color:#8E8E93;font-size:10px;">Morning briefing (08:00)</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                            <span style="color:#FF9500;font-size:12px;">⏳</span>
+                            <span style="color:#8E8E93;font-size:10px;">Asset inspection (11:00)</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <span style="color:#8E8E93;font-size:12px;">○</span>                            <span style="color:#8E8E93;font-size:10px;">Weekly report (16:00)</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="background:#F2F2F7;padding:15px;border-radius:15px;">
+                    <div style="color:#1C1C1E;font-size:11px;font-weight:700;margin-bottom:8px;">📢 Announcements</div>
+                    <div style="color:#8E8E93;font-size:10px;line-height:1.5;">Meeting ruangan A dipindah ke Aula Utama jam 13:00</div>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: 7,
+        title: '💬 Ucapan Kabar',
+        content: `
+            <div style="padding:20px;">
+                <h2 style="color:#34C759;font-size:18px;margin-bottom:15px;">Ucapan Kabar Bagian Umum</h2>
+                <div style="background:linear-gradient(135deg,#FF9500,#FF8A00);padding:15px;border-radius:15px;margin-bottom:10px;">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div style="font-size:30px;">🎉</div>
+                        <div>
+                            <div style="color:#fff;font-size:12px;font-weight:700;">Birthday Celebration</div>
+                            <div style="color:#fff;font-size:10px;opacity:0.9;">Bapak Hanung · Today</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background:#F2F2F7;padding:15px;border-radius:15px;margin-bottom:10px;">
+                    <div style="color:#1C1C1E;font-size:11px;font-weight:700;margin-bottom:8px;">📝 Message Board</div>
+                    <div style="color:#8E8E93;font-size:10px;line-height:1.5;">"Terima kasih untuk tim maintenance yang sudah bekerja lembur kemarin" - HRD</div>
+                </div>
+                <div style="background:#F2F2F7;padding:15px;border-radius:15px;">
+                    <div style="color:#1C1C1E;font-size:11px;font-weight:700;margin-bottom:8px;">📞 Important Contacts</div>
+                    <div style="color:#8E8E93;font-size:10px;line-height:1.8;">
+                        <div>📱 Security: 0812-XXXX-XXXX</div>
+                        <div>📱 Maintenance: 0813-XXXX-XXXX</div>
+                        <div>📱 Umum: 0814-XXXX-XXXX</div>
+                    </div>
+                </div>
+            </div>
+        `
+    }
+];
+
 window.onload = () => {
     console.log('✅ Dream OS Loading...');
-    // Initialize Girangati first
     if(window.girangati) {
         window.girangati.init().then(diag => {
             console.log('🧬 Girangati Diagnostics:', diag);
         });
-    }
-    if(!sessionStorage.getItem('dream_session')) renderLogin();
+    }    if(!sessionStorage.getItem('dream_session')) renderLogin();
     else renderDashboard();
 };
 
@@ -60,6 +267,7 @@ function renderLogin() {
         </div>
     `;
 }
+
 window.togglePassword = function() {
     const pwd = document.getElementById('password');
     const btn = pwd.nextElementSibling;
@@ -75,14 +283,18 @@ function doLogin() {
     if(CREDENTIALS[user] && CREDENTIALS[user] === pass) {
         sessionStorage.setItem('dream_session', 'ACTIVE');
         sessionStorage.setItem('dream_user', user.toUpperCase());
-        // Baby Agent learns login
         if(window.girangati) { window.girangati.babyAgent.learn('login', 'success'); }
         renderDashboard();
     } else {
         error.style.display = 'block';
-        if(navigator.vibrate) navigator.vibrate([50,50,50]);
-    }
-}
+        if(window.girangati && window.girangati.tiny.vibrate) { window.girangati.tiny.vibrate([50,50,50]); }
+        else if(navigator.vibrate) { navigator.vibrate([50,50,50]); }
+    }}
+
+// 🎠 CAROUSEL STATE
+let currentSlide = 0;
+let slideInterval = null;
+let isPaused = false;
 
 function renderDashboard() {
     const immunityData = JSON.parse(localStorage.getItem('dream_vaccines') || '{}');
@@ -106,21 +318,33 @@ function renderDashboard() {
                     <div class="mahkota-text shalawat-margin">اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ</div>
                 </div>
             </header>
+            
             <div class="immunity-badge">🛡️ IMMUNITY: ${immunityData.immunityLevel || 0}% (${immunityData.count || 0} Vaccines)</div>
+            
+            <!-- 7 SLIDE CAROUSEL (NO ICONS) -->
             <div class="mega-slider">
-                <img src="${ICONS.logo}" alt="Dream OS" style="width:60px;height:60px;margin-bottom:10px;border-radius:15px;box-shadow:0 4px 15px rgba(212,175,55,0.3);">                <div class="status-title">DREAM OS ${VERSION} PRO</div>
-                <div class="status-badge">Global Immunity System Active</div>
-                ${window.girangati ? '<div style="font-size:8px;color:#8E8E93;margin-top:5px;">🧬 Girangati: ' + window.girangati.status + '</div>' : ''}
+                <div class="slider-header">
+                    <span class="slide-title" id="slide-title">${SLIDES[0].title}</span>
+                    <div class="slide-controls">
+                        <button onclick="prevSlide()" style="background:none;border:none;font-size:18px;color:#8E8E93;cursor:pointer;">◀</button>
+                        <button onclick="togglePause()" id="pause-btn" style="background:none;border:none;font-size:16px;color:#8E8E93;cursor:pointer;">⏸️</button>
+                        <button onclick="nextSlide()" style="background:none;border:none;font-size:18px;color:#8E8E93;cursor:pointer;">▶</button>
+                    </div>
+                </div>
+                <div class="slider-content" id="slider-content">${SLIDES[0].content}</div>
+                <div class="slide-dots" id="slide-dots"></div>
             </div>
+            
             <div class="grid-container">
                 ${mods.map(m => `
                     <div onclick="window.loadModule('${m.n}')" class="grid-item">
-                        <span class="icon">${m.e}</span>
-                        <span class="label">${m.n}</span>
+                        <span class="icon">${m.e}</span>                        <span class="label">${m.n}</span>
                     </div>
                 `).join('')}
             </div>
+            
             <div style="height:180px;width:100%;"></div>
+
             <nav class="ios-dock">
                 <div class="nav-btn"><span>🏠</span><p>HOME</p></div>
                 <div class="nav-btn"><span>👤</span><p>PROFILE</p></div>
@@ -139,9 +363,14 @@ function renderDashboard() {
             .mahkota-text { font-size: 24px; color: #064e3b; font-family: serif; font-weight: 700; line-height: 1.2; }
             .shalawat-margin { font-size: 22px; margin-top: 5px; }
             .immunity-badge { background: var(--green); color: #fff; padding: 8px 15px; border-radius: 20px; font-size: 10px; font-weight: 800; margin: 15px 0; box-shadow: 0 4px 10px rgba(52,199,89,0.2); }
-            .mega-slider { width: 92%; height: 180px; background: var(--white); border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 25px; border: 0.5px solid #E5E5EA; }
-            .status-title { font-size: 18px; font-weight: 700; color: var(--dark); }
-            .status-badge { font-size: 10px; color: var(--green); font-weight: 600; margin-top: 5px; }
+            .mega-slider { width: 92%; background: var(--white); border-radius: 28px; margin-bottom: 25px; border: 0.5px solid #E5E5EA; overflow: hidden; }
+            .slider-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 0.5px solid #E5E5EA; }
+            .slide-title { color: var(--green); font-size: 14px; font-weight: 700; }
+            .slide-controls { display: flex; gap: 10px; }
+            .slider-content { min-height: 280px; }
+            .slide-dots { display: flex; justify-content: center; gap: 8px; padding: 15px; }
+            .slide-dot { width: 8px; height: 8px; border-radius: 50%; background: #E5E5EA; cursor: pointer; transition: all 0.3s; }
+            .slide-dot.active { background: var(--green); width: 20px; border-radius: 4px; }
             .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 92%; padding-bottom: 20px; }
             .grid-item { background: var(--white); aspect-ratio: 1/1; border-radius: 24px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.03); border: 0.5px solid #F2F2F7; cursor: pointer; }
             .grid-item:active { transform: scale(0.95); }
@@ -154,21 +383,62 @@ function renderDashboard() {
             @keyframes huPulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
         </style>
     `;
+    
+    // Initialize carousel
+    renderDots();
+    startCarousel();
+}
+// 🎠 CAROUSEL FUNCTIONS
+function startCarousel() {
+    if(slideInterval) clearInterval(slideInterval);
+    slideInterval = setInterval(() => {
+        if(!isPaused) nextSlide();
+    }, 7000); // 7 detik per slide
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % SLIDES.length;
+    updateSlide();
+}
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + SLIDES.length) % SLIDES.length;
+    updateSlide();
+}
+
+function togglePause() {
+    isPaused = !isPaused;
+    document.getElementById('pause-btn').innerHTML = isPaused ? '▶️' : '⏸️';
+}
+
+function updateSlide() {
+    document.getElementById('slide-title').textContent = SLIDES[currentSlide].title;
+    document.getElementById('slider-content').innerHTML = SLIDES[currentSlide].content;
+    renderDots();
+}
+
+function renderDots() {
+    const dots = document.getElementById('slide-dots');
+    dots.innerHTML = SLIDES.map((s, i) => 
+        `<div class="slide-dot ${i === currentSlide ? 'active' : ''}" onclick="goToSlide(${i})"></div>`
+    ).join('');
+}
+
+function goToSlide(index) {
+    currentSlide = index;
+    updateSlide();
 }
 
 // ✅ MODULE LOADER WITH GIRANGATI
-window.loadModule = function(moduleName) {    console.log('[Module] Loading:', moduleName);
-    
-    // Use Girangati brain if available
+window.loadModule = function(moduleName) {
+    console.log('[Module] Loading:', moduleName);
     if(window.girangati) {
         window.girangati.brain.emit('MODULE_OPEN', moduleName);
-    } else {
-        const toast = document.createElement('div');
-        toast.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#34C759;color:#fff;padding:12px 24px;border-radius:30px;font-weight:700;z-index:10000;';
-        toast.textContent = '📦 Loading: ' + moduleName;
-        document.body.appendChild(toast);
-        setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2000);
     }
+    const toast = document.createElement('div');
+    toast.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#34C759;color:#fff;padding:12px 24px;border-radius:30px;font-weight:700;z-index:10000;';    toast.textContent = '📦 Loading: ' + moduleName;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2000);
 };
 
 // ✅ GHOST MODE
@@ -206,7 +476,8 @@ function activateGhostImmune() {
     if('caches' in window) {
         caches.keys().then(names => names.forEach(n => caches.delete(n)));
     }
-        const errors = JSON.parse(localStorage.getItem('girangati_errors') || '[]');
+    
+    const errors = JSON.parse(localStorage.getItem('girangati_errors') || '[]');
     const oldVaccines = JSON.parse(localStorage.getItem('dream_vaccines') || '{}');
     const newCount = (oldVaccines.count || 0) + errors.length;
     const newLevel = Math.min(100, newCount * 5);
@@ -214,17 +485,15 @@ function activateGhostImmune() {
     localStorage.setItem('dream_vaccines', JSON.stringify({
         count: newCount,
         immunityLevel: newLevel,
-        lastActivation: new Date().toISOString(),
-        vaccines: oldVaccines.vaccines || []
+        lastActivation: new Date().toISOString(),        vaccines: oldVaccines.vaccines || []
     }));
     
     localStorage.removeItem('girangati_errors');
     
-    // Get Girangati diagnostics
     let diagMsg = '';
     if(window.girangati) {
         const diag = window.girangati.diagnostics();
-        diagMsg = '\n\n🧬 Girangati Status: ' + diag.status + '\n🦾 Tiny: ' + diag.tiny.status + '\n🧠 Baby Agent: ' + diag.babyAgent.status;
+        diagMsg = '\n\n🧬 Girangati: ' + diag.status + '\n🦾 Tiny: ' + diag.tiny.status + '\n🧠 Baby Agent: ' + diag.babyAgent.status;
     }
     
     alert(`👻 GHOST IMMUNE ACTIVATED\n\n🛡️ Immunity Level: ${newLevel}%\n💉 Vaccines: ${newCount}\n🧹 Bugs Cleaned: ${errors.length}${diagMsg}`);
@@ -232,7 +501,5 @@ function activateGhostImmune() {
     renderDashboard();
 }
 
-console.log('✅ Dream OS v2.1 FULLY INTEGRATED Loaded!');
-console.log('🧬 Girangati Neural Core: Active');
-console.log('🦾 Tiny: Ready');
-console.log('🧠 Baby Agent: Ready');
+console.log('✅ Dream OS v2.1 - 7 Slide Carousel Loaded!');
+console.log('🎠 Slides: Greeting, Booking, K3, Weather, Management, Umum, Ucapan');
