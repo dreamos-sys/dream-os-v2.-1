@@ -1,11 +1,29 @@
-// 💖 GIRANGATI ENGINE v1.0 - ULTRA LITE EDITION
-// "Anti Sungsang, Anti Bloon, 100% Performance"
+// 💖 GIRANGATI HYBRID ENGINE v2.0
+// Dynamic Integration: WASM + PURE JS (Standard Global)
 
 const Girangati = {
-    greet: () => "Assalamu'alaikum Master M, Girangati Engine v1.0 (JS) Online! ⚡",
-    shield: (data) => `ISO-ENCRYPTED-${data}-SHALAWAT-SHIELD`
+    mode: 'JS',
+    greet: () => "Assalamu'alaikum Master M, Girangati Hybrid Online! ⚡",
+    shield: (data) => `ISO-SHIELD-${data}-SHALAWAT`
 };
 
-window.greetGirangati = Girangati.greet;
-window.girangatiShield = Girangati.shield;
-console.log("💖 Girangati: Ready for Low-End Devices.");
+// Fungsi Eksekusi WASM (Jika Tersedia)
+async function initGirangatiWasm() {
+    try {
+        const go = new Go();
+        const result = await WebAssembly.instantiateStreaming(
+            fetch("girangati.wasm"), 
+            go.importObject
+        );
+        go.run(result.instance);
+        Girangati.mode = 'WASM';
+        console.log("🚀 Girangati WASM: Power Active!");
+    } catch (err) {
+        console.log("🛡️ Girangati JS: Safety Mode Active (Low-End Friendly)");
+    }
+}
+
+initGirangatiWasm();
+
+window.greetGirangati = () => Girangati.greet();
+window.girangatiShield = (d) => Girangati.shield(d);
