@@ -92,7 +92,7 @@ function renderDashboard() {
 function triggerGhost() {
     ghostClicks++;
     if(ghostClicks === 5) {
-        alert("🛡️ GHOST MODE ACTIVE | SIF AL-FIKRI");
+        window.girangati.executeWasm("GHOST_SHIELD_ACTIVATE"); alert("🛡️ GHOST MODE ACTIVE");
         ghostClicks = 0;
     }
     setTimeout(() => { ghostClicks = 0; }, 2500);

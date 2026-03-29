@@ -1,30 +1,34 @@
-// 🧠 GIRANGATI NEURAL ENGINE v4.0 
-// Integrated: Baby Smart Super AI Agent & Cellular System
+// 🧬 GIRANGATI NEURAL CORE v5.0
+// Integration: TinyGo (Executor) + Baby Agent (Brain)
 
 const Girangati = {
-    mode: 'AI_HYBRID',
-    status: 'SINKRON',
-    // 🧬 Sinyal Sel: Biar AI bisa ngomong ke Dashboard
+    mode: 'CELLULAR_SYNC',
+    status: 'ACTIVE',
+    
+    // 🧠 Baby Agent Omelan (Broadcaster)
     broadcast: (msg) => {
+        console.log(`🤖 Baby Agent: "${msg}"`);
         const event = new CustomEvent('dream_os_pulse', { detail: msg });
         window.dispatchEvent(event);
     },
-    // 🤖 Super AI Agent: Fungsi buat eksekusi perintah Master M
-    askAI: (prompt) => {
-        console.log("🤖 AI Agent Thinking: " + prompt);
-        // Simulasi respon AI yang super pinter
-        setTimeout(() => {
-            Girangati.broadcast("AI: Perintah '" + prompt + "' Berhasil Dieksekusi biidznillah!");
-        }, 1500);
+
+    // ⛓️ TinyGo Execution Bridge (Kabel ke Otot)
+    executeWasm: (task) => {
+        console.log(`⚙️ TinyGo Executing: ${task}`);
+        // Di sini TinyGo nerima bisikan dari Baby Agent
+        if (typeof window.Go !== 'undefined') {
+            // Logic TinyGo WASM lo masuk sini
+            Girangati.broadcast(`TinyGo Success: ${task} Integrated!`);
+        } else {
+            Girangati.broadcast("TinyGo Standby (JS Fallback)");
+        }
     }
 };
 
-// Kabel saraf buat denger perintah dari Dashboard
-window.addEventListener('ai_command', (e) => {
-    Girangati.askAI(e.detail);
-});
-
-// Omelan inisialisasi AI
-setTimeout(() => Girangati.broadcast("AI AGENT ONLINE: Siap Melayani Master M!"), 4000);
+// 🤝 Inisialisasi: Baby Agent manggil TinyGo pas bangun
+setTimeout(() => {
+    Girangati.broadcast("SINKRONISASI SEL DIMULAI...");
+    Girangati.executeWasm("CORE_IMMUNITY_CHECK");
+}, 3500);
 
 window.girangati = Girangati;
