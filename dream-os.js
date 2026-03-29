@@ -18,7 +18,7 @@ function renderApp() {
             <h1 class="bismillah-neon">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</h1>
             <p class="tagline">The Power Soul of Shalawat</p>
             <div class="user-greet">
-                Assalamu'alaikum, <strong>Master M</strong><br>
+                📡 Supabase: Connected | Assalamu'alaikum, <strong>Master M</strong><br>
                 <span>Depok, Maghrib 20:02</span>
             </div>
         </div>
