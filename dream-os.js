@@ -106,7 +106,7 @@ async function loadModule(moduleName) {
     try {
         // Panggil file yang barusan lo kumpulin di root
         const script = document.createElement('script');
-        script.src = `${moduleName}.js`;
+        script.src = `modules/${moduleName}.js`;
         script.onload = () => {
             console.log(`✅ Module [${moduleName}] Loaded!`);
             // Di sini kita asumsikan tiap module punya fungsi render-nya sendiri
