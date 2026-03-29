@@ -1,6 +1,3 @@
-/**
- * 🧬 DREAM OS v2.1 PRO - MAIN APP LOADER
- */
 const App = {
     modules: {
         'commandcenter': { path: './modules/commandcenter/module.js', name: 'Command Center', icon: '⚡' },
@@ -12,9 +9,12 @@ const App = {
         'stok': { path: './modules/stok/module.js', name: 'Stok', icon: '📦' },
         'maintenance': { path: './modules/maintenance/module.js', name: 'Maintenance', icon: '🔧' },
         'asset': { path: './modules/asset/module.js', name: 'Asset', icon: '🏛️' },
-        'gudang': { path: './modules/gudang/module.js', name: 'Gudang', icon: '🏭' }
+        'gudang': { path: './modules/gudang/module.js', name: 'Gudang', icon: '🏭' },
+        'profile': { path: './modules/profile/module.js', name: 'Profile', icon: '👤' },
+        'settings': { path: './modules/settings/module.js', name: 'Settings', icon: '⚙️' },
+        'connectivity': { path: './modules/connectivity/module.js', name: 'Connectivity', icon: '📡' }
     },
-    state: { currentModule: null, currentUser: null, supabase: null },
+    state: { currentModule: null, currentUser: null },
     
     async init() {
         console.log('🧬 Dream OS v2.1 PRO Initializing...');
@@ -24,9 +24,9 @@ const App = {
         console.log('✅ Dream OS Ready!');
     },
 
-    renderDashboard() {        const app = document.getElementById('app');
-        if (!app) return;
-        app.innerHTML = `
+    renderDashboard() {
+        const app = document.getElementById('app');
+        if (!app) return;        app.innerHTML = `
             <div class="main-container">
                 <div class="spiritual-header">
                     <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
@@ -73,13 +73,22 @@ const App = {
         } catch (err) {
             alert(`Error loading ${moduleId}: ${err.message}`);
             this.backToDashboard();
-        }    },
-
+        }
+    },
     backToDashboard() {
         document.querySelector('.module-grid').style.display = 'grid';
         document.getElementById('module-container').style.display = 'none';
         document.getElementById('back-btn').style.display = 'none';
         this.state.currentModule = null;
+    },
+
+    logout() {
+        if (confirm('Logout from all devices?')) {
+            sessionStorage.clear();
+            localStorage.clear();
+            alert('✅ Logged out successfully!');
+            location.reload();
+        }
     }
 };
 
