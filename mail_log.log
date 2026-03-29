@@ -1,0 +1,7 @@
+📨 [CLOUD-SYNC]: Mengirim laporan SPJ ke teknisi@alfikri.sch.id...
+Mar 29 16:15:01 host=smtp.gmail.com tls=on auth=on user=girangati1001@gmail.com from=girangati1001@gmail.com recipients=teknisi@alfikri.sch.id smtpstatus=535 smtpmsg='535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-82ca8498779sm3972526b3a.25 - gsmtp' errormsg='authentication failed (method PLAIN)' exitcode=EX_NOPERM
+msmtp: authentication failed (method PLAIN)
+msmtp: server message: 535-5.7.8 Username and Password not accepted. For more information, go to
+msmtp: server message: 535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-82ca8498779sm3972526b3a.25 - gsmtp
+msmtp: could not send mail (account default from /data/data/com.termux/files/home/.msmtprc)
+⚠️ CLOUD SYNC DELAYED: Cek koneksi internet atau config SMTP!

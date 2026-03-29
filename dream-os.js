@@ -93,7 +93,7 @@ function doLogin() {
         renderDashboard();
     } else {
         error.style.display = 'block';
-        if(navigator.vibrate) navigator.vibrate([50,50,50]);    }
+        if(window.girangati) window.girangati.tiny.vibrate([50,50,50]);    }
 }
 
 // ✅ DASHBOARD WITH ICONS
@@ -231,7 +231,7 @@ function activateGhostImmune() {
 }
 
 // ✅ MODULE LOADER
-window.loadModule = function(moduleName) {
+window.loadModule = function(moduleName) { if(window.girangati) window.girangati.brain.emit('MODULE_OPEN', moduleName);
     console.log('[Module] Loading:', moduleName);
     const toast = document.createElement('div');
     toast.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#34C759;color:#fff;padding:12px 24px;border-radius:30px;font-weight:700;z-index:10000;';
