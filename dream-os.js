@@ -92,3 +92,28 @@ function renderApp() {
         </style>
     `;
 }
+
+// 🚀 SMART MODULE LOADER - GLOBAL ENTERPRISE STANDARD
+async function loadModule(moduleName) {
+    console.log(`📡 Ghost Architect: Loading Module [${moduleName}]...`);
+    const app = document.getElementById('app');
+    
+    // Tampilkan Loading Ghaib
+    app.innerHTML = `<div style="display:flex; justify-content:center; align-items:center; height:100vh; color:#10b981;">
+        <i class="fas fa-spinner fa-spin" style="font-size:3rem;"></i>
+    </div>`;
+
+    try {
+        // Panggil file yang barusan lo kumpulin di root
+        const script = document.createElement('script');
+        script.src = `${moduleName}.js`;
+        script.onload = () => {
+            console.log(`✅ Module [${moduleName}] Loaded!`);
+            // Di sini kita asumsikan tiap module punya fungsi render-nya sendiri
+            if (window.renderModule) window.renderModule();
+        };
+        document.body.appendChild(script);
+    } catch (err) {
+        console.error("❌ Loader Error:", err);
+    }
+}
