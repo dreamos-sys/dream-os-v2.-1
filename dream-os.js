@@ -1,11 +1,10 @@
-/* 🧬 DREAM OS v2.1 - GHOST IMMUNE SYSTEM
-   UI: iOS Luxury + Immunity Visualizer
+/* 🧬 DREAM OS v2.1 - FIXED LAYOUT
+   Fix: Grid tidak tertutup dock navigation
 */
 
 const VERSION = "v2.1";
 const GHOST_MASTER = 'GhostArchitect2026!@#';
 
-// Load credentials
 const CREDENTIALS = {
     'developer': 'b15m1ll4h_012443410',
     'master': 'Mr.M_Architect_2025',
@@ -32,7 +31,8 @@ function renderLogin() {
         <div style="background:#F2F2F7;height:100vh;display:flex;justify-content:center;align-items:center;">
             <div style="background:#FFFFFF;padding:40px 30px;border-radius:28px;box-shadow:0 8px 25px rgba(0,0,0,0.1);text-align:center;max-width:320px;width:90%;">
                 <div style="font-size:28px;color:#064e3b;font-family:serif;margin-bottom:10px;">بِسْمِ اللَّهِ</div>
-                <div style="font-size:10px;color:#34C759;font-weight:800;letter-spacing:1px;margin-bottom:20px;">DREAM OS ${VERSION}</div>                <input type="text" id="username" placeholder="Username" style="width:100%;padding:14px;margin-bottom:12px;border:1px solid #E5E5EA;border-radius:12px;background:#F2F2F7;font-size:14px;">
+                <div style="font-size:10px;color:#34C759;font-weight:800;letter-spacing:1px;margin-bottom:20px;">DREAM OS ${VERSION}</div>
+                <input type="text" id="username" placeholder="Username" style="width:100%;padding:14px;margin-bottom:12px;border:1px solid #E5E5EA;border-radius:12px;background:#F2F2F7;font-size:14px;">
                 <input type="password" id="password" placeholder="Password" style="width:100%;padding:14px;margin-bottom:20px;border:1px solid #E5E5EA;border-radius:12px;background:#F2F2F7;font-size:14px;">
                 <button onclick="doLogin()" style="width:100%;padding:16px;background:#34C759;color:#fff;border:none;border-radius:15px;font-weight:bold;font-size:14px;box-shadow:0 10px 20px rgba(52,199,89,0.3);">🔐 LOGIN</button>
                 <div id="error" style="color:#FF3B30;font-size:11px;margin-top:15px;display:none;">⚠️ ACCESS DENIED</div>
@@ -44,8 +44,7 @@ function renderLogin() {
 function doLogin() {
     const user = document.getElementById('username').value.toLowerCase().trim();
     const pass = document.getElementById('password').value;
-    const error = document.getElementById('error');
-    
+    const error = document.getElementById('error');    
     if(CREDENTIALS[user] && CREDENTIALS[user] === pass) {
         sessionStorage.setItem('dream_session', 'ACTIVE');
         sessionStorage.setItem('dream_user', user.toUpperCase());
@@ -79,11 +78,7 @@ function renderDashboard() {
                 </div>
             </header>
             
-            <!-- IMMUNITY INDICATOR -->
-            <div class="immunity-badge" style="background:linear-gradient(135deg,#34C759,#30B350);color:#fff;padding:8px 16px;border-radius:20px;font-size:10px;font-weight:800;margin:10px 0;display:flex;align-items:center;gap:8px;">
-                <span>🛡️</span>                <span>IMMUNITY: ${immunityLevel}%</span>
-                <span>(${immunityData.count || 0} Vaccines)</span>
-            </div>
+            <div class="immunity-badge">🛡️ IMMUNITY: ${immunityLevel}% (${immunityData.count || 0} Vaccines)</div>
             
             <div class="mega-slider">
                 <div class="slider-content">
@@ -98,44 +93,178 @@ function renderDashboard() {
                     <div onclick="window.loadModule('${m.n}')" class="grid-item">
                         <span class="icon">${m.e}</span>
                         <span class="label">${m.n}</span>
-                    </div>
-                `).join('')}
+                    </div>                `).join('')}
             </div>
             
             <nav class="ios-dock">
-                <div class="nav-btn active"><span>🏠</span><p>HOME</p></div>
+                <div class="nav-btn"><span>🏠</span><p>HOME</p></div>
                 <div class="nav-btn"><span>👤</span><p>PROFILE</p></div>
                 <div class="qr-btn-container"><div class="qr-btn">🔳</div></div>
                 <div class="nav-btn"><span>ℹ️</span><p>ABOUT</p></div>
                 <div class="nav-btn"><span>⚙️</span><p>SETTING</p></div>
             </nav>
-            
-            <style>
-                :root { --bg: #F2F2F7; --white: #FFFFFF; --green: #34C759; --dark: #1C1C1E; }
-                body { margin: 0; background: var(--bg); font-family: -apple-system, sans-serif; }
-                .main-container { display: flex; flex-direction: column; align-items: center; padding-bottom: 110px; }
-                .header-sync { width: 100%; display: flex; align-items: center; justify-content: center; padding: 45px 15px 10px; }
-                .hu-icon { margin-right: 15px; animation: huPulse 8s infinite; cursor: pointer; }
-                .spiritual-block { text-align: center; }
-                .mahkota-text { font-size: 24px; color: #064e3b; font-family: serif; font-weight: 700; }
-                .shalawat-margin { margin-top: 5px; }
-                .mega-slider { width: 92%; max-width: 500px; height: 165px; background: var(--white); border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 10px 0 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.03); }
-                .status-badge { font-size: 10px; color: var(--green); font-weight: 800; }
-                .status-title { font-size: 16px; font-weight: 700; color: var(--dark); margin-top: 4px; }
-                .progress-bar { width: 100%; height: 3px; background: var(--bg); margin-top: 15px; overflow: hidden; }
-                .progress-fill { height: 100%; background: var(--green); transition: width 0.5s; }
-                .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 92%; }
-                .grid-item { background: var(--white); aspect-ratio: 1/1; border-radius: 22px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); cursor: pointer; }
-                .grid-item:active { transform: scale(0.95); }
-                .icon { font-size: 36px; margin-bottom: 8px; }
-                .label { font-size: 8px; color: var(--dark); font-weight: 800; }
-                .ios-dock { position: fixed; bottom: 30px; width: 92%; height: 78px; background: rgba(28,28,30,0.96); backdrop-filter: blur(20px); border-radius: 38px; display: flex; justify-content: space-around; align-items: center; z-index: 9999; }
-                .nav-btn { text-align: center; }                .nav-btn span { font-size: 26px; }
-                .nav-btn p { font-size: 7px; color: #8E8E93; margin-top: 4px; }
-                .qr-btn { background: var(--green); width: 64px; height: 64px; border-radius: 22px; margin-top: -48px; display: flex; align-items: center; justify-content: center; border: 5px solid var(--bg); font-size: 32px; color: #fff; cursor: pointer; }
-                @keyframes huPulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
-            </style>
         </div>
+        
+        <style>
+            :root { --bg: #F2F2F7; --white: #FFFFFF; --green: #34C759; --dark: #1C1C1E; }
+            body { margin: 0; background: var(--bg); font-family: -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
+            
+            /* ✅ FIXED: Increased padding from 110px to 140px */
+            .main-container { 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+                padding-bottom: 140px; /* WAS 110px - NOW 140px */
+            }
+            
+            .header-sync { 
+                width: 100%; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                padding: 45px 15px 10px; 
+            }
+            
+            .hu-icon { 
+                margin-right: 15px; 
+                animation: huPulse 8s infinite ease-in-out; 
+                cursor: pointer; 
+            }
+            
+            .spiritual-block { text-align: center; }
+            .mahkota-text { font-size: 24px; color: #064e3b; font-family: serif; font-weight: 700; line-height: 1.1; }
+            .shalawat-margin { margin-top: 5px; font-size: 24px; }
+            
+            /* ✅ FIXED: Added margin-top for immunity badge */
+            .immunity-badge { 
+                background: linear-gradient(135deg, #34C759, #30B350); 
+                color: #fff; 
+                padding: 10px 20px; 
+                border-radius: 25px; 
+                font-size: 11px; 
+                font-weight: 800;                 margin: 15px 0; 
+                display: flex; 
+                align-items: center; 
+                gap: 8px;
+                box-shadow: 0 4px 15px rgba(52,199,89,0.3);
+            }
+            
+            .mega-slider { 
+                width: 92%; 
+                max-width: 500px; 
+                height: 165px; 
+                background: var(--white); 
+                border-radius: 28px; 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+                justify-content: center; 
+                margin: 10px 0 15px; 
+                box-shadow: 0 8px 25px rgba(0,0,0,0.03); 
+                border: 0.5px solid rgba(0,0,0,0.05); 
+            }
+            
+            .status-badge { font-size: 10px; color: var(--green); font-weight: 800; letter-spacing: 1px; }
+            .status-title { font-size: 16px; font-weight: 700; color: var(--dark); margin-top: 4px; }
+            
+            .progress-bar { 
+                width: 100%; 
+                height: 3px; 
+                background: var(--bg); 
+                margin-top: 15px; 
+                position: relative; 
+                overflow: hidden; 
+            }
+            
+            .progress-fill { 
+                height: 100%; 
+                background: var(--green); 
+                transition: width 0.5s; 
+            }
+            
+            .grid-container { 
+                display: grid; 
+                grid-template-columns: repeat(3, 1fr); 
+                gap: 15px; 
+                width: 92%; 
+                max-width: 440px;
+                /* ✅ FIXED: Added padding-bottom for safety */
+                padding-bottom: 20px;
+            }
+                        .grid-item { 
+                background: var(--white); 
+                aspect-ratio: 1/1; 
+                border-radius: 22px; 
+                display: flex; 
+                flex-direction: column; 
+                justify-content: center; 
+                align-items: center; 
+                box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+                border: 0.5px solid rgba(0,0,0,0.05); 
+                transition: 0.2s; 
+                cursor: pointer; 
+            }
+            
+            .grid-item:active { transform: scale(0.95); }
+            .icon { font-size: 36px; margin-bottom: 8px; }
+            .label { font-size: 8px; color: var(--dark); font-weight: 800; text-transform: uppercase; text-align: center; }
+            
+            /* ✅ FIXED: Dock position adjusted */
+            .ios-dock { 
+                position: fixed; 
+                bottom: 20px; /* WAS 30px - NOW 20px (better spacing) */
+                left: 50%; 
+                transform: translateX(-50%); 
+                width: 92%; 
+                max-width: 420px; 
+                height: 78px; 
+                background: rgba(28, 28, 30, 0.96); 
+                backdrop-filter: blur(20px); 
+                border-radius: 38px; 
+                display: flex; 
+                justify-content: space-around; 
+                align-items: center; 
+                z-index: 9999; 
+                box-shadow: 0 20px 45px rgba(0,0,0,0.25); 
+            }
+            
+            .nav-btn { text-align: center; flex: 1; cursor: pointer; }
+            .nav-btn.active { }
+            .nav-btn span { font-size: 26px; }
+            .nav-btn p { font-size: 7px; color: #8E8E93; font-weight: bold; margin-top: 4px; }
+            .nav-btn.active p { color: var(--green); }
+            
+            /* ✅ FIXED: QR button margin reduced */
+            .qr-btn-container { position: relative; }
+            .qr-btn { 
+                background: var(--green); 
+                width: 64px; 
+                height: 64px; 
+                border-radius: 22px;                 margin-top: -42px; /* WAS -48px - NOW -42px (less overlap) */
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                border: 5px solid var(--bg); 
+                font-size: 32px; 
+                color: #fff; 
+                cursor: pointer; 
+                box-shadow: 0 10px 25px rgba(52,199,89,0.4);
+            }
+            
+            /* ✅ FIXED: Better landscape support */
+            @media (orientation: landscape) {
+                .header-sync { padding: 15px 15px 5px; }
+                .mahkota-text { font-size: 20px; }
+                .mega-slider { height: 85px; flex-direction: row; }
+                .grid-container { grid-template-columns: repeat(5, 1fr); max-width: 800px; }
+                .main-container { padding-bottom: 120px; }
+            }
+            
+            @keyframes huPulse { 
+                0%, 100% { transform: scale(1); opacity: 0.8; } 
+                50% { transform: scale(1.05); opacity: 1; } 
+            }
+        </style>
     `;
 }
 
@@ -160,11 +289,9 @@ function getPrayerPassword() {
     if(hour >= 12 && hour < 15) return 'dreamos04';
     if(hour >= 15 && hour < 18) return 'dreamos04';
     if(hour >= 18 && hour < 19) return 'dreamos03';
-    return 'dreamos04';
-}
+    return 'dreamos04';}
 
 function activateGhostImmune() {
-    // Run immune protocol
     if('caches' in window) {
         caches.keys().then(names => {
             names.forEach(n => caches.delete(n));
@@ -179,14 +306,14 @@ function activateGhostImmune() {
     localStorage.setItem('dream_vaccines', JSON.stringify({
         count: newCount,
         immunityLevel: newLevel,
-        lastActivation: new Date().toISOString(),        vaccines: oldVaccines.vaccines || []
+        lastActivation: new Date().toISOString(),
+        vaccines: oldVaccines.vaccines || []
     }));
     
     localStorage.removeItem('girangati_errors');
     
     alert(`👻 GHOST IMMUNE ACTIVATED\n\n🛡️ Immunity Level: ${newLevel}%\n💉 Vaccines: ${newCount}\n🧹 Bugs Cleaned: ${errors.length}`);
     
-    // Refresh dashboard
     renderDashboard();
 }
 
@@ -199,4 +326,4 @@ window.loadModule = function(moduleName) {
     setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2000);
 };
 
-console.log('✅ Dream OS v2.1 Immune System Loaded!');
+console.log('✅ Dream OS v2.1 Layout FIXED!');
