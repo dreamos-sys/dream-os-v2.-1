@@ -1,29 +1,34 @@
-// 🧬 GIRANGATI PRO GLOBAL v8.3 - RLS SECURE CORE
-// Integration: Supabase RLS (Row Level Security) Active
+// 🧬 GIRANGATI NEURAL CORE v14.5 - INTEGRATED HUMAN SYSTEM
+// Brain: Baby Agent | Muscles: TinyGo | Memory: Supabase RLS
 
-const GirangatiBody = {
-    config: { status: 'PROTECT', rls: true },
+const Girangati = {
+    status: 'INTEGRATED',
     
-    db: {
-        // Master M, pastiin Session ID ini sinkron sama auth Supabase lo
-        getSession: () => localStorage.getItem('dream_os_session'),
-        
-        fetchSecure: async (table) => {
-            const session = GirangatiBody.db.getSession();
-            if (!session) {
-                console.error("⚡ RLS BLOCK: Sel tanpa identitas dilarang akses!");
-                return null;
-            }
-            console.log(`🛡️ RLS ACTIVE: Menarik data ${table} dengan ID Aman...`);
-            // Di sini logic Supabase Client manggil data lo
+    // 🧠 Saraf Pusat (Baby Agent)
+    brain: {
+        emit: (signal, data) => {
+            console.log(`🤖 Brain Signal: [${signal}]`, data);
+            // Saraf sensorik ke UI
+            window.dispatchEvent(new CustomEvent('neural_pulse', { detail: { signal, data } }));
         }
     },
 
-    leukosit: {
+    // 🛡️ Sistem Imun (Leukosit/TinyGo)
+    immunity: {
         scan: (target) => {
-            console.log(`🧬 Imun: Memverifikasi RLS Policy untuk [${target}]`);
-            GirangatiBody.db.fetchSecure(target);
+            Girangati.brain.emit('IMMUNE_SCAN', target);
+            if(target.includes('virus')) return "AMPUTATE";
+            return "CLEAN";
+        }
+    },
+
+    // 🗄️ Memori RLS (Supabase)
+    memory: {
+        sync: async (table) => {
+            Girangati.brain.emit('DB_SYNC', table);
+            // Logic RLS Supabase semalem masuk sini
         }
     }
 };
-window.girangati = GirangatiBody;
+
+window.girangati = Girangati;

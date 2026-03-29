@@ -43,7 +43,7 @@ function renderDashboard() {
 
             <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; width:90%; max-width:440px;">
                 ${mods.map(m => `
-                    <div onclick="window.girangati.leukosit.scan('${m.n}')" style="background:#FFFFFF; aspect-ratio:1/1; border-radius:22px; display:flex; flex-direction:column; justify-content:center; align-items:center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); border:0.5px solid rgba(0,0,0,0.05); transition: transform 0.2s active;">
+                    <div onclick="window.girangati.brain.emit('MODULE_OPEN', '${m.n}'); window.girangati.immunity.scan('${m.n}');" style="background:#FFFFFF; aspect-ratio:1/1; border-radius:22px; display:flex; flex-direction:column; justify-content:center; align-items:center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); border:0.5px solid rgba(0,0,0,0.05); transition: transform 0.2s active;">
                         <span style="font-size:38px; margin-bottom:8px;">${m.e}</span>
                         <span style="font-size:8px; color:#1C1C1E; font-weight:700; text-transform:uppercase; text-align:center; padding:0 5px; letter-spacing:0.3px;">${m.n}</span>
                     </div>
