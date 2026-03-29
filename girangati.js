@@ -1,33 +1,32 @@
-// 🧬 GIRANGATI PRO GLOBAL ENGINE v6.0 
-// Integrated System: TinyGo (Immunity) & Baby Smart AI (Consciousness)
+// 🧬 GIRANGATI PRO GLOBAL v7.0 - THE CLASSIFIER
+// DNA Mapping: Smart File Recognition & Integration
 
 const GirangatiPro = {
-    config: { version: "13.0.0", standard: ["ISO 27001", "9001", "55001"] },
-    
-    // 🧠 Otak AI: Monitoring Seluruh Komponen (Global Sync)
+    // 🧠 Otak Klasifikasi
+    classifier: {
+        identify: (fileName) => {
+            const ext = fileName.split('.').pop().toLowerCase();
+            const name = fileName.toLowerCase();
+            
+            if (name.includes('icon') || name.includes('logo')) return "SEL: BRANDING_ASSET (GOLD)";
+            if (ext === 'wasm' || ext === 'go') return "SEL: CORE_ENGINE (TINYGO)";
+            if (name.includes('spj') || name.includes('iso')) return "SEL: AUDIT_COMPLIANCE";
+            if (ext === 'js' || ext === 'html') return "SEL: NERVE_SYSTEM";
+            
+            return "SEL: UNKNOWN_GUDANG (NEED_AUDIT)";
+        }
+    },
+
     babyAgent: {
-        analyze: (data) => {
-            console.log("🤖 AI Agent Analyzing...");
-            if(data.includes("ATTACK")) GirangatiPro.immunity.strike();
-            GirangatiPro.ui.pulse(`AI: ${data} Verified.`);
+        analyze: (fileName) => {
+            const classification = GirangatiPro.classifier.identify(fileName);
+            console.log(`🤖 AI Agent: Menemukan file baru [${fileName}]. Klasifikasi: ${classification}`);
+            
+            // Kirim sinyal ke UI buat nanya Master M
+            GirangatiPro.ui.pulse(`DETEKSI ${classification}: ${fileName}`);
         }
     },
 
-    // 🛡️ Otot TinyGo: Antibodi Sistem (WASM Power)
-    immunity: {
-        status: "SECURE",
-        check: () => {
-            // TinyGo ngomel kalau ada yang sungsang
-            console.log("⚙️ TinyGo Anti-Body: Monitoring Cellular Health...");
-            return true;
-        },
-        strike: () => {
-            console.warn("⚡ DEPOK LIGHTNING STRIKE: Counter-Measure Active!");
-            GirangatiPro.ui.pulse("SISTEM TERANCAM: DEPOK SHIELD AKTIF!");
-        }
-    },
-
-    // ⛓️ Kabel Saraf: Sinkronisasi UI & Logic
     ui: {
         pulse: (msg) => {
             const event = new CustomEvent('dream_os_sync', { detail: msg });
@@ -35,12 +34,5 @@ const GirangatiPro = {
         }
     }
 };
-
-// --- AUTO-INTEGRATION (Sistem Sel Tubuh) ---
-setInterval(() => {
-    if(GirangatiPro.immunity.check()) {
-        GirangatiPro.ui.pulse("Sistem Resik - Girangati Integrated");
-    }
-}, 10000); // Cek kesehatan sel tiap 10 detik
 
 window.girangati = GirangatiPro;

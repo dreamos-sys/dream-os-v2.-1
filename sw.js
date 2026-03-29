@@ -1,13 +1,11 @@
-const CACHE_NAME = 'dream-os-v13-pro';
-self.addEventListener('install', (e) => self.skipWaiting());
-self.addEventListener('activate', (e) => e.waitUntil(clients.claim()));
-
+// 🛡️ SMART WATCHDOG PRO
 self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request).then((res) => {
             if (!res) {
+                const url = event.request.url.split('/').pop();
                 self.clients.matchAll().then(cs => {
-                    cs.forEach(c => c.postMessage({type:'NEW_FILE', url:event.request.url}));
+                    cs.forEach(c => c.postMessage({type:'NEW_FILE', name:url}));
                 });
             }
             return res || fetch(event.request);
