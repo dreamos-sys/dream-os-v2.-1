@@ -2,25 +2,18 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dream OS v13.0 | Sovereign System</title>
-    <link rel="icon" href="assets/img/icon-192x192.png">
-    <style>
-        body { margin: 0; background: #000000; overflow: hidden; }
-        #app { min-height: 100vh; }
-    </style>
-</head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>DREAM OS v2.1</title>
+    <base href="/dream/">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="./assets/img/apple-touch-icon.png">
+    <meta name="theme-color" content="#34C759"></head>
 <body>
     <div id="app"></div>
-
-    <script src="wasm_exec.js"></script>
-    
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="girangati.js"></script>
-
-    <script src="dream-os.js"></script>
-
-    <script src="splash.js"></script>
-<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js"); navigator.serviceWorker.addEventListener("message",e=>{if(e.data.type==="NEW_FILE")console.log("Radar: Sel Baru!",e.data.url)})}</script>
+    <!-- Load Girangati FIRST -->
+    <script src="./girangati.js"></script>
+    <!-- Then load main app -->
+    <script src="./dream-os.js"></script>
 </body>
 </html>
