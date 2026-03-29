@@ -1,70 +1,73 @@
-// 🖥️ DREAM OS PRO GLOBAL - SYSTEM INTEGRATED
-let secretClicks = 0;
+/* 🧬 DREAM OS v13.8 - SOVEREIGN HUMAN IMMUNITY SYSTEM
+   Mahkota: Pure Bismillah & Shalawat Arabic
+   Heart: Icon Hu (هـ) - Pulse 8s
+   Struktur: Slider 7s | 9 Grid | Sticky Nav 5
+*/
 
 window.onload = () => {
-    if (!localStorage.getItem('dream_os_session')) renderLogin();
-    else renderDashboard();
+    if (!localStorage.getItem('dream_os_session')) { renderLogin(); } 
+    else { renderDashboard(); }
 };
-
-window.addEventListener('dream_os_sync', (e) => {
-    const status = document.getElementById('ai-status');
-    if(status) status.innerText = e.detail;
-});
 
 function renderDashboard() {
     const app = document.getElementById('app');
     const mods = [
-        {n:'Command', e:'⚡'}, {n:'Booking', e:'📅'}, {n:'K3', e:'⚠️'},
-        {n:'Sekuriti', e:'🛡️'}, {n:'Janitor In', e:'🧹'}, {n:'Janitor Out', e:'🌳'},
-        {n:'Stok', e:'📦'}, {n:'Maint.', e:'🔧'}, {n:'Asset', e:'🗄️'}
+        {n:'Command Center', e:'⚡'}, {n:'Form Booking', e:'📅'}, {n:'K3', e:'⚠️'},
+        {n:'Sekuriti', e:'🛡️'}, {n:'Janitor Indoor', e:'🧹'}, {n:'Janitor Outdoor', e:'🌳'},
+        {n:'Stok', e:'📦'}, {n:'Maintenance', e:'🔧'}, {n:'Asset', e:'🗄️'}
     ];
 
     app.innerHTML = `
-        <div style="background:#000; min-height:100vh; color:#fff; font-family:sans-serif; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:#000; min-height:100vh; color:#fff; font-family:sans-serif; display:flex; flex-direction:column; align-items:center; padding-bottom:110px;">
             
-            <div style="text-align:center; padding:20px 0; width:100%; background:linear-gradient(to bottom, #064e3b, #000);">
-                <p style="margin:0; font-size:12px; color:#10b981; letter-spacing:4px; font-weight:bold;">BISMILLAH BI IDZNILLAH</p>
-                <div onclick="triggerGhost()" style="margin:10px auto; cursor:pointer; width:35px;">
-                    <img src="assets/img/apple-touch-icon.png" style="width:35px; filter: drop-shadow(0 0 10px #fbbf24);">
-                </div>
-                <p style="margin:0; font-size:14px; color:#94a3b8;">اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ</p>
-                <p id="ai-status" style="margin-top:8px; font-size:9px; color:#10b981; font-style:italic;">Initializing Smart Agent...</p>
+            <div style="width:100%; text-align:center; padding:30px 0 10px; background:linear-gradient(to bottom, #064e3b, #000);">
+                <div style="font-size:24px; color:#10b981; font-family:serif; margin-bottom:12px;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+                <div style="font-size:16px; color:#94a3b8; font-family:serif;">اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ</div>
             </div>
 
-            <div style="width:92%; max-width:400px; height:90px; background:rgba(16,185,129,0.1); border-radius:20px; margin:15px 0; border:1px solid #065f46; display:flex; align-items:center; justify-content:center;">
-                <p style="font-size:11px; color:#fbbf24; font-weight:bold;">Sovereign Global System Integrated</p>
+            <div onclick="triggerGhost()" style="margin:10px 0 20px; cursor:pointer;">
+                <img src="assets/img/apple-touch-icon.png" style="width:52px; height:52px; animation: huPulse 8s infinite ease-in-out; filter: drop-shadow(0 0 15px rgba(251,191,36,0.5));">
             </div>
 
-            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; width:92%; max-width:400px; margin-bottom:100px;">
+            <div style="width:92%; max-width:400px; height:60px; background:rgba(16,185,129,0.05); border-radius:15px; border:1px solid #065f46; display:flex; align-items:center; justify-content:center; margin-bottom:18px;">
+                <p style="font-size:10px; color:#fbbf24; font-weight:bold; letter-spacing:1px; animation: slideText 7s infinite;">DREAM OS PRO GLOBAL SYSTEM INTEGRATED</p>
+            </div>
+
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; width:92%; max-width:420px;">
                 ${mods.map(m => `
-                    <div onclick="window.girangati.babyAgent.analyze('Opening ${m.n}')" style="background:#0a0a0a; aspect-ratio:1/1; border-radius:20px; display:flex; flex-direction:column; justify-content:center; align-items:center; border:1px solid #111;">
-                        <span style="font-size:28px; margin-bottom:5px;">${m.e}</span>
-                        <span style="font-size:8px; color:#444; font-weight:bold;">${m.n.toUpperCase()}</span>
+                    <div onclick="window.girangati.leukosit.scan('${m.n}')" style="background:rgba(15,15,15,0.95); aspect-ratio:1/1; border-radius:24px; display:flex; flex-direction:column; justify-content:center; align-items:center; border:1px solid #1a1a1a; backdrop-filter:blur(10px);">
+                        <span style="font-size:28px; margin-bottom:6px;">${m.e}</span>
+                        <span style="font-size:7px; color:#555; font-weight:bold; text-transform:uppercase; text-align:center;">${m.n}</span>
                     </div>
                 `).join('')}
             </div>
 
-            <div style="position:fixed; bottom:25px; width:90%; max-width:450px; height:75px; background:rgba(10,10,10,0.98); border-radius:30px; display:flex; justify-content:space-around; align-items:center; border:1px solid #222;">
-                <div onclick="location.reload()" style="text-align:center;"><div style="font-size:20px;">🏠</div><div style="font-size:7px; color:#666;">HOME</div></div>
-                <div style="text-align:center;"><div style="font-size:20px;">👤</div><div style="font-size:7px; color:#666;">PROFILE</div></div>
-                <div style="background:#10b981; width:60px; height:60px; border-radius:22px; margin-top:-45px; display:flex; align-items:center; justify-content:center; border:4px solid #000;"><div style="font-size:28px;">🔳</div></div>
-                <div style="text-align:center;"><div style="font-size:20px;">ℹ️</div><div style="font-size:7px; color:#666;">ABOUT</div></div>
-                <div style="text-align:center;"><div style="font-size:20px;">⚙️</div><div style="font-size:7px; color:#666;">SETTING</div></div>
+            <div style="position:fixed; bottom:25px; width:92%; max-width:450px; height:75px; background:rgba(5,5,5,0.98); backdrop-filter:blur(30px); border-radius:30px; display:flex; justify-content:space-around; align-items:center; border:1px solid #222; z-index:9999; box-shadow: 0 20px 60px #000;">
+                <div onclick="location.reload()" style="text-align:center; flex:1;"><div style="font-size:20px;">🏠</div><div style="font-size:7px; color:#10b981;">HOME</div></div>
+                <div style="text-align:center; flex:1;"><div style="font-size:20px;">👤</div><div style="font-size:7px; color:#444;">PROFILE</div></div>
+                <div style="flex:1.2; display:flex; justify-content:center;">
+                    <div style="background:#10b981; width:62px; height:62px; border-radius:22px; margin-top:-40px; display:flex; align-items:center; justify-content:center; border:4px solid #000; box-shadow:0 10px 25px rgba(16,185,129,0.3);">
+                        <div style="font-size:28px; color:#fff;">🔳</div>
+                    </div>
+                </div>
+                <div style="text-align:center; flex:1;"><div style="font-size:20px;">ℹ️</div><div style="font-size:7px; color:#444;">ABOUT</div></div>
+                <div style="text-align:center; flex:1;"><div style="font-size:20px;">⚙️</div><div style="font-size:7px; color:#444;">SETTING</div></div>
             </div>
+
+            <style>
+                @keyframes huPulse { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.05); filter: brightness(1.25); } }
+                @keyframes slideText { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
+            </style>
         </div>
     `;
 }
 
 function triggerGhost() {
-    secretClicks++;
-    if(secretClicks === 5) {
-        window.girangati.babyAgent.analyze("GHOST_ACCESS_GRANTED");
-        alert("🛡️ GHOST MODE ACTIVE");
-        secretClicks = 0;
-    }
-    setTimeout(() => { secretClicks = 0; }, 3000);
+    window.ghostCount = (window.ghostCount || 0) + 1;
+    if(window.ghostCount === 5) { alert("🛡️ GHOST ACCESS ACTIVATED"); window.ghostCount = 0; }
+    setTimeout(() => { window.ghostCount = 0; }, 3000);
 }
 
 function renderLogin() {
-    document.getElementById('app').innerHTML = `<div style="background:#000; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;"><img src="assets/img/icon-512.png" style="width:100px; border-radius:20px; margin-bottom:20px;"><button onclick="localStorage.setItem('dream_os_session','1');location.reload();" style="padding:15px 50px; background:#10b981; border:none; border-radius:10px; color:#fff; font-weight:bold;">LOGIN</button></div>`;
+    document.getElementById('app').innerHTML = `<div style="background:#000; height:100vh; display:flex; justify-content:center; align-items:center;"><button onclick="localStorage.setItem('dream_os_session','1');location.reload();" style="padding:15px 40px; background:#10b981; color:#fff; border:none; border-radius:10px; font-weight:bold;">ENTER HOUSE</button></div>`;
 }
