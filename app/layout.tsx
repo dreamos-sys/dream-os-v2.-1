@@ -18,7 +18,6 @@ export const metadata: Metadata = {
     title: "Dream OS",
   },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,6 +28,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/assets/img/icon-192.png" sizes="192x192" />
         <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+        <script src="/wasm_exec.js" async></script>
       </head>
       <body className={`${inter.className} ${amiri.className}`}>
         <ErrorBoundary>
@@ -37,5 +37,6 @@ export default function RootLayout({
           </QueryProvider>
         </ErrorBoundary>
       </body>
-    </html>  );
+    </html>
+  );
 }
