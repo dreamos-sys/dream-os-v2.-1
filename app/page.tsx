@@ -2,7 +2,7 @@ import { SovereignUniversalGrid } from '../components/command/SovereignUniversal
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#020617]">
+    <main>
       <SovereignUniversalGrid />
     </main>
   );
