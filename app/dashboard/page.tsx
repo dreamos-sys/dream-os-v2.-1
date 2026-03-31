@@ -76,29 +76,63 @@ export default function Dashboard() {
           ))}
         </div>
       </div>
+{/* Bottom Navigation - 5 Buttons */}
+<nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200 shadow-2xl z-50 safe-area-pb">
+  <div className="flex justify-around items-center px-2 py-2 max-w-md mx-auto">
+    {/* Home */}
+    <button 
+      onClick={() => router.push("/dashboard")}
+      className="flex flex-col items-center justify-center p-2 rounded-xl hover:bg-gray-100 transition-all active:scale-95 min-w-[64px]"
+    >
+      <span className="text-2xl mb-0.5">🏠</span>
+      <span className="text-[10px] font-medium text-gray-600">Home</span>
+    </button>
+    
+    {/* Profile */}
+    <button 
+      onClick={() => router.push("/profile")}
+      className="flex flex-col items-center justify-center p-2 rounded-xl hover:bg-gray-100 transition-all active:scale-95 min-w-[64px]"
+    >
+      <span className="text-2xl mb-0.5">👤</span>
+      <span className="text-[10px] font-medium text-gray-600">Profile</span>
+    </button>
+    
+    {/* QR - Center Button (Highlighted) */}
+    <button 
+      onClick={() => router.push("/qr")}
+      className="flex flex-col items-center justify-center p-3 -mt-4 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-110 transition-all active:scale-95"
+    >
+      <span className="text-3xl mb-0.5">📷</span>
+      <span className="text-[10px] font-bold text-white">QR</span>
+    </button>
+    
+    {/* About */}
+    <button 
+      onClick={() => router.push("/about")}
+      className="flex flex-col items-center justify-center p-2 rounded-xl hover:bg-gray-100 transition-all active:scale-95 min-w-[64px]"
+    >
+      <span className="text-2xl mb-0.5">ℹ️</span>
+      <span className="text-[10px] font-medium text-gray-600">About</span>
+    </button>
+    
+    {/* Settings */}
+    <button 
+      onClick={() => router.push("/settings")}
+      className="flex flex-col items-center justify-center p-2 rounded-xl hover:bg-gray-100 transition-all active:scale-95 min-w-[64px]"
+    >
+      <span className="text-2xl mb-0.5">⚙️</span>
+      <span className="text-[10px] font-medium text-gray-600">Setting</span>
+    </button>
+  </div>
+</nav>
 
-      {/* Dock */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t p-2 flex justify-around">
-        <button onClick={() => router.push("/dashboard")} className="text-center">
-          <div className="text-xl">🏠</div>
-          <div className="text-[10px]">Home</div>
-        </button>
-        <button onClick={() => router.push("/modules/booking")} className="text-center">
-          <div className="text-xl">📅</div>
-          <div className="text-[10px]">Booking</div>
-        </button>
-        <button onClick={() => router.push("/modules/command")} className="text-center bg-emerald-500 rounded-xl p-2 -mt-4">
-          <div className="text-2xl">🎛️</div>
-          <div className="text-[10px] text-white">Command</div>
-        </button>
-        <button onClick={() => router.push("/modules/k3")} className="text-center">
-          <div className="text-xl">⚠️</div>
-          <div className="text-[10px]">K3</div>
-        </button>
-        <button onClick={() => router.push("/settings")} className="text-center">
-          <div className="text-xl">⚙️</div>          <div className="text-[10px]">Settings</div>
-        </button>
-      </nav>
-    </div>
-  )
-}
+{/* Add padding to prevent content hiding behind nav */}
+<style jsx global>{`
+  body {
+    padding-bottom: 80px;
+  }
+  .safe-area-pb {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+`}</style>
+     
