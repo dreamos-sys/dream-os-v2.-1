@@ -7,7 +7,7 @@ export default function DreamPage() {
   const [activeTab, setActiveTab] = useState('chat');
 
   return (
-    <main className="min-h-screen bg-gray-50 pb-24">
+    <main style={{backgroundColor: "white", color: "black"}} className="min-h-screen bg-gray-50 pb-24">
       <BismillahBanner className="sticky top-0 z-50" />
       
       {/* Header */}
