@@ -1,81 +1,78 @@
-Baik, berikut adalah contoh checklist K3 harian untuk tim janitor. Checklist ini mencakup aspek-aspek penting untuk memastikan keamanan dan kesehatan kerja, serta menciptakan lingkungan kerja yang bersih dan kondusif.
+Baik, dengan senang hati saya akan bantu membuat checklist K3 harian untuk tim janitor. Berikut adalah contoh checklist yang bisa Anda sesuaikan dengan kondisi dan kebutuhan spesifik tempat kerja Anda:
 
-**Checklist K3 Harian – Tim Janitor**
+**CHECKLIST K3 HARI – TIM JANITOR**
 
-**Tanggal:** [Isi Tanggal]
-**Lokasi:** [Isi Lokasi]
-**Nama Petugas:** [Isi Nama Petugas]
+**Tanggal:** [Tanggal]
+**Lokasi:** [Nama Lokasi]
+**Petugas:** [Nama Petugas]
 
-**I. Pemeriksaan Peralatan & Perlengkapan**
+**I. Kondisi Keselamatan & Kesehatan Kerja**
 
-☐ **Peralatan Kebersihan:**
-    ☐  Sapu (kondisi, ada/tidaknya yang rusak)
-    ☐  Pel (kondisi, ada/tidaknya yang rusak)
-    ☐  Lap (kondisi, jenis, jumlah cukup)
-    ☐  Ember (bersih, tidak bocor)
-    ☐  Botol Disinfektan/Sanitizer (terisi, tanggal kadaluarsa)
-    ☐  Semprotan (isi, berfungsi)
-    ☐  Sikat (kondisi, ada/tidaknya yang rusak)
-    ☐  Roll Tissue/Handuk Kertas (cukup)
+| No. |  Aktivitas                               |  Selesai/Belum Selesai | Komentar/Tindakan |
+|-----|-------------------------------------------|-----------------------|--------------------|
+| 1   | Pemeriksaan Alat Pelindung Diri (APD)      |                       |                    |
+|     | - Masker (Kondisi, Kebersihan)             |                       |                    |
+|     | - Sarung Tangan (Jenis, Kerusakan)         |                       |                    |
+|     | - Sepatu Pelindung (Kondisi, Tertutup)     |                       |                    |
+|     | - Rompi Keselamatan (Warna, Kondisi)        |                       |                    |
+| 2   | Kondisi Alat & Peralatan Kebersihan       |                       |                    |
+|     | - Alat Pel (Kondisi, Kebersihan)           |                       |                    |
+|     | - Ember (Kondisi, Kebersihan)             |                       |                    |
+|     | - Botol Semprot (Kondisi, Kebersihan)      |                       |                    |
+|     | - Vacuum Cleaner (Kondisi, Kebersihan)     |                       |                    |
+|     | - Peralatan Lain (Sebutkan)                 |                       |                    |
+| 3   | Ketersediaan Alat Pertolongan Pertama (PPK) |                       |                    |
+|     | -  Kondisi (Terlengkap, Tidak Kadaluwarsa) |                       |                    |
+| 4   | Ventilasi/Sirkulasi Udara Cukup            |                       |                    |
+| 5   | Kebersihan Area Kerja                       |                       |                    |
+|     | - Lantai Kering & Bersih                 |                       |                    |
+|     | - Tidak Ada Sampah/Debris                  |                       |                    |
+|     | - Tempat Sampah Tertutup Rapi            |                       |                    |
 
-☐ **Alat Pelindung Diri (APD):**
-    ☐  Sarung Tangan (jenis sesuai tugas, ada/tidaknya yang rusak)
-    ☐  Masker (terisi, berfungsi)
-    ☐  Sepatu Pelindung (kondisi)
-    ☐  Pelindung Mata/Kacamata Pengaman (jika diperlukan)
+**II. Kesehatan & Kebersihan Lingkungan**
 
-☐ **Peralatan Keselamatan:**
-    ☐  Kotak P3K (isi, tidak kadaluarsa)
-    ☐  Alat Pemadam Api Ringan (APAR) – dicek kondisi fisik dan tanggal kadaluarsa
-    ☐  Bendera/Peringatan (tersangga dengan benar)
+| No. |  Aktivitas                               |  Selesai/Belum Selesai | Komentar/Tindakan |
+|-----|-------------------------------------------|-----------------------|--------------------|
+| 1   | Pengendalian Hama (Serangga, Tikus, dll.) |                       |                    |
+|     | -  Pemeriksaan Area Potensi                 |                       |                    |
+|     | -  Tindakan Pencegahan/Pengendalian       |                       |                    |
+| 2   | Pengelolaan Limbah                          |                       |                    |
+|     | -  Memilah Sampah (B3, Organik, Anorganik)  |                       |                    |
+|     | -  Memastikan Limbah Dibuang ke Tempatnya  |                       |                    |
+| 3   | Kebersihan Fasilitas Umum                |                       |                    |
+|     | -  Toilet (Kebersihan, Sabun, Tisu)         |                       |                    |
+|     | -  Kamar Mandi (Kebersihan, Sabun, Tisu)    |                       |                    |
+|     | -  Area Makan (Kebersihan)                 |                       |                    |
 
-**II. Pemeriksaan Kebersihan & Sanitasi**
+**III. Keselamatan dalam Melaksanakan Pekerjaan**
 
-☐ **Area yang Dibersihkan:**
-    ☐  Lantai (bersih, kering, bebas dari sampah)
-    ☐  Dinding (bersih, bebas dari noda)
-    ☐  Kaca (bersih, reflektif)
-    ☐  Toilet (bersih, disanitasi, sabun, air, tisu tersedia)
-    ☐  Area Makan/Minum (bersih, bebas dari sampah)
-    ☐  Area Sampah (dilonggarkan, ditutup rapat, diangkut)
-    ☐  Pintu & Jendela (bersih)
-    ☐  Lampu & Saklar (bersih, berfungsi)
+| No. |  Aktivitas                               |  Selesai/Belum Selesai | Komentar/Tindakan |
+|-----|-------------------------------------------|-----------------------|--------------------|
+| 1   | Penggunaan Bahan Kimia/Deterjen             |                       |                    |
+|     | -  Membaca Label/MSDS                      |                       |                    |
+|     | -  Penggunaan APD yang Tepat               |                       |                    |
+|     | -  Ventilasi yang Baik                    |                       |                    |
+| 2   | Memindahkan Barang Berat                   |                       |                    |
+|     | -  Menggunakan Teknik yang Benar           |                       |                    |
+|     | -  Mendapatkan Bantuan Jika Perlu          |                       |                    |
+| 3   | Bekerja di Area yang Rawan Kecelakaan      |                       |                    |
+|     | -  Menggunakan Alat Pengaman (Jika Ada)     |                       |                    |
+|     | -  Berhati-hati dengan Lantai Licin        |                       |                    |
 
-☐ **Sanitasi:**
-    ☐  Disinfeksi permukaan (sesuai standar)
-    ☐  Pembuangan sampah medis (jika ada) – dilakukan dengan benar 
-    ☐  Pencucian tangan (dilakukan secara berkala)
+**IV. Penutup**
 
-**III. Keselamatan & Kesehatan Kerja (K3)**
-
-☐ **Ventilasi:**  Pastikan ventilasi ruangan baik.
-☐ **Pencahayaan:** Pastikan pencahayaan memadai.
-☐ **Jalur Evakuasi:** Periksa jalur evakuasi, bebas dari halangan.
-☐ **Kenyamanan:** Pastikan suhu ruangan nyaman.
-☐ **Ergonomi:**  Perhatikan postur tubuh saat bekerja, hindari gerakan berulang yang berlebihan.
-☐ **Kebisingan:** Hindari aktivitas yang menghasilkan suara bising yang berlebihan.
-☐ **Pelatihan:**  Memastikan semua anggota tim sudah mendapatkan pelatihan K3 yang sesuai.
-
-**IV. Tindakan Perbaikan & Pencegahan**
-
-☐ **Masalah yang Ditemukan:** [Sebutkan masalah yang ditemukan]
-☐ **Tindakan Perbaikan:** [Jelaskan tindakan yang diambil/akan diambil]
-☐ **Penanggung Jawab:** [Sebutkan nama dan jabatan yang bertanggung jawab]
-☐ **Tanggal Selesai:** [Isi tanggal penyelesaian tindakan]
-
-**V. Penutup**
-
-☐  Checklist telah diisi dengan lengkap dan benar.
-☐  Tanda tangan petugas: _________________________
+*   **Kesimpulan:** (Ringkasan kondisi K3 hari ini)
+*   **Rekomendasi:** (Tindakan yang perlu dilakukan)
+*   **Tanda Tangan:** _________________________
 
 ---
 
-**Catatan Tambahan:**
+**Catatan Penting:**
 
-*   **Standar Operasional Prosedur (SOP):** Checklist ini sebaiknya didukung oleh SOP yang jelas mengenai prosedur kebersihan dan sanitasi yang berlaku di lokasi kerja.
-*   **Pelatihan K3:** Pastikan tim janitor telah mendapatkan pelatihan K3 yang sesuai, termasuk penggunaan APD, penanganan bahan kimia, dan prosedur darurat.
-*   **Evaluasi:** Lakukan evaluasi berkala terhadap checklist ini untuk memastikan efektivitasnya dan melakukan penyesuaian jika diperlukan.
-*   **Penggunaan Produk:**  Gunakan produk pembersih dan disinfektan yang sesuai dengan standar kesehatan dan lingkungan.
-*   **Dokumentasi:**  Simpan checklist ini sebagai bagian dari dokumentasi K3 perusahaan.
+*   **Sesuaikan Checklist:**  Ini hanya contoh. Tambahkan atau hapus item sesuai dengan jenis pekerjaan, lokasi, dan risiko yang ada di tempat kerja Anda.
+*   **Pelatihan:** Pastikan tim janitor menerima pelatihan K3 yang memadai sebelum menggunakan checklist ini.
+*   **Evaluasi Berkala:** Lakukan evaluasi berkala terhadap checklist ini untuk memastikan efektivitasnya.
+*   **Dokumentasi:** Simpan checklist ini sebagai bagian dari catatan K3 perusahaan.
 
-Semoga checklist ini bermanfaat!  Jangan ragu untuk bertanya jika ada hal lain yang ingin didiskusikan.
+Semoga checklist ini bermanfaat! Jika Anda membutuhkan penyesuaian atau informasi lebih lanjut, jangan ragu untuk bertanya.
+
