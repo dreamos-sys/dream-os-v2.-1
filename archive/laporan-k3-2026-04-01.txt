@@ -1,0 +1,72 @@
+Tentu, berikut adalah contoh laporan insiden K3 singkat untuk tanggal 2026-04-01:
+
+**LAPORAN INSIDEN K3**
+
+**Tanggal Kejadian:** 2026-04-01
+**Waktu Kejadian:** 09.15 WIB
+**Lokasi Kejadian:** Area Penumpukan Material Kayu, Pabrik PT. Maju Jaya
+**Nama Pekerjaan:** Pemotongan Kayu
+
+**1. Ringkasan Kejadian**
+
+Pada tanggal 2026-04-01, terjadi *near miss* (hampir celaka) saat seorang pekerja, Bapak Ahmad, saat memotong kayu dengan gergaji mesin, kehilangan keseimbangan dan hampir terjatuh dari platform kerja. Untungnya, Bapak Ahmad berhasil menahan diri dan tidak mengalami cedera.
+
+**2. Kronologi Kejadian**
+
+*   Bapak Ahmad sedang melakukan pemotongan kayu di area penumpukan material.
+*   Platform kerja yang digunakan sedikit miring dan tidak memiliki pagar pengaman.
+*   Saat memotong kayu, Bapak Ahmad kehilangan keseimbangan akibat terdorong oleh getaran gergaji mesin.
+*   Bapak Ahmad berusaha menahan diri dan berhasil mencegah terjatuh.
+
+**3. Penyebab Kejadian**
+
+*   Platform kerja tidak stabil dan tidak memiliki pagar pengaman.
+*   Kurangnya perhatian terhadap stabilitas platform kerja.
+*   Getaran gergaji mesin yang berlebihan.
+
+**4. Tindakan Perbaikan**
+
+*   Segera dilakukan perbaikan platform kerja dengan memasang pagar pengaman.
+*   Dilakukan penataan ulang area penumpukan material agar lebih stabil.
+*   Diperiksa dan dilakukan perawatan pada gergaji mesin untuk mengurangi getaran.
+*   Pekerja diberikan pelatihan ulang mengenai prosedur kerja yang aman dan pentingnya menjaga keseimbangan serta memperhatikan stabilitas platform kerja.
+
+**5. Tindakan Pencegahan**
+
+*   Seluruh platform kerja harus memiliki pagar pengaman.
+*   Regular inspection dan maintenance pada peralatan kerja.
+*   Peningkatan kesadaran dan disiplin pekerja terkait prosedur K3.
+*   Penyediaan alat pelindung diri (APD) yang sesuai.
+
+**Disetujui Oleh:**
+
+_________________________
+(Nama & Jabatan)
+
+**Catatan:**
+
+*   Laporan ini bersifat singkat dan dapat disesuaikan lebih detail sesuai kebutuhan.
+*   Perlu dicatat bahwa ini adalah contoh, dan detail yang dimasukkan perlu disesuaikan dengan kejadian sebenarnya.
+*   Penting untuk melakukan investigasi lebih lanjut untuk memahami akar penyebab kejadian dan memastikan tindakan pencegahan efektif.
+
+Semoga laporan ini bermanfaat!
+
+
+========================================
+        DREAM OS APPROVAL SYSTEM        
+========================================
+ID LAPORAN  : K3-2026-04-01-1775016892
+STATUS      : ✅ DISETUJUI (APPROVED)
+WAKTU KIRIM : 2026-04-01 11:14:48
+----------------------------------------
+PEMOHON     : Erwinsyah (Koordinator)
+APPROVER    : Hanung Budianto S. E (Kabag Umum)
+----------------------------------------
+VERIFIKASI  : [Dream OS Verified System]
+========================================
+
+--- DIGITAL SIGNATURE ---
+Disetujui Oleh: Hanung Budianto S. E
+Tanggal Acc   : 2026-04-01 11:14:53
+Status        : SINKRON KE DATABASE ISO
+--------------------------

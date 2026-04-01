@@ -1,0 +1,80 @@
+Baik, mari kita buat laporan insiden K3 (Keselamatan dan Kesehatan Kerja). Berikut adalah contoh laporan insiden K3 yang bisa Anda modifikasi sesuai dengan kejadian yang sebenarnya:
+
+**LAPORAN INSIDEN K3**
+
+**Nomor Laporan:** [Isi Nomor Laporan]
+**Tanggal Laporan:** [Isi Tanggal Penyusunan Laporan]
+**Periode Kejadian:** [Isi Tanggal Kejadian]
+**Lokasi Kejadian:** [Isi Lokasi Kejadian yang Spesifik, Contoh: Area Produksi Mesin 1, Bagian Pengemasan]
+**Nama Pekerjaan:** [Isi Nama Pekerjaan yang Dilakukan Saat Kejadian Terjadi, Contoh: Perakitan Mesin, Pengisian Kardus]
+
+**1. IDENTIFIKASI INSIDEN**
+
+*   **Jenis Insiden:** [Pilih salah satu atau kombinasikan]
+    *   Kecelakaan Kerja (Luka, Sakit, atau Cedera)
+    *   Hampir Celaka (Near Miss)
+    *   Peristiwa Bahaya (Potensi Bahaya yang Terjadi)
+*   **Deskripsi Kejadian:** [Jelaskan secara rinci apa yang terjadi. Usahakan sejelas dan sedetail mungkin. Gunakan bahasa yang mudah dimengerti.]
+    *   Contoh: “Pada tanggal [Tanggal Kejadian], saat pekerja bernama [Nama Pekerja] sedang melakukan perakitan mesin, ia tidak sengaja tersandung kabel yang tidak beraturan di lantai. Akibatnya, ia terjatuh dan membentur kaki kanannya.”
+*   **Kronologi Kejadian:** [Uraikan urutan kejadian dari awal hingga akhir.  Sertakan waktu kejadian, tindakan yang diambil pada saat kejadian, dan akibat yang ditimbulkan.]
+    *   Contoh:
+        1.  Pekerja [Nama Pekerja] memulai pekerjaan perakitan mesin pukul [Waktu].
+        2.  Saat pekerja sedang memindahkan mesin, ia melihat kabel yang tidak beraturan di lantai.
+        3.  Pekerja mencoba melewati kabel tersebut dengan tergesa-gesa.
+        4.  Tiba-tiba, pekerja tersandung kabel tersebut dan terjatuh.
+        5.  Pekerja mengalami nyeri pada kaki kanan dan pembengkakan.
+
+**2. DATA TAMBUNGAN**
+
+*   **Nama Pekerja yang Terlibat:** [Isi Nama Pekerja yang Terlibat]
+*   **Jabatan Pekerja:** [Isi Jabatan Pekerja]
+*   **Pihak yang Menanggung Langsung:** [Isi Nama dan Jabatan Orang yang Bertanggung Jawab Langsung atas Pekerjaan]
+*   **Alat/Peralatan yang Digunakan:** [Sebutkan alat/peralatan yang digunakan saat kejadian. Jika ada kerusakan, jelaskan.]
+*   **Faktor Penyebab (Root Cause Analysis):** [Identifikasi penyebab utama insiden. Gunakan teknik analisis seperti 5 Whys atau Diagram Ishikawa (Fishbone Diagram) jika diperlukan.]
+    *   Contoh:
+        *   Penyebab Langsung: Kabel tidak ditata dengan rapi.
+        *   Penyebab Tingkat 1: Tidak ada aturan yang jelas mengenai penataan kabel.
+        *   Penyebab Tingkat 2: Tidak ada pelatihan mengenai penanganan kabel.
+        *   Penyebab Tingkat 3: Budaya keselamatan yang belum kuat.
+*   **Faktor Kontribusi:** [Faktor-faktor lain yang turut memperparah atau menyebabkan insiden.]
+    *   Contoh: Kecepatan kerja yang tinggi, kurangnya perhatian.
+
+**3. TINDAKAN PERBAIK**
+
+*   **Tindakan Segera (Immediate Corrective Action):** [Langkah-langkah yang harus diambil secara segera untuk menghentikan potensi bahaya dan mengatasi dampak langsung insiden.]
+    *   Contoh: Memberikan pertolongan pertama kepada korban, mengevakuasi korban ke fasilitas kesehatan, mengamankan area kejadian.
+*   **Tindakan Permanen (Corrective Action – Jangka Panjang):** [Langkah-langkah yang harus diambil untuk mencegah insiden serupa terjadi di masa depan.  Ini harus ditindaklanjuti oleh pihak yang berwenang.]
+    *   Contoh:
+        *   Membuat aturan tertulis mengenai penataan kabel.
+        *   Melakukan pelatihan mengenai K3 dan penanganan kabel kepada seluruh pekerja.
+        *   Memasang rambu peringatan di area yang berbahaya.
+        *   Memeriksa dan memperbaiki alat/peralatan yang rusak.
+
+
+
+**4. LAMPIRAN**
+
+*   Foto Lokasi Kejadian (Jika ada)
+*   Dokumen Pendukung Lainnya (Contoh: Hasil pemeriksaan medis, laporan dari saksi mata)
+
+**Disetujui Oleh:**
+
+[Nama dan Jabatan Pihak yang Berwenang (Misalnya, Supervisor, Manajer K3)]
+
+**Catatan:**
+
+*   Laporan ini harus diisi dengan jujur dan lengkap.
+*   Laporan ini merupakan dokumen penting untuk evaluasi dan perbaikan sistem K3 perusahaan.
+*   Pastikan untuk menyimpan laporan ini dengan baik.
+
+---
+
+**Tips Tambahan:**
+
+*   **Gunakan Bahasa yang Jelas dan Ringkas:**  Hindari penggunaan istilah teknis yang sulit dimengerti.
+*   **Prioritaskan Keamanan:**  Fokus pada identifikasi penyebab dan tindakan perbaikan untuk mencegah kejadian serupa di masa depan.
+*   **Libatkan Pihak Terkait:**  Kumpulkan informasi dari saksi mata dan pihak yang terlibat dalam kejadian.
+*   **Update Secara Berkala:**  Lakukan tindak lanjut terhadap tindakan perbaikan dan evaluasi efektivitasnya.
+
+Semoga contoh laporan ini membantu Anda. Jika Anda memiliki pertanyaan lebih lanjut, jangan ragu untuk bertanya.  Apakah ada bagian tertentu yang ingin Anda elaborasi lebih lanjut? Misalnya, teknik Root Cause Analysis atau contoh tindakan perbaikan yang lebih spesifik?
+
