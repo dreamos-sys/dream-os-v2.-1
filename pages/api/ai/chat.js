@@ -3,57 +3,38 @@ export default async function handler(req, res) {
   
   const { prompt, useLocal = false, spiritual = true } = req.body;
   
-  // 🔍 Debug log (keluar di Vercel Logs)
-  console.log('🔍 Hybrid Debug:', { useLocal, hasLocalUrl: !!process.env.LOCAL_OLLAMA_URL });
+  // 🔍 Debug: Cek env vars
+  const hasLocalUrl = !!process.env.LOCAL_OLLAMA_URL;
+  const hasCloudKey = !!process.env.OLLAMA_KEY;
+  const isLocal = useLocal === true && hasLocalUrl;
   
-  // 🎯 Pilih jalur: Lokal atau Cloud
-  const isLocal = useLocal === true && process.env.LOCAL_OLLAMA_URL;
-  
-  let apiUrl, headers, modelName, bodyPayload;
-  
-  if (isLocal) {
-    // 📱 Sis Qwen @ Lokal (via Pinggy)
-    apiUrl = `${process.env.LOCAL_OLLAMA_URL}/api/chat`;
-    headers = { 
-      'Content-Type': 'application/json',
-      'X-Pinggy-No-Screen': 'true'
-    };
-    modelName = 'qwen2.5-coder:1.5b';
-    bodyPayload = {
-      model: modelName,
-      messages: [{ 
-        role: 'user', 
-        content: spiritual ? `Bismillah bi idznillah. ${prompt}` : prompt 
-      }],
-      stream: false,
-      options: { temperature: 0.3 }
-    };
-  } else {
-    // ☁️ Gemma @ Cloud
-    apiUrl = 'https://ollama.com/v1/chat/completions';
-    headers = { 
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.OLLAMA_KEY}`
-    };
-    modelName = 'gemma3:4b';
-    bodyPayload = {
-      model: modelName,
-      messages: [{ 
-        role: 'user', 
-        content: spiritual ? `Bismillah bi idznillah. ${prompt}` : prompt 
-      }],
-      stream: false,
-      temperature: 0.3
-    };
+  // 🎯 Pilih jalur
+  const apiUrl = isLocal 
+    ? `${process.env.LOCAL_OLLAMA_URL}/api/chat` 
+    : "https://ollama.com/v1/chat/completions";
+    
+  const headers = { 'Content-Type': 'application/json' };
+  if (!isLocal && hasCloudKey) {
+    headers['Authorization'] = `Bearer ${process.env.OLLAMA_KEY}`;
+  } else if (isLocal) {
+    headers['X-Pinggy-No-Screen'] = 'true';
   }
   
-  console.log('🎯 Using:', isLocal ? 'LOCAL' : 'CLOUD', '| Model:', modelName);
+  const modelName = isLocal ? "qwen2.5-coder:1.5b" : "gemma3:4b";
   
   try {
     const apiRes = await fetch(apiUrl, {
       method: 'POST',
       headers,
-      body: JSON.stringify(bodyPayload),
+      body: JSON.stringify({
+        model: modelName,
+        messages: [{ 
+          role: 'user', 
+          content: spiritual ? `Bismillah bi idznillah. ${prompt}` : prompt 
+        }],
+        stream: false,
+        options: isLocal ? { temperature: 0, num_predict: 20 } : undefined
+      }),
       next: { revalidate: 0 }
     });
 
@@ -63,25 +44,32 @@ export default async function handler(req, res) {
     }
     
     const data = await apiRes.json();
-    
-    // 🔄 Format response beda: Lokal vs Cloud
     const finalReply = isLocal 
       ? data.message?.content 
       : data.choices?.[0]?.message?.content;
     
+    // 🎁 RETURN DEBUG INFO
     res.status(200).json({ 
       response: finalReply || '🧘 AI sedang berpikir...', 
       model: modelName,
-      source: isLocal ? 'local' : 'cloud'
+      source: isLocal ? 'local' : 'cloud',
+      debug: {
+        useLocal_param: useLocal,
+        LOCAL_OLLAMA_URL_set: hasLocalUrl,
+        OLLAMA_KEY_set: hasCloudKey,
+        isLocal_result: isLocal,
+        apiUrl_used: isLocal ? process.env.LOCAL_OLLAMA_URL : 'ollama.com'
+      }
     });
     
   } catch (err) {
-    console.error('💥 Hybrid AI Error:', err.message);
     res.status(500).json({ 
-      error: isLocal 
-        ? `Sis Qwen error: ${err.message}` 
-        : `Gemma Cloud error: ${err.message}`,
-      fallback: 'Coba switch mode atau cek koneksi!'
+      error: err.message,
+      debug: {
+        useLocal_param: useLocal,
+        LOCAL_OLLAMA_URL_set: hasLocalUrl,
+        isLocal_result: isLocal
+      }
     });
   }
 }
