@@ -12,3 +12,4 @@ vault_dream_os_*.zip
 node_modules/
 .next/
 out/
+.vercel
