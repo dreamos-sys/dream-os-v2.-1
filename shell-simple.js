@@ -70,7 +70,7 @@ function showLoginModal() {
         `;
         modal.innerHTML = `
             <div style="background: #0f172a; border-radius: 28px; padding: 32px; width: 90%; max-width: 380px; border: 1px solid #10b981; text-align: center;">
-                <div style="font-size: 40px; margin-bottom: 16px;">🚀</div>
+                <img src="./assets/img/icon-512.png" style="width: 80px; height: 80px; border-radius: 20px; margin-bottom: 16px;">
                 <h2 style="color: #10b981;">Dream OS</h2>
                 <p style="color: #94a3b8;">Masukkan username & password</p>
                 <input type="text" id="login-username" placeholder="Username" class="login-input">
