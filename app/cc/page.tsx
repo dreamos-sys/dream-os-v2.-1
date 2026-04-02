@@ -1,22 +1,11 @@
-export default function CommandCenterPage() {
+export default function Page() {
   return (
-    <main className="min-h-screen bg-gray-50 text-gray-900">
-      <header className="bg-white border-b border-gray-200 px-4 py-3">
-        <h1 className="text-lg font-bold">🚀 Command Center</h1>
-      </header>
-      <div className="p-4">
-        <p className="text-gray-700">Command Center loaded successfully! ✨</p>
-        <div className="mt-4 grid grid-cols-2 gap-3">
-          <div className="bg-white rounded-xl p-4 border border-gray-200">
-            <p className="text-2xl font-bold">12</p>
-            <p className="text-xs text-gray-500">Total</p>
-          </div>
-          <div className="bg-white rounded-xl p-4 border border-gray-200">
-            <p className="text-2xl font-bold">5</p>
-            <p className="text-xs text-gray-500">Pending</p>
-          </div>
-        </div>
+    <div style={{minHeight:'100vh',background:'#f9fafb',color:'#111827',padding:'1rem'}}>
+      <h1 style={{fontSize:'1.5rem',fontWeight:'700'}}>🚀 Command Center</h1>
+      <p style={{color:'#6b7280'}}>Dream OS v2.1 · /cc route</p>
+      <div style={{marginTop:'1rem',display:'flex',gap:'0.5rem'}}>
+        <button style={{padding:'0.5rem 1rem',background:'#3b82f6',color:'white',border:'none',borderRadius:'0.5rem'}}>Action</button>
       </div>
-    </main>
+    </div>
   );
 }
