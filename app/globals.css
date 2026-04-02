@@ -1,1 +1,37 @@
-/* Minimal CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #10b981;
+  --primary-glow: 0 0 12px rgba(16,185,129,0.5);
+}
+
+body {
+  background: radial-gradient(circle at top left, #0f172a, #020617);
+  color: #e2e8f0;
+}
+
+.glass-card {
+  @apply backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl;
+}
+
+:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+}
+
+@keyframes magnetic {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.ghost-icon:hover {
+  animation: magnetic 0.3s ease;
+}
+
+button, a, [role="button"] {
+  min-width: 48px;
+  min-height: 48px;
+}

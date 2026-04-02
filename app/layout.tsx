@@ -1,28 +1,33 @@
-import './globals.css';
+import type { Metadata } from 'next'
+import './globals.css'
+import { Inter } from 'next/font/google'
+import { Header } from '@/components/layout/Header'
+import { BottomNav } from '@/components/layout/BottomNav'
 
-export const metadata = {
-  title: 'Dream OS V2.1 - AI-Powered Operational System',
-  description: 'Sistem Operasi Terintegrasi dengan AI untuk Manajemen Operasional',
-  keywords: 'Dream OS, AI, Management, Operational System',
-  authors: [{ name: 'Dream Team' }],
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-  themeColor: '#f9fafb',
-};
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'Dream OS',
+  description: 'Enterprise Operation System',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="id">
       <head>
-        <link rel="icon" href="/assets/img/dream-logo.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/assets/img/dream-logo.svg" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       </head>
-      <body style={{margin:0,padding:0,fontFamily:'system-ui,-apple-system,sans-serif',background:'#f9fafb',color:'#111827'}}>
-        {children}
+      <body className={inter.className}>
+        <Header />
+        <main className="pb-20">
+          {children}
+        </main>
+        <BottomNav />
       </body>
     </html>
-  );
+  )
 }
