@@ -1,7 +1,1 @@
-import { redirect } from 'next/navigation';
-
-export const dynamic = 'force-dynamic';
-
-export default function Redirect() {
-  redirect('/dream');
-}
+export default function CommandCenterPage(){return(<div style={{minHeight:'100vh',background:'#f9fafb',color:'#111827',padding:'1rem',fontFamily:'system-ui',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}><h1 style={{fontSize:'1.5rem',fontWeight:'700',marginBottom:'1rem'}}>🚀 Command Center</h1><p style={{color:'#6b7280',marginBottom:'2rem',textAlign:'center'}}>Dream OS v2.1<br/>Route: /cc</p><a href="/dream" style={{padding:'0.75rem 1.5rem',background:'#3b82f6',color:'white',textDecoration:'none',borderRadius:'0.75rem',fontWeight:'600'}}>Go to Dream OS →</a></div>);}
