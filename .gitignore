@@ -1,0 +1,18 @@
+# Generated documents
+*.txt
+!README.md
+
+# Backup vaults
+vault_dream_os_*.zip
+
+# Trigger files
+.rebuild-trigger
+
+# Node & build
+node_modules/
+.next/
+out/
+.vercel
+node_modules/
+.env.local
+.env.local
