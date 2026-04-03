@@ -31,7 +31,7 @@ export const Header = () => {
   }, [slides]);
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-900/70 border-b border-emerald-500/20">
+    <header className="sticky top-0 z-50 backdrop-blur bg-slate-900/70 border-b border-emerald-500/20">
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <div>

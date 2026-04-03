@@ -8,7 +8,7 @@ export default function Home() {
   if (!isLoggedIn) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="bg-slate-800/80 backdrop-blur-xl p-8 rounded-3xl border border-emerald-500/20 max-w-md w-full text-center">
+        <div className="bg-slate-800/80 backdrop-blur p-8 rounded-3xl border border-emerald-500/20 max-w-md w-full text-center">
           <div className="text-6xl mb-4">🎯</div>
           <p className="text-2xl font-bold text-emerald-400 mb-2" dir="rtl">بِسْمِ اللَّهِ</p>
           <h1 className="text-3xl font-black text-white mb-1">DREAM OS</h1>
@@ -70,7 +70,7 @@ export default function Home() {
       </div>
 
       {/* Bottom Nav - 5 Buttons */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-slate-800/95 backdrop-blur-xl border-t border-emerald-500/20">
+      <nav className="fixed bottom-0 left-0 right-0 bg-slate-800/95 backdrop-blur border-t border-emerald-500/20">
         <div className="flex justify-around items-center p-3 max-w-md mx-auto">
           <button className="flex flex-col items-center text-emerald-400">
             <span className="text-2xl">🏠</span>
